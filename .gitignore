@@ -1,24 +1,54 @@
-# Compiled class file
-*.class
+# ===============================
+# Node.js
+# ===============================
+node_modules/
+npm-debug.log*
+yarn-error.log
+package-lock.json.lck
 
-# Log file
+# ===============================
+# Vite Build Output
+# ===============================
+dist/
+
+# ===============================
+# Environment Variables
+# ===============================
+.env
+.env.*
+!.env.example  # 예시용 환경 파일은 포함 가능
+
+# ===============================
+# Editor / OS 설정파일
+# ===============================
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Logs
+# ===============================
 *.log
+logs/
+*.tsbuildinfo
 
-# BlueJ files
-*.ctxt
+# ===============================
+# TypeScript
+# ===============================
+*.tsbuildinfo
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# ===============================
+# Mac / Windows 시스템 파일
+# ===============================
+ehthumbs.db
+Icon?
+Desktop.ini
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# ===============================
+# IDEs
+# ===============================
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
