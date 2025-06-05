@@ -28,29 +28,31 @@ const slides = [
 
 function Carousel() {
   return (
-    <Swiper
-      modules={[Autoplay, Pagination, Navigation]}
-      autoplay={{ delay: 3000 }}
-      pagination={{ clickable: true }}
-      loop={true}
-      navigation={true}
-    >
-      {slides.map((slide, index) => (
-        <SwiperSlide key={index}>
-          <div className="carousel-slide" style={{ backgroundColor: slide.backgroundColor }}>
-            <div className="carousel-slide-inner">
-              <div className="carousel-image">
-                <img src={slide.image} alt={slide.title} />
-              </div>
-              <div className="carousel-text">
-                <h2>{slide.title}</h2>
-                <p>{slide.subtitle}</p>
+    <div className="carousel-wrapper">
+      <Swiper
+        modules={[Autoplay, Pagination, Navigation]}
+        autoplay={{ delay: 3000 }}
+        pagination={{ clickable: true }}
+        loop={true}
+        navigation={true}
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="carousel-slide" style={{ backgroundColor: slide.backgroundColor }}>
+              <div className="carousel-slide-inner">
+                <div className="carousel-image">
+                  <img src={slide.image} alt={slide.title} />
+                </div>
+                <div className="carousel-text">
+                  <h2>{slide.title}</h2>
+                  <p>{slide.subtitle}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }
 
