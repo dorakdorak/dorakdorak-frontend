@@ -1,4 +1,4 @@
-import "@/css/Header.css";
+import "@/css/common/Header.css";
 
 type HeaderProps = {
   isLoggedIn: boolean;
