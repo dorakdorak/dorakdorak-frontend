@@ -1,0 +1,106 @@
+.carousel-slide {
+  font-family: "Pretendard", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  height: 500px;
+}
+
+.carousel-wrapper {
+  margin-left: -10vw;
+  margin-right: -10vw;
+  width: calc(100% + 20vw);
+}
+
+.carousel-slide-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 70px;
+}
+
+.carousel-image img {
+  width: 280px;
+  height: auto;
+  object-fit: contain;
+}
+
+.carousel-text {
+  margin-left: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.carousel-text h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.carousel-text p {
+  font-size: 16px;
+  color: #555;
+}
+
+.swiper-slide-active .carousel-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* h2와 p에 약간의 딜레이를 줘서 순차적으로 올라오게 함 */
+.carousel-text h2 {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.carousel-text p {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.6s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.swiper-slide-active .carousel-text h2,
+.swiper-slide-active .carousel-text p {
+  animation-play-state: running;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: #34661f;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #34661f;
+  width: 32px;
+  height: 32px;
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 25px; /* 화살표 크기 줄이기 */
+}
+
+.swiper-button-prev {
+  left: 20px;
+}
+
+.swiper-button-next {
+  right: 20px;
+}

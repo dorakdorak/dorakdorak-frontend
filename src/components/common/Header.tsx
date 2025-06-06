@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "@/css/common/Header.css";
 
 type HeaderProps = {
@@ -9,28 +10,30 @@ function Header({ isLoggedIn }: HeaderProps) {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <img src="/images/logo2.png" alt="도락도락 로고" width={24} height={24} />{" "}
-          <strong>도락도락</strong>
+          <Link to="/" style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <img src="/images/logo2.png" alt="도락도락 로고" width={24} height={24} />
+            <strong>도락도락</strong>
+          </Link>
         </div>
         <nav className="nav-menu">
-          <span>도시락 조회</span>
-          <span>공구 주문</span>
-          <span>나만의 도시락 만들기</span>
-          <span>커스텀 랭킹</span>
-          <span>제로 웨이스트 랭킹</span>
+          <Link to="/menu">도시락 조회</Link>
+          <Link to="/group-order">공구 주문</Link>
+          <Link to="/custom-dosirak">나만의 도시락 만들기</Link>
+          <Link to="/custom-ranking">커스텀 랭킹</Link>
+          <Link to="/zero-waste">제로 웨이스트 랭킹</Link>
         </nav>
         <div className="user-menu">
           {isLoggedIn ? (
             <>
-              <span>마이페이지</span>
+              <Link to="/mypage">마이페이지</Link>
               <span>|</span>
-              <span>로그아웃</span>
+              <Link to="/logout">로그아웃</Link>
             </>
           ) : (
             <>
-              <span>로그인</span>
+              <Link to="/login">로그인</Link>
               <span>|</span>
-              <span>회원가입</span>
+              <Link to="/signup">회원가입</Link>
             </>
           )}
         </div>

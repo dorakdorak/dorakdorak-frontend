@@ -68,3 +68,17 @@ html {
     padding: 0 20px;
   }
 }
+
+.nav-menu a,
+.user-menu a,
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-menu a:hover,
+.user-menu a:hover,
+.logo a:hover {
+  text-decoration: none;
+  color: #34661f;
+}

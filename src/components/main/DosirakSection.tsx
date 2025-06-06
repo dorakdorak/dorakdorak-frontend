@@ -1,0 +1,30 @@
+import { ReactNode } from "react";
+import "@/css/main/DosirakSection.css";
+import SectionTitle from "@/components/main/SectionTitle";
+import DosirakCard from "@/components/main/DosirakCard";
+
+interface DosirakBox {
+  image: string;
+  tag: string;
+}
+
+interface DosirakSectionProps {
+  title: string;
+  description?: ReactNode;
+  boxes: DosirakBox[];
+  to: string;
+  cardTo: string;
+}
+
+const DosirakSection = ({ title, description, boxes, to, cardTo }: DosirakSectionProps) => (
+  <section>
+    <SectionTitle title={title} description={description} to={to} />
+    <div className="dosirak-section">
+      {boxes.map((box, idx) => (
+        <DosirakCard key={idx} image={box.image} tag={box.tag} to={`/${cardTo}/${idx}`} />
+      ))}
+    </div>
+  </section>
+);
+
+export default DosirakSection;
