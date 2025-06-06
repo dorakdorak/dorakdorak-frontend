@@ -3,10 +3,12 @@ import Carousel from "@/components/main/Carousel";
 import DosirakSection from "@/components/main/DosirakSection";
 import meal2 from "@/assets/images/mock/meal2.jpg";
 import { motion } from "framer-motion";
+import SectionTitle from "@/components/main/SectionTitle";
+import RankingList from "@/components/main/RankingList";
 
 function Main() {
   return (
-    <section>
+    <section style={{ marginBottom: "200px" }}>
       <CategoryList />
       <Carousel />
       <motion.div
@@ -51,6 +53,30 @@ function Main() {
             { image: meal2, tag: "저당" },
           ]}
         />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.6 }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <SectionTitle
+          title="제로 웨이스트 인증"
+          description={
+            <>
+              도시락에 부착된 QR 코드를 스캔해
+              <br />
+              다 먹은 도시락 사진을 업로드해보세요!
+              <br />
+              <br />
+              가장 많이 인증한 학교에는
+              <br />
+              커스텀 도시락 할인 혜택을 드립니다.
+            </>
+          }
+          to="/certification"
+        />
+        <RankingList />
       </motion.div>
     </section>
   );
