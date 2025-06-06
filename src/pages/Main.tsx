@@ -22,6 +22,7 @@ function Main() {
           title="인기 도시락"
           description="지난주 가장 인기 있었던 도시락 TOP3"
           to="/menu"
+          cardTo="detail"
           boxes={[
             { image: meal2, tag: "고혈압 식단" },
             { image: meal2, tag: "스페셜 식단" },
@@ -47,6 +48,7 @@ function Main() {
             </>
           }
           to="/menu"
+          cardTo="custom-detail"
           boxes={[
             { image: meal2, tag: "고단백" },
             { image: meal2, tag: "식단조절" },
@@ -57,7 +59,7 @@ function Main() {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.6 }}
+        transition={{ duration: 1, delay: 0.3 }}
         viewport={{ once: true, amount: 0.5 }}
       >
         <SectionTitle

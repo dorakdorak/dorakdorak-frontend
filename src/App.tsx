@@ -12,6 +12,8 @@ import ZeroWasteRanking from "@/pages/ZeroWasteRanking";
 import Login from "@/pages/Login";
 import SignUp from "@/pages/SignUp";
 import Mypage from "@/pages/Mypage";
+import Detail from "@/pages/Detail";
+import CustomDetail from "@/pages/CustomDetail";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/mypage" element={<Mypage />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/custom-detail/:id" element={<CustomDetail />} />
           </Routes>
         </main>
         <Footer />

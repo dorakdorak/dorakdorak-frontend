@@ -16,7 +16,7 @@
 }
 
 .title-row h2 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -24,4 +24,12 @@
   width: 24px;
   height: 24px;
   object-fit: contain;
+}
+
+.section-title p {
+  font-family: "Pretendard", sans-serif;
+  font-size: 1.1rem;
+  color: #787b81;
+  line-height: 1.6;
+  margin-top: 0.5rem;
 }
