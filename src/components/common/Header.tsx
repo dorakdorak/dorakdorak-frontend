@@ -17,10 +17,10 @@ function Header({ isLoggedIn }: HeaderProps) {
         </div>
         <nav className="nav-menu">
           <Link to="/menu">도시락 조회</Link>
-          <Link to="/group">공구 주문</Link>
-          <Link to="/custom">나만의 도시락 만들기</Link>
-          <Link to="/ranking">커스텀 랭킹</Link>
-          <Link to="/zero">제로 웨이스트 랭킹</Link>
+          <Link to="/group-order">공구 주문</Link>
+          <Link to="/custom-dosirak">나만의 도시락 만들기</Link>
+          <Link to="/custom-ranking">커스텀 랭킹</Link>
+          <Link to="/zero-waste">제로 웨이스트 랭킹</Link>
         </nav>
         <div className="user-menu">
           {isLoggedIn ? (
