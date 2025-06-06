@@ -1,0 +1,26 @@
+.section-title {
+  font-family: "Pretendard", sans-serif;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.title-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.title-row h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
