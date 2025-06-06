@@ -1,0 +1,59 @@
+.btn {
+  font-family: "Pretendard", sans-serif;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: white;
+}
+
+/* 크기 */
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 14px;
+}
+.btn-md {
+  padding: 12px 80px;
+  font-size: 16px;
+}
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 18px;
+}
+
+/* 색상 variant */
+.btn-primary {
+  background-color: #94c573;
+}
+.btn-primary:hover {
+  background-color: #7dbd55;
+}
+
+.btn-secondary {
+  background-color: #34661f;
+}
+.btn-secondary:hover {
+  background-color: #2a5319;
+}
+
+.btn-gray {
+  background-color: #9c9c9c;
+}
+.btn-gray:hover {
+  background-color: #8a8a8a;
+}
+
+/* full width */
+.btn-full {
+  width: 100%;
+}
+
+/* 비활성화 */
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

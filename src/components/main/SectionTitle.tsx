@@ -1,5 +1,5 @@
 import "@/css/main/SectionTitle.css";
-import arrowIcon from "@/assets/images/icons/arrow.png";
+import arrowIcon from "@/assets/images/icon/arrow.png";
 import { Link } from "react-router-dom";
 
 interface SectionTitleProps {

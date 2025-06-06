@@ -1,0 +1,17 @@
+.tabs {
+  display: flex;
+  font-family: "Pretendard", sans-serif;
+  border-bottom: 1px solid #9c9c9c;
+  margin: 3rem 0;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #9c9c9c;
+  border-bottom: none;
+  background-color: #fff;
+  font-weight: 500;
+  color: #888;
+  cursor: pointer;
+}
