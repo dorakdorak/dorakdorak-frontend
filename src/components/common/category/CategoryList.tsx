@@ -1,11 +1,13 @@
-import { useState } from "react";
 import CategoryButton from "@/components/common/category/CategoryButton";
 import "@/css/common/Category.css";
 import { categories, FilterType } from "@/constants/categories";
 
-function CategoryList() {
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
+interface CategoryListProps {
+  selectedFilter: FilterType;
+  onSelectFilter: (filter: FilterType) => void;
+}
 
+function CategoryList({ selectedFilter, onSelectFilter }: CategoryListProps) {
   return (
     <div className="category-list">
       {categories.map((item) => (
@@ -14,7 +16,7 @@ function CategoryList() {
           label={item.label}
           icon={item.icon}
           selected={item.filterType === selectedFilter}
-          onClick={() => setSelectedFilter(item.filterType)}
+          onClick={() => onSelectFilter(item.filterType)}
         />
       ))}
     </div>
