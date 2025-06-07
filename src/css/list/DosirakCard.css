@@ -1,0 +1,74 @@
+.dosirak-name {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.dosirak-price {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.normal-price {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.original-price {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+  margin-bottom: 10px;
+}
+
+.discount-rate {
+  font-size: 20px;
+  color: #e53935;
+  font-weight: bold;
+  display: inline;
+  margin-right: 4px;
+}
+
+.discounted-price {
+  font-size: 20px;
+  color: #111;
+  font-weight: bold;
+  display: inline;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.storage-label {
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  border: 1.6px solid;
+}
+
+.storage-label.rt {
+  color: #5d4037;
+  border-color: #5d4037;
+}
+
+.storage-label.r {
+  color: #4caf50;
+  border-color: #4caf50;
+}
+
+.storage-label.f {
+  color: #1e88e5;
+  border-color: #1e88e5;
+}
+
+.name-text {
+  font-weight: 500;
+}
