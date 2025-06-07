@@ -23,21 +23,23 @@ function DosirakCard({ item }: Props) {
       <div className="dosirak-image-wrapper">
         <img src={imageUrl} alt={name} className="dosirak-image" />
       </div>
-      <div className="dosirak-name">
-        <span className={`storage-label ${storageType.toLowerCase()}`}>
+      <div className="dosirak-card-name">
+        <span className={`dosirak-card-storage-label ${storageType.toLowerCase()}`}>
           {getStorageTypeLabel(storageType)}
         </span>
-        <span className="name-text">{name}</span>
+        <span className="dosirak-card-name-text">{name}</span>
       </div>
-      <div className="dosirak-price">
+      <div className="dosirak-card-price">
         {hasDiscount ? (
           <>
-            <div className="original-price">{price.toLocaleString()}원</div>
-            <div className="discount-rate">{discountRate}%</div>
-            <div className="discounted-price">{discountedPrice.toLocaleString()}원</div>
+            <div className="dosirak-card-original-price">{price.toLocaleString()}원</div>
+            <div className="dosirak-card-discount-rate">{discountRate}%</div>
+            <div className="dosirak-card-discounted-price">
+              {discountedPrice.toLocaleString()}원
+            </div>
           </>
         ) : (
-          <div className="normal-price">{price.toLocaleString()}원</div>
+          <div className="dosirak-card-normal-price">{price.toLocaleString()}원</div>
         )}
       </div>
     </Link>
