@@ -10,9 +10,9 @@ interface SectionTitleProps {
 
 const SectionTitle = ({ title, description, to }: SectionTitleProps) => (
   <div className="section-title">
-    <Link to={to} className="title-row">
+    <Link to={to} className="section-title-row">
       <h2>{title}</h2>
-      <img src={arrowIcon} alt="화살표" className="arrow-icon" />
+      <img src={arrowIcon} alt="화살표" className="section-arrow-icon" />
     </Link>
     {description && <p>{description}</p>}
   </div>

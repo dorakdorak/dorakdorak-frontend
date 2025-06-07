@@ -27,7 +27,7 @@ function Menu() {
   return (
     <div className="menu-container">
       <CategoryList selectedFilter={selectedFilter} onSelectFilter={setSelectedFilter} />
-      <div className="sort-wrapper">
+      <div className="menu-sort-wrapper">
         <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
       </div>
       <DosirakList items={dosiraks} />

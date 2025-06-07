@@ -10,7 +10,7 @@ interface CategoryButtonProps {
 function CategoryButton({ label, icon, selected = false, onClick }: CategoryButtonProps) {
   return (
     <button className="category-btn" onClick={onClick}>
-      <div className={`icon-wrapper ${selected ? "selected" : ""}`}>
+      <div className={`category-icon-wrapper ${selected ? "selected" : ""}`}>
         <img src={icon} alt={label} />
       </div>
       <span className="category-label">{label}</span>

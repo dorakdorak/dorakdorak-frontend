@@ -5,7 +5,7 @@
   margin-top: 12rem;
 }
 
-.title-row {
+.section-title-row {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,12 +15,12 @@
   cursor: pointer;
 }
 
-.title-row h2 {
+.section-title-row h2 {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.arrow-icon {
+.section-arrow-icon {
   width: 24px;
   height: 24px;
   object-fit: contain;
