@@ -17,7 +17,7 @@ function SortOptions({ selectedSort, onSelectSort }: SortOptionsProps) {
           >
             {option.label}
           </button>
-          {index !== SORT_OPTIONS.length - 1 && <span className="divider">|</span>}
+          {index !== SORT_OPTIONS.length - 1 && <span className="sort-divider">|</span>}
         </span>
       ))}
     </div>
