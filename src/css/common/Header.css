@@ -29,7 +29,7 @@ html {
   margin: 0 auto;
 }
 
-.logo {
+.header-logo {
   font-size: 20px;
   font-family: "Paperlogy", sans-serif;
   font-weight: 600;
@@ -39,28 +39,28 @@ html {
   gap: 4px;
 }
 
-.nav-menu,
-.user-menu {
+.header-nav-menu,
+.header-user-menu {
   display: flex;
   gap: 16px;
   color: #666;
   font-size: 14px;
 }
 
-.nav-menu span,
-.user-menu span {
+.header-nav-menu span,
+.header-user-menu span {
   cursor: pointer;
   white-space: nowrap;
 }
 
 @media (max-width: 768px) {
-  .nav-menu {
+  .header-nav-menu {
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 10px;
   }
 
-  .user-menu {
+  .header-user-menu {
     margin-top: 10px;
   }
 
@@ -69,16 +69,16 @@ html {
   }
 }
 
-.nav-menu a,
-.user-menu a,
-.logo a {
+.header-nav-menu a,
+.header-user-menu a,
+.header-logo a {
   text-decoration: none;
   color: inherit;
 }
 
-.nav-menu a:hover,
-.user-menu a:hover,
-.logo a:hover {
+.header-nav-menu a:hover,
+.header-user-menu a:hover,
+.header-logo a:hover {
   text-decoration: none;
   color: #34661f;
 }
