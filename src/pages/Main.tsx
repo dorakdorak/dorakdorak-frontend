@@ -5,11 +5,15 @@ import meal2 from "@/assets/images/mock/meal2.jpg";
 import { motion } from "framer-motion";
 import SectionTitle from "@/components/main/SectionTitle";
 import RankingList from "@/components/main/RankingList";
+import { useState } from "react";
+import { FilterType } from "@/constants/categories";
 
 function Main() {
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
+
   return (
     <section style={{ marginBottom: "200px" }}>
-      <CategoryList />
+      <CategoryList selectedFilter={selectedFilter} onSelectFilter={setSelectedFilter} />
       <Carousel />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
