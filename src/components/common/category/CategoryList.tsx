@@ -1,20 +1,20 @@
 import { useState } from "react";
 import CategoryButton from "@/components/common/category/CategoryButton";
 import "@/css/common/Category.css";
-import { categories } from "@/constants/categories";
+import { categories, FilterType } from "@/constants/categories";
 
 function CategoryList() {
-  const [selectedLabel, setSelectedLabel] = useState("전체");
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
 
   return (
     <div className="category-list">
       {categories.map((item) => (
         <CategoryButton
-          key={item.label}
+          key={item.filterType}
           label={item.label}
           icon={item.icon}
-          selected={item.label === selectedLabel}
-          onClick={() => setSelectedLabel(item.label)}
+          selected={item.filterType === selectedFilter}
+          onClick={() => setSelectedFilter(item.filterType)}
         />
       ))}
     </div>
