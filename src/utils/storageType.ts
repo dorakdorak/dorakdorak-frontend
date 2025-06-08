@@ -1,4 +1,6 @@
-export function getStorageTypeLabel(type: "R" | "F" | "RT"): string {
+import { StorageType } from "@/types/DosirakDetail";
+
+export function getStorageTypeLabel(type: StorageType): string {
   switch (type) {
     case "R":
       return "냉장";

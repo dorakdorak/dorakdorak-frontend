@@ -6,12 +6,13 @@
   text-align: center;
   text-decoration: none;
   color: inherit;
+  padding-bottom: 10px;
 }
 
 .dosirak-image-wrapper {
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   overflow: hidden;
   border-radius: 8px;
 }
