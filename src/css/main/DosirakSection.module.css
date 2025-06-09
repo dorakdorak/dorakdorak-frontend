@@ -1,4 +1,4 @@
-.dosirak-section {
+.dosirakSection {
   font-family: "Pretendard", sans-serif;
   display: grid;
   grid-template-columns: 1fr;
@@ -9,7 +9,7 @@
 }
 
 @media (min-width: 768px) {
-  .dosirak-section {
+  .dosirakSection {
     grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -3,7 +3,7 @@ import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "@/css/main/Carousel.css";
+import styles from "@/css/main/Carousel.module.css";
 import meal from "@/assets/images/mock/meal.png";
 
 const slides = [
@@ -29,7 +29,7 @@ const slides = [
 
 function Carousel() {
   return (
-    <div className="carousel-wrapper">
+    <div className={styles.carouselWrapper}>
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         autoplay={{ delay: 3000 }}
@@ -39,12 +39,12 @@ function Carousel() {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="carousel-slide" style={{ backgroundColor: slide.backgroundColor }}>
-              <div className="carousel-slide-inner">
-                <div className="carousel-image">
+            <div className={styles.carouselSlide} style={{ backgroundColor: slide.backgroundColor }}>
+              <div className={styles.carouselSlideInner}>
+                <div className={styles.carouselImage}>
                   <img src={slide.image} alt={slide.title} />
                 </div>
-                <div className="carousel-text">
+                <div className={styles.carouselText}>
                   <h2>{slide.title}</h2>
                   <p>{slide.subtitle}</p>
                 </div>
