@@ -6,6 +6,7 @@ import { CustomDosirakItem } from "@/types/DosirakList";
 import { mockCustomDosiraks } from "@/mock/CustomDosirakRankingMockData";
 import styles from "@/css/list/Menu.module.css";
 import VoteModal from "@/components/customRanking/VoteModal";
+import SectionHeader from "@/components/common/SectionHeader";
 
 function CustomRanking() {
   const [selectedSort, setSelectedSort] = useState<SortType>("LATEST");
@@ -52,6 +53,7 @@ function CustomRanking() {
 
   return (
     <div className={styles.menuContainer}>
+      <SectionHeader title="커스텀 도시락 랭킹"></SectionHeader>
       <div className={styles.menuSortWrapper}>
         <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
       </div>
