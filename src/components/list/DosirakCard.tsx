@@ -1,5 +1,5 @@
 import { DosirakItem } from "@/types/DosirakList";
-import "@/css/list/DosirakCard.css";
+import styles from "@/css/list/DosirakCard.module.css";
 import { getStorageTypeLabel } from "@/utils/storageType";
 import { Link } from "react-router-dom";
 
@@ -17,29 +17,37 @@ function DosirakCard({ item }: Props) {
   return (
     <Link
       to={`/detail/${dosirakId}`}
-      className="dosirak-card"
+      className={styles.dosirakCard}
       style={{ textDecoration: "none", color: "inherit" }}
     >
-      <div className="dosirak-image-wrapper">
-        <img src={imageUrl} alt={name} className="dosirak-image" />
+      <div className={styles.dosirakImageWrapper}>
+        <img src={imageUrl} alt={name} className={styles.dosirakImage} />
       </div>
-      <div className="dosirak-card-name">
-        <span className={`dosirak-card-storage-label ${storageType.toLowerCase()}`}>
+
+      <div className={styles.dosirakCardName}>
+        <span
+          className={`${styles.dosirakCardStorageLabel} ${storageType.toLowerCase()}`}
+        >
           {getStorageTypeLabel(storageType)}
         </span>
-        <span className="dosirak-card-name-text">{name}</span>
+        <span className={styles.dosirakCardNameText}>{name}</span>
       </div>
-      <div className="dosirak-card-price">
+
+      <div className={styles.dosirakCardPrice}>
         {hasDiscount ? (
           <>
-            <div className="dosirak-card-original-price">{price.toLocaleString()}원</div>
-            <div className="dosirak-card-discount-rate">{discountRate}%</div>
-            <div className="dosirak-card-discounted-price">
+            <div className={styles.dosirakCardOriginalPrice}>
+              {price.toLocaleString()}원
+            </div>
+            <div className={styles.dosirakCardDiscountRate}>{discountRate}%</div>
+            <div className={styles.dosirakCardDiscountedPrice}>
               {discountedPrice.toLocaleString()}원
             </div>
           </>
         ) : (
-          <div className="dosirak-card-normal-price">{price.toLocaleString()}원</div>
+          <div className={styles.dosirakCardNormalPrice}>
+            {price.toLocaleString()}원
+          </div>
         )}
       </div>
     </Link>

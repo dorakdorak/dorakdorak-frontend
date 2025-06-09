@@ -7,7 +7,8 @@ import CategoryList from "@/components/common/category/CategoryList";
 import SortOptions from "@/components/common/SortOptions";
 import { mockDosiraks } from "@/mock/DosirakListMockData";
 import DosirakList from "@/components/list/DosirakList";
-import "@/css/list/Menu.css";
+import styles from "@/css/list/Menu.module.css";
+
 function Menu() {
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
   const [selectedSort, setSelectedSort] = useState<SortType>("LATEST");
@@ -25,9 +26,9 @@ function Menu() {
   }, [selectedFilter, selectedSort]);
 
   return (
-    <div className="menu-container">
+    <div className={styles.menuContainer}>
       <CategoryList selectedFilter={selectedFilter} onSelectFilter={setSelectedFilter} />
-      <div className="menu-sort-wrapper">
+      <div className={styles.menuSortWrapper}>
         <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
       </div>
       <DosirakList items={dosiraks} />

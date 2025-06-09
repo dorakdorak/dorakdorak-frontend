@@ -1,0 +1,97 @@
+.dosirakCard {
+  font-family: "Pretendard", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 10px;
+}
+
+.dosirakImageWrapper {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.dosirakImage {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.dosirakImage:hover {
+  transform: scale(1.1);
+}
+
+.dosirakCardName {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.dosirakCardNameText {
+  font-weight: 500;
+}
+
+.dosirakCardPrice {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dosirakCardNormalPrice {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.dosirakCardOriginalPrice {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+  margin-bottom: 10px;
+}
+
+.dosirakCardDiscountRate {
+  font-size: 20px;
+  color: #e53935;
+  font-weight: bold;
+  display: inline;
+  margin-right: 4px;
+}
+
+.dosirakCardDiscountedPrice {
+  font-size: 20px;
+  color: #111;
+  font-weight: bold;
+  display: inline;
+}
+
+.dosirakCardStorageLabel {
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  border: 1.6px solid;
+}
+
+:global(.r) {
+  color: #4caf50;
+  border-color: #4caf50;
+}
+
+:global(.rt) {
+  color: #5d4037;
+  border-color: #5d4037;
+}
+
+:global(.f) {
+  color: #1e88e5;
+  border-color: #1e88e5;
+}
