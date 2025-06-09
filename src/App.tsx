@@ -1,25 +1,36 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "@/assets/font/font.css";
-import "@/App.css";
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import Main from "@/pages/Main";
-import Menu from "@/pages/Menu";
-import GroupOrder from "@/pages/GroupOrder";
-import CustomDosirak from "@/pages/CustomDosirak";
-import CustomRanking from "@/pages/CustomRanking";
-import ZeroWasteRanking from "@/pages/ZeroWasteRanking";
-import Login from "@/pages/Login";
-import SignUp from "@/pages/SignUp";
-import Mypage from "@/pages/Mypage";
-import Detail from "@/pages/Detail";
-import CustomDetail from "@/pages/CustomDetail";
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import '@/assets/font/font.css';
+import '@/App.css';
+import Header from '@/components/common/Header';
+import Footer from '@/components/common/Footer';
+import Main from '@/pages/Main';
+import Menu from '@/pages/Menu';
+import GroupOrder from '@/pages/GroupOrder';
+import CustomDosirak from '@/pages/CustomDosirak';
+import CustomRanking from '@/pages/CustomRanking';
+import ZeroWasteRanking from '@/pages/ZeroWasteRanking';
+import Login from '@/pages/Login';
+import SignUp from '@/pages/SignUp';
+import Mypage from '@/pages/Mypage';
+import Detail from '@/pages/Detail';
+import CustomDetail from '@/pages/CustomDetail';
+import useAuthStore from '@/store/authStore';
 
-function App() {
+const App: React.FC = () => {
+  // Zustand store에서 인증 상태와 함수들 가져오기
+  const { isLoggedIn, checkAuth } = useAuthStore();
+
+  // 앱 시작 시 인증 상태 확인
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        <Header isLoggedIn={false} />
+        {/* 실시간 로그인 상태를 Header에 전달 */}
+        <Header isLoggedIn={isLoggedIn} />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Main />} />
@@ -39,6 +50,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
