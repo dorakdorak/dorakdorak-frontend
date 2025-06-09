@@ -5,16 +5,10 @@ import { CustomDosirakItem } from "@/types/DosirakList";
 
 interface Props {
   item: CustomDosirakItem;
-  onVote: (id: number) => void;
+  onVoteClick: (id: number) => void;
 }
 
-const CustomDosirakCard = ({ item, onVote }: Props) => {
-  const handleClick = () => {
-    if (!item.isVoted) {
-      onVote(item.dosirakId);
-    }
-  };
-
+const CustomDosirakCard = ({ item, onVoteClick }: Props) => {
   return (
     <div className={styles.card}>
       <div className={styles.imageWrapper}>
@@ -25,7 +19,7 @@ const CustomDosirakCard = ({ item, onVote }: Props) => {
       <div className={styles.voteCount}>{item.vote.toLocaleString()}표</div>
       <button
         className={`${styles.voteButton} ${item.isVoted ? styles.voted : ""}`}
-        onClick={handleClick}
+        onClick={() => onVoteClick(item.dosirakId)}
         disabled={item.isVoted}
       >
         <img src={item.isVoted ? checkWhite : checkGreen} alt="투표" className={styles.icon} />

@@ -4,14 +4,14 @@ import styles from "@/css/customRanking/CustomDosirak.module.css";
 
 interface Props {
   items: CustomDosirakItem[];
-  onVote: (id: number) => void;
+  onVoteClick: (id: number) => void;
 }
 
-function CustomDosirakList({ items, onVote }: Props) {
+function CustomDosirakList({ items, onVoteClick }: Props) {
   return (
     <div className={styles.container}>
       {items.map((item) => (
-        <CustomDosirakCard key={item.dosirakId} item={item} onVote={onVote} />
+        <CustomDosirakCard key={item.dosirakId} item={item} onVoteClick={onVoteClick} />
       ))}
     </div>
   );

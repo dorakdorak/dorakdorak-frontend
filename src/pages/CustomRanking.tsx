@@ -5,10 +5,13 @@ import { SortType } from "@/constants/sortOptions";
 import { CustomDosirakItem } from "@/types/DosirakList";
 import { mockCustomDosiraks } from "@/mock/CustomDosirakRankingMockData";
 import styles from "@/css/list/Menu.module.css";
+import VoteModal from "@/components/customRanking/VoteModal";
 
 function CustomRanking() {
   const [selectedSort, setSelectedSort] = useState<SortType>("LATEST");
   const [dosiraks, setDosiraks] = useState<CustomDosirakItem[]>(mockCustomDosiraks);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<CustomDosirakItem | null>(null);
 
   // useEffect(() => {
   //   const sorted = [...dosiraks];
@@ -20,14 +23,31 @@ function CustomRanking() {
   //   setDosiraks(sorted);
   // }, [selectedSort]);
 
-  const handleVote = (id: number) => {
+  const openModal = (item: CustomDosirakItem) => {
+    setSelectedItem(item);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedItem(null);
+    setModalOpen(false);
+  };
+
+  const handleVoteClick = (id: number) => {
+    const found = dosiraks.find((item) => item.dosirakId === id);
+    if (found) openModal(found);
+  };
+
+  const handleVoteConfirm = () => {
+    if (!selectedItem) return;
     setDosiraks((prev) =>
       prev.map((item) =>
-        item.dosirakId === id
+        item.dosirakId === selectedItem.dosirakId
           ? { ...item, isVoted: true, vote: item.vote + 1 }
           : item
       )
     );
+    closeModal();
   };
 
   return (
@@ -35,7 +55,10 @@ function CustomRanking() {
       <div className={styles.menuSortWrapper}>
         <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
       </div>
-      <CustomDosirakList items={dosiraks} onVote={handleVote} />
+      <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />
+      {modalOpen && selectedItem && (
+        <VoteModal name={selectedItem.name} onConfirm={handleVoteConfirm} onCancel={closeModal} />
+      )}
     </div>
   );
 }
