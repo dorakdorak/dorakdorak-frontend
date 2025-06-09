@@ -3,7 +3,7 @@ import { getStorageTypeLabel } from "@/utils/storageType";
 import QuantitySelector from "@/components/common/QuantitySelector";
 import Button from "@/components/common/Button";
 import { useState } from "react";
-import "@/css/detail/DosirakInfo.css";
+import styles from "@/css/detail/DosirakInfo.module.css";
 
 interface Props {
   dosirak: DosirakDetail;
@@ -14,28 +14,32 @@ const DosirakInfo = ({ dosirak }: Props) => {
   const finalPrice = dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
 
   return (
-    <div className="dosirak-detail-container">
-      <div className="dosirak-detail-image-wrapper">
+    <div className={styles.dosirakDetailContainer}>
+      <div className={styles.dosirakDetailImageWrapper}>
         <img
           src={dosirak.baseInfo.thumbnailImageUrl}
           alt={dosirak.baseInfo.name}
-          className="dosirak-detail-image"
+          className={styles.dosirakDetailImage}
         />
       </div>
 
-      <div className="dosirak-detail-info">
-        <h2 className="dosirak-detail-title">{dosirak.baseInfo.name}</h2>
+      <div className={styles.dosirakDetailInfo}>
+        <h2 className={styles.dosirakDetailTitle}>{dosirak.baseInfo.name}</h2>
 
-        <div className="dosirak-detail-priceBox">
-          <span className="dosirak-detail-sale">{`${dosirak.baseInfo.salePercentage * 100}%`}</span>
-          <span className="dosirak-detail-price">{finalPrice.toLocaleString()}원</span>
-          <span className="dosirak-detail-originalPrice">
+        <div className={styles.dosirakDetailPriceBox}>
+          <span className={styles.dosirakDetailSale}>
+            {`${dosirak.baseInfo.salePercentage * 100}%`}
+          </span>
+          <span className={styles.dosirakDetailPrice}>
+            {finalPrice.toLocaleString()}원
+          </span>
+          <span className={styles.dosirakDetailOriginalPrice}>
             {dosirak.baseInfo.price.toLocaleString()}원
           </span>
         </div>
 
-        <div className="dosirak-detail-detail">
-          <table className="dosirak-detail-table">
+        <div className={styles.dosirakDetailDetail}>
+          <table className={styles.dosirakDetailTable}>
             <tbody>
               <tr>
                 <td>배송정보</td>
@@ -67,13 +71,9 @@ const DosirakInfo = ({ dosirak }: Props) => {
           </table>
         </div>
 
-        <div className="dosirak-detail-buttons">
-          <Button variant="primary" size="md">
-            일반 주문
-          </Button>
-          <Button variant="secondary" size="md">
-            공동 주문
-          </Button>
+        <div className={styles.dosirakDetailButtons}>
+          <Button variant="primary" size="md">일반 주문</Button>
+          <Button variant="secondary" size="md">공동 주문</Button>
         </div>
       </div>
     </div>

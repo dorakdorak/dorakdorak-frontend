@@ -1,5 +1,5 @@
 import { Nutrition } from "@/types/DosirakDetail";
-import "@/css/detail/NutritionTable.css";
+import styles from "@/css/detail/NutritionTable.module.css";
 
 interface Props {
   nutrition: Nutrition;
@@ -7,9 +7,9 @@ interface Props {
 
 const NutritionTable = ({ nutrition }: Props) => {
   return (
-    <div className="nutrition-box">
-      <h2 className="nutrition-title">영양 정보</h2>
-      <table className="nutrition-table">
+    <div className={styles.nutritionBox}>
+      <h2 className={styles.nutritionTitle}>영양 정보</h2>
+      <table className={styles.nutritionTable}>
         <tbody>
           <tr>
             <th>칼로리</th>
