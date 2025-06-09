@@ -5,7 +5,7 @@
   margin: 3rem 0;
 }
 
-.tabs button {
+.tabButton {
   flex: 1;
   padding: 10px;
   border: 1px solid #9c9c9c;

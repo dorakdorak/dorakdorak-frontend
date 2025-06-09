@@ -1,4 +1,4 @@
-.dosirak-list {
+.dosirakList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
@@ -6,13 +6,13 @@
 }
 
 @media (max-width: 1024px) {
-  .dosirak-list {
+  .dosirakList {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .dosirak-list {
+  .dosirakList {
     grid-template-columns: 1fr;
   }
 }

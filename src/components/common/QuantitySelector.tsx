@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "@/css/common/QuantitySelector.css";
+import styles from "@/css/common/QuantitySelector.module.css";
 
 interface QuantitySelectorProps {
   initialQuantity?: number;
@@ -24,12 +24,12 @@ export default function QuantitySelector({ initialQuantity = 1, onChange }: Quan
   };
 
   return (
-    <div className="quantity-selector">
-      <button className="quantity-button" onClick={handleDecrease}>
+    <div className={styles.quantitySelector}>
+      <button className={styles.quantityButton} onClick={handleDecrease}>
         −
       </button>
-      <div className="quantity-value">{quantity}</div>
-      <button className="quantity-button" onClick={handleIncrease}>
+      <div className={styles.quantityValue}>{quantity}</div>
+      <button className={styles.quantityButton} onClick={handleIncrease}>
         +
       </button>
     </div>

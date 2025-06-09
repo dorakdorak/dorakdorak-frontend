@@ -1,5 +1,5 @@
 import CategoryButton from "@/components/common/category/CategoryButton";
-import "@/css/common/Category.css";
+import styles from "@/css/common/Category.module.css";
 import { categories, FilterType } from "@/constants/categories";
 
 interface CategoryListProps {
@@ -9,7 +9,7 @@ interface CategoryListProps {
 
 function CategoryList({ selectedFilter, onSelectFilter }: CategoryListProps) {
   return (
-    <div className="category-list">
+    <div className={styles.categoryList}>
       {categories.map((item) => (
         <CategoryButton
           key={item.filterType}

@@ -1,4 +1,4 @@
-.dosirak-card {
+.dosirakCard {
   font-family: "Pretendard", sans-serif;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   padding-bottom: 10px;
 }
 
-.dosirak-image-wrapper {
+.dosirakImageWrapper {
   aspect-ratio: 1 / 1;
   width: 100%;
   max-width: 350px;
@@ -17,17 +17,17 @@
   border-radius: 8px;
 }
 
-.dosirak-image {
+.dosirakImage {
   width: 100%;
   height: auto;
   transition: transform 0.3s ease;
 }
 
-.dosirak-image:hover {
+.dosirakImage:hover {
   transform: scale(1.1);
 }
 
-.dosirak-tag {
+.dosirakTag {
   display: inline-block;
   background-color: #34661f;
   color: white;

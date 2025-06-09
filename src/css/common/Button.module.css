@@ -11,47 +11,45 @@
 }
 
 /* 크기 */
-.btn-sm {
+.btnSm {
   padding: 6px 14px;
   font-size: 14px;
 }
-.btn-md {
+.btnMd {
   padding: 12px 80px;
   font-size: 16px;
 }
-.btn-lg {
+.btnLg {
   padding: 14px 28px;
   font-size: 18px;
 }
 
 /* 색상 variant */
-.btn-primary {
+.btnPrimary {
   background-color: #94c573;
 }
-.btn-primary:hover {
+.btnPrimary:hover {
   background-color: #7dbd55;
 }
 
-.btn-secondary {
+.btnSecondary {
   background-color: #34661f;
 }
-.btn-secondary:hover {
+.btnSecondary:hover {
   background-color: #2a5319;
 }
 
-.btn-gray {
+.btnGray {
   background-color: #9c9c9c;
 }
-.btn-gray:hover {
+.btnGray:hover {
   background-color: #8a8a8a;
 }
 
-/* full width */
-.btn-full {
+.btnFull {
   width: 100%;
 }
 
-/* 비활성화 */
 .btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;

@@ -1,4 +1,4 @@
-.dosirak-detail-container {
+.dosirakDetailContainer {
   display: flex;
   gap: 6rem;
   align-items: flex-start;
@@ -6,22 +6,23 @@
   font-family: "Pretendard", sans-serif;
 }
 
-.dosirak-detail-image {
-  width: 100%;
+.dosirakDetailImage {
+  min-width: 300px;
+  height: auto;
   max-width: 100%;
 }
 
-.dosirak-detail-image-wrapper {
+.dosirakDetailImageWrapper {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.dosirak-detail-info {
+.dosirakDetailInfo {
   flex: 1;
 }
 
-.dosirak-detail-title {
+.dosirakDetailTitle {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -29,41 +30,41 @@
   padding-bottom: 0.5rem;
 }
 
-.dosirak-detail-priceBox {
+.dosirakDetailPriceBox {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin: 1rem 0;
 }
 
-.dosirak-detail-sale {
+.dosirakDetailSale {
   color: red;
   font-weight: bold;
   font-size: 1.6rem;
 }
 
-.dosirak-detail-price {
+.dosirakDetailPrice {
   font-size: 1.6rem;
   font-weight: 700;
 }
 
-.dosirak-detail-originalPrice {
+.dosirakDetailOriginalPrice {
   color: gray;
   text-decoration: line-through;
   font-size: 1.1rem;
 }
 
-.dosirak-detail-detail {
+.dosirakDetailDetail {
   margin-top: 1rem;
 }
 
-.dosirak-detail-table {
+.dosirakDetailTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
 }
 
-.dosirak-detail-table td {
+.dosirakDetailTable td {
   padding: 12px 0;
   border-top: 1px solid #ccc;
   font-size: 15px;
@@ -71,15 +72,33 @@
   line-height: 1.4;
 }
 
-.dosirak-detail-table td:first-child {
+.dosirakDetailTable td:first-child {
   width: 90px;
   font-weight: 500;
   vertical-align: top;
 }
 
-.dosirak-detail-buttons {
+.dosirakDetailButtons {
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
   margin-top: 2rem;
+}
+
+@media (max-width: 850px) {
+  .dosirakDetailContainer {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 2rem;
+  }
+
+  .dosirakDetailImageWrapper {
+    justify-content: center;
+  }
+
+  .dosirakDetailImage {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
 }

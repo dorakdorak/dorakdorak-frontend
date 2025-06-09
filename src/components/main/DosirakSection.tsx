@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "@/css/main/DosirakSection.css";
+import styles from "@/css/main/DosirakSection.module.css";
 import SectionTitle from "@/components/main/SectionTitle";
 import DosirakCard from "@/components/main/DosirakCard";
 
@@ -19,7 +19,7 @@ interface DosirakSectionProps {
 const DosirakSection = ({ title, description, boxes, to, cardTo }: DosirakSectionProps) => (
   <section>
     <SectionTitle title={title} description={description} to={to} />
-    <div className="dosirak-section">
+    <div className={styles.dosirakSection}>
       {boxes.map((box, idx) => (
         <DosirakCard key={idx} image={box.image} tag={box.tag} to={`/${cardTo}/${idx}`} />
       ))}
