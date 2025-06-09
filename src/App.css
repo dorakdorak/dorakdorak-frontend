@@ -16,6 +16,7 @@ body,
 .main-content {
   flex-grow: 1;
   width: 100%;
+  padding-top: 20px;
   padding-inline: 10vw;
   box-sizing: border-box;
 }
