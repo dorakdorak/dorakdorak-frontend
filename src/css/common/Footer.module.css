@@ -10,7 +10,7 @@
   font-family: inherit;
 }
 
-.footer-container {
+.footerContainer {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 80px;
@@ -21,22 +21,22 @@
   box-sizing: border-box;
 }
 
-.footer-left {
+.footerLeft {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.footer-left .label {
+.label {
   font-weight: 500;
   margin-right: 8px;
 }
 
-.footer-left .email {
+.email {
   font-weight: 400;
 }
 
-.footer-right {
+.footerRight {
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -46,13 +46,13 @@
 }
 
 @media (max-width: 768px) {
-  .footer-container {
+  .footerContainer {
     flex-direction: column;
     gap: 24px;
     padding: 0 20px;
   }
 
-  .footer-right {
+  .footerRight {
     text-align: left;
   }
 }
