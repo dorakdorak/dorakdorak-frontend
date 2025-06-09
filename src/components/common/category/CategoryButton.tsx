@@ -1,4 +1,4 @@
-import "@/css/common/Category.css";
+import styles from "@/css/common/Category.module.css";
 
 interface CategoryButtonProps {
   label: string;
@@ -9,11 +9,13 @@ interface CategoryButtonProps {
 
 function CategoryButton({ label, icon, selected = false, onClick }: CategoryButtonProps) {
   return (
-    <button className="category-btn" onClick={onClick}>
-      <div className={`category-icon-wrapper ${selected ? "selected" : ""}`}>
+    <button className={styles.categoryBtn} onClick={onClick}>
+      <div
+        className={`${styles.categoryIconWrapper} ${selected ? styles.selected : ""}`}
+      >
         <img src={icon} alt={label} />
       </div>
-      <span className="category-label">{label}</span>
+      <span className={styles.categoryLabel}>{label}</span>
     </button>
   );
 }
