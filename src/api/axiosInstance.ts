@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.example.com", // 공통 베이스 URL
+  baseURL: 'http://localhost:8080', // 공통 베이스 URL https://api.example.com
   timeout: 5000,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API 요청 에러:", error);
+    console.error('API 요청 에러:', error);
     return Promise.reject(error);
   }
 );
