@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "@/css/main/DosirakCard.css";
+import styles from "@/css/main/DosirakCard.module.css";
 
 interface DosirakCardProps {
   image: string;
@@ -8,11 +8,11 @@ interface DosirakCardProps {
 }
 
 const DosirakCard = ({ image, tag, to }: DosirakCardProps) => (
-  <Link to={to} className="dosirak-card">
-    <div className="dosirak-image-wrapper">
-      <img src={image} alt={tag} className="dosirak-image" />
+  <Link to={to} className={styles.dosirakCard}>
+    <div className={styles.dosirakImageWrapper}>
+      <img src={image} alt={tag} className={styles.dosirakImage} />
     </div>
-    <div className="dosirak-tag"># {tag}</div>
+    <div className={styles.dosirakTag}># {tag}</div>
   </Link>
 );
 

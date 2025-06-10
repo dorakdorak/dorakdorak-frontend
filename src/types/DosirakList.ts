@@ -16,3 +16,12 @@ export interface DosirakItem {
   storageType: StorageType;
   imageUrl: string;
 }
+
+export interface CustomDosirakItem {
+  dosirakId: number;
+  name: string;
+  price: number;
+  vote: number;
+  imageUrl: string;
+  isVoted: boolean;
+}

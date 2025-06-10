@@ -1,4 +1,4 @@
-.sort-options {
+.sortOptions {
   display: flex;
   gap: 8px;
   font-size: 14px;
@@ -7,38 +7,39 @@
   margin: 20px 16px;
 }
 
-.sort-option-wrapper {
+.sortOptionWrapper {
   display: flex;
   align-items: center;
 }
 
-.sort-option {
+.sortOption {
   background: none;
   border: none;
   cursor: pointer;
   color: #999;
   font-weight: 400;
   padding: 0;
+  margin-right: 7px;
 }
 
-.sort-option.active {
+.active {
   color: #000;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.sort-divider {
-  margin: 0 8px;
+.sortDivider {
+  margin: 0 10px;
   color: #ccc;
 }
 
 @media (max-width: 1024px) {
-  .sort-options {
+  .sortOptions {
     padding: 0 16px;
   }
 }
 
 @media (max-width: 600px) {
-  .sort-options {
+  .sortOptions {
     padding: 0 8px;
   }
 }

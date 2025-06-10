@@ -1,4 +1,4 @@
-.quantity-selector {
+.quantitySelector {
   font-family: "Pretendard", sans-serif;
   display: flex;
   width: 90px;
@@ -9,8 +9,8 @@
   box-sizing: border-box;
 }
 
-.quantity-button,
-.quantity-value {
+.quantityButton,
+.quantityValue {
   flex: 1;
   display: flex;
   align-items: center;
@@ -19,11 +19,11 @@
   box-sizing: border-box;
 }
 
-.quantity-button:last-child {
+.quantityButton:last-child {
   border-right: none;
 }
 
-.quantity-button {
+.quantityButton {
   background-color: #fff;
   border: none;
   cursor: pointer;
@@ -32,11 +32,11 @@
   padding: 0;
 }
 
-.quantity-button:hover {
+.quantityButton:hover {
   background-color: #f5f5f5;
 }
 
-.quantity-value {
+.quantityValue {
   user-select: none;
   font-weight: 500;
   border-left: 1px solid #000;
