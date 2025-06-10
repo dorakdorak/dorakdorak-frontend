@@ -20,8 +20,10 @@
   font-size: 16px;
 }
 .btnLg {
-  padding: 14px 28px;
-  font-size: 18px;
+  padding: 14px 40px;
+  font-size: 20px;
+  border-radius: 20px;
+  font-weight: 500;
 }
 
 /* 색상 variant */
