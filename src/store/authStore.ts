@@ -1,15 +1,10 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-// 사용자 정보 타입 정의 (any 제거)
+// 사용자 정보 타입 정의
 interface User {
   email: string;
-  name?: string;
-  role?: string;
-  // 추가 속성이 필요한 경우 명시적으로 정의
-  id?: number;
-  profileImage?: string;
-  createdAt?: string;
+  role: string;
 }
 
 // Auth Store 상태 타입 정의
@@ -23,7 +18,8 @@ interface AuthState {
 interface AuthActions {
   login: (token: string, userData?: User | null) => void;
   logout: () => void;
-  checkAuth: () => void;
+  updateToken: (newToken: string) => void; // 토큰 업데이트 함수 추가
+  updateUser: (userData: User) => void; // 사용자 정보 업데이트 함수 추가
 }
 
 // 전체 Auth Store 타입
@@ -32,14 +28,19 @@ type AuthStore = AuthState & AuthActions;
 const useAuthStore = create<AuthStore>()(
   persist(
     (set): AuthStore => ({
-      // get 매개변수 제거
       // 상태
       isLoggedIn: false,
       accessToken: null,
       user: null,
 
-      // 액션
+      // 로그인 액션 (localStorage 제거)
       login: (token: string, userData: User | null = null): void => {
+        console.log('🔐 Zustand 로그인:', {
+          email: userData?.email || 'Unknown',
+          role: userData?.role || 'Unkown',
+          token: token,
+        });
+
         set({
           isLoggedIn: true,
           accessToken: token,
@@ -47,29 +48,38 @@ const useAuthStore = create<AuthStore>()(
         });
       },
 
+      // 로그아웃 액션 (localStorage 제거)
       logout: (): void => {
+        console.log('🚪 Zustand 로그아웃 - persist만 정리');
+
         set({
           isLoggedIn: false,
           accessToken: null,
           user: null,
         });
-        // localStorage에서도 제거
-        localStorage.removeItem('accesstoken');
+        //  localStorage.removeItem('accesstoken') 제거됨
       },
 
-      // 토큰 유효성 확인
-      checkAuth: (): void => {
-        const token = localStorage.getItem('accesstoken');
-        if (token) {
-          set({
-            isLoggedIn: true,
-            accessToken: token,
-          });
-        }
+      // 토큰 업데이트 (새로 추가)
+      updateToken: (newToken: string): void => {
+        console.log('🔄 토큰 업데이트:', newToken);
+
+        set({
+          accessToken: newToken,
+        });
+      },
+
+      // 사용자 정보 업데이트 (새로 추가)
+      updateUser: (userData: User): void => {
+        console.log('👤 사용자 정보 업데이트:', userData.email);
+
+        set({
+          user: userData,
+        });
       },
     }),
     {
-      name: 'auth-storage', // localStorage 키
+      name: 'auth-storage', // Zustand persist만 사용
       partialize: (state: AuthStore): Partial<AuthState> => ({
         isLoggedIn: state.isLoggedIn,
         accessToken: state.accessToken,
