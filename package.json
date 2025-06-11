@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.80.6",
+    "@types/jwt-decode": "^2.2.1",
     "axios": "^1.9.0",
     "framer-motion": "^12.16.0",
+    "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-daum-postcode": "^3.2.0",
