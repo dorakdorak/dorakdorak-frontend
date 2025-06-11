@@ -6,6 +6,7 @@ type Props = {
   description: string[];
   imageUrl: string;
   imageAlt?: string;
+  backGroundColor?: "default" | "white";
 };
 
 export default function IntroSection({
@@ -13,10 +14,11 @@ export default function IntroSection({
   description,
   imageUrl,
   imageAlt,
+  backGroundColor = "default",
 }: Props) {
   return (
     <motion.section
-      className={styles.wrapper}
+      className={`${styles.wrapper} ${backGroundColor === "white" ? styles.whiteBg : ""}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
