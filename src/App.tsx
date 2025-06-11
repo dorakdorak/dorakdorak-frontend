@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '@/assets/font/font.css';
 import '@/App.css';
@@ -18,19 +17,14 @@ import CustomDetail from '@/pages/CustomDetail';
 import useAuthStore from '@/store/authStore';
 
 const App: React.FC = () => {
-  // Zustand store에서 인증 상태와 함수들 가져오기
-  const { isLoggedIn, checkAuth } = useAuthStore();
-
-  // 앱 시작 시 인증 상태 확인
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+  // Zustand persist가 자동으로 상태 복원
+  const { isLoggedIn } = useAuthStore();
 
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        {/* 실시간 로그인 상태를 Header에 전달 */}
         <Header isLoggedIn={isLoggedIn} />
+
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Main />} />
@@ -46,6 +40,7 @@ const App: React.FC = () => {
             <Route path="/custom-detail/:id" element={<CustomDetail />} />
           </Routes>
         </main>
+
         <Footer />
       </div>
     </BrowserRouter>
