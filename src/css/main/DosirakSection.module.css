@@ -1,0 +1,15 @@
+.dosirakSection {
+  font-family: "Pretendard", sans-serif;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  justify-items: center;
+  margin-top: 1rem;
+  margin-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .dosirakSection {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

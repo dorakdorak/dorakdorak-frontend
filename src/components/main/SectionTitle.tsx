@@ -1,4 +1,4 @@
-import "@/css/main/SectionTitle.css";
+import styles from "@/css/main/SectionTitle.module.css";
 import arrowIcon from "@/assets/images/icon/arrow.png";
 import { Link } from "react-router-dom";
 
@@ -9,10 +9,10 @@ interface SectionTitleProps {
 }
 
 const SectionTitle = ({ title, description, to }: SectionTitleProps) => (
-  <div className="section-title">
-    <Link to={to} className="section-title-row">
+  <div className={styles.sectionTitle}>
+    <Link to={to} className={styles.sectionTitleRow}>
       <h2>{title}</h2>
-      <img src={arrowIcon} alt="화살표" className="section-arrow-icon" />
+      <img src={arrowIcon} alt="화살표" className={styles.sectionArrowIcon} />
     </Link>
     {description && <p>{description}</p>}
   </div>

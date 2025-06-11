@@ -1,0 +1,61 @@
+.item {
+    border:2px solid #ccc;
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .item:hover {
+    background-color: #f4f4f4;
+  }
+  
+  .selected {
+    border: 2px solid #34661F;
+    color: #34661F;
+    font-weight: 500;
+  }
+  
+  .checkmark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .container{
+    background-color: white;
+    padding: 70px 70px;
+    border-radius: 30px;
+  }
+  
+
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 30px 100px;
+    border-radius: 30px;
+  }
+  
+  @media (max-width: 900px) {
+    .gridContainer {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+  }
+
+  .headerSection {
+    padding: 0 100px;
+    padding-top: 30px;
+  }
+
+  .btnWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+  }
+  

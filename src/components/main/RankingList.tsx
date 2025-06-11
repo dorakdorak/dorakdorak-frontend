@@ -1,5 +1,5 @@
 import CountUp from "react-countup";
-import "@/css/main/RankingList.css";
+import styles from "@/css/main/RankingList.module.css";
 
 const RankingList = () => {
   const rankings = [
@@ -9,11 +9,11 @@ const RankingList = () => {
   ];
 
   return (
-    <div className="ranking-wrapper">
-      <div className="ranking-label">실시간 인증 랭킹</div>
-      <ul className="ranking-list">
+    <div className={styles.rankingWrapper}>
+      <div className={styles.rankingLabel}>실시간 인증 랭킹</div>
+      <ul className={styles.rankingList}>
         {rankings.map((item) => (
-          <li key={item.rank} className="ranking-item">
+          <li key={item.rank} className={styles.rankingItem}>
             {item.rank}위 {item.school} -{" "}
             <CountUp end={item.count} duration={1.5} enableScrollSpy />회
           </li>

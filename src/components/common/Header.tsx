@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLoginForm } from '@/hooks/useLoginForm'; // 📌 훅 import
-import '@/css/common/Header.css';
+import styles from '@/css/common/Header.module.css';
 
 type HeaderProps = {
   isLoggedIn: boolean;
@@ -17,9 +17,9 @@ function Header({ isLoggedIn }: HeaderProps): React.ReactElement {
   };
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <div className="header-logo">
+    <header className={styles.header}>
+      <div className={styles.headerContainer}>
+        <div className={styles.headerLogo}>
           <Link
             to="/"
             style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -33,16 +33,14 @@ function Header({ isLoggedIn }: HeaderProps): React.ReactElement {
             <strong>도락도락</strong>
           </Link>
         </div>
-
-        <nav className="header-nav-menu">
+        <nav className={styles.headerNavMenu}>
           <Link to="/menu">도시락 조회</Link>
           <Link to="/group-order">공구 주문</Link>
           <Link to="/custom-dosirak">나만의 도시락 만들기</Link>
           <Link to="/custom-ranking">커스텀 랭킹</Link>
           <Link to="/zero-waste">제로 웨이스트 랭킹</Link>
         </nav>
-
-        <div className="header-user-menu">
+        <div className={styles.headerUserMenu}>
           {isLoggedIn ? (
             <>
               <Link to="/mypage">마이페이지</Link>
