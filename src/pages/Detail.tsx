@@ -44,7 +44,7 @@ function Detail() {
         </div>
       </section>
 
-      <section id="nutrition">
+      <section id="nutrition" style={{ marginBottom: "200px" }}>
         <SectionHeader title="영양 정보" />
         <NutritionTable nutrition={mockDosirak.nutrition} />
       </section>
