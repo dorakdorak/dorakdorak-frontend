@@ -3,12 +3,15 @@ import SelectBox from "@/components/common/select/SelectBox";
 import styles from "@/css/common/SelectableItem.module.css";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
+import createCustomDosirak from "@/api/CustomDosirakGenerate";
+import { mockCustomDosirakDetail } from "@/mock/CustomDosirakDetailMockData";
 import {
   LIKED_INGREDIENT_OPTIONS,
   DISLIKED_INGREDIENT_OPTIONS,
   FOOD_STYLE_OPTIONS,
   FOOD_PREFERENCE_OPTIONS,
 } from "@/constants/foodOptions";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   liked: string;
@@ -62,6 +65,26 @@ export default function QuestionGrid({
     },
   ];
 
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await createCustomDosirak({
+        likedIngredient: liked,
+        dislikedIngredient: disliked,
+        preferredStyle: style,
+        desiredFeeling: preference,
+      });
+
+      navigate("/dosiraks/result", { state: response });
+    } catch (error) {
+      alert("도시락 생성에 실패했습니다.");
+      console.log(error);
+      alert("도시락 생성에 실패하여 임시 데이터를 사용합니다.");
+      navigate("/custom-detail", { state: mockCustomDosirakDetail });
+    }
+  };
+
   return (
     <div>
       <motion.div
@@ -100,7 +123,7 @@ export default function QuestionGrid({
         transition={{ duration: 0.8, delay: 0.4 }}
         viewport={{ once: true, amount: 0.4 }}
       >
-        <Button variant="secondary" size="lg">
+        <Button variant="secondary" size="lg" onClick={handleSubmit}>
           생성하기
         </Button>
       </motion.div>
