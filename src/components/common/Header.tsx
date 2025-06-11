@@ -1,50 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import useAuthStore, { User } from '@/store/authStore'; // User 타입 import 추가
+import { Link } from 'react-router-dom';
+import { useLoginForm } from '@/hooks/useLoginForm'; // 📌 훅 import
 import '@/css/common/Header.css';
 
 type HeaderProps = {
   isLoggedIn: boolean;
 };
 
-function Header({ isLoggedIn }: HeaderProps) {
-  const navigate = useNavigate();
+function Header({ isLoggedIn }: HeaderProps): React.ReactElement {
+  // useLoginForm 훅에서 로그아웃 기능 가져오기
+  const { handleLogout, isLogoutLoading } = useLoginForm();
 
-  // 🔥 타입 명시적 지정
-  const logout = useAuthStore((state) => state.logout);
-  const user = useAuthStore((state) => state.user) as User | null;
-
-  // 로그아웃 핸들러
-  const handleLogout = async (): Promise<void> => {
-    try {
-      // 1. 서버에 로그아웃 요청
-      await axios.post(
-        'http://localhost:8080/logout',
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-        }
-      );
-
-      console.log('서버 로그아웃 성공');
-    } catch (error) {
-      console.error('서버 로그아웃 실패:', error);
-    } finally {
-      // 2. Zustand store 초기화
-      logout();
-
-      // 3. 메인 페이지로 리다이렉트
-      navigate('/');
-
-      // 4. 로그아웃 완료 알림
-      alert('로그아웃이 완료되었습니다.');
-    }
-  };
-
-  // 로그아웃 링크 클릭 핸들러
+  //  로그아웃 링크 클릭 핸들러 (간소화됨)
   const handleLogoutClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
     e.preventDefault();
     handleLogout();
@@ -67,6 +33,7 @@ function Header({ isLoggedIn }: HeaderProps) {
             <strong>도락도락</strong>
           </Link>
         </div>
+
         <nav className="header-nav-menu">
           <Link to="/menu">도시락 조회</Link>
           <Link to="/group-order">공구 주문</Link>
@@ -74,11 +41,10 @@ function Header({ isLoggedIn }: HeaderProps) {
           <Link to="/custom-ranking">커스텀 랭킹</Link>
           <Link to="/zero-waste">제로 웨이스트 랭킹</Link>
         </nav>
+
         <div className="header-user-menu">
           {isLoggedIn ? (
             <>
-              {/* 🔥 사용자 정보 표시 (선택사항) */}
-              {user?.email && <></>}
               <Link to="/mypage">마이페이지</Link>
               <span>|</span>
               <a
@@ -87,10 +53,12 @@ function Header({ isLoggedIn }: HeaderProps) {
                 style={{
                   textDecoration: 'none',
                   color: 'inherit',
-                  cursor: 'pointer',
+                  cursor: isLogoutLoading ? 'not-allowed' : 'pointer', //  로딩 중 커서 변경
+                  opacity: isLogoutLoading ? 0.6 : 1, // 로딩 중 투명도 변경
                 }}
               >
-                로그아웃
+                {isLogoutLoading ? '로그아웃 중...' : '로그아웃'}{' '}
+                {/* 로딩 상태 표시 */}
               </a>
             </>
           ) : (
