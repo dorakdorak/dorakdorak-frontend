@@ -1,0 +1,143 @@
+/* 마이페이지 메인 컨테이너 */
+.mypageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    min-height: calc(100vh - 200px);
+    padding-bottom: 60px;
+}
+
+/* 2열 레이아웃 컨테이너 */
+.contentLayout {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+/* 왼쪽 컬럼 */
+.leftColumn {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 오른쪽 컬럼 */
+.rightColumn {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 컬럼 내 박스들 높이 설정 */
+.leftColumn > *,
+.rightColumn > * {
+    height: auto;
+    min-height: 280px;
+    max-height: 400px;
+    flex-shrink: 0;
+}
+
+/* 공통 박스 스타일 */
+.orderHistoryList,
+.customDosirakList,
+.zeroWastePromo {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+/* 제로웨이스트 프로모 박스 */
+.zeroWastePromo {
+    height: auto !important;
+    min-height: 280px !important;
+    max-height: 400px !important;
+    margin-bottom: 0;
+}
+
+/* 마이페이지 내 박스들 높이 설정 */
+.mypageContainer .orderHistoryList,
+.mypageContainer .customDosirakList {
+    height: auto;
+    min-height: 280px;
+    max-height: 400px;
+}
+
+/* 박스 높이 동일화를 위한 레이아웃 */
+.contentLayout {
+    align-items: stretch;
+}
+
+.leftColumn,
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.leftColumn > *,
+.rightColumn > * {
+    flex: 1;
+    height: auto;
+    min-height: 280px;
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 768px) {
+    .mypageContainer {
+        padding: 16px;
+        padding-bottom: 40px;
+        min-height: calc(100vh - 150px);
+    }
+
+    .contentLayout {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+
+    .leftColumn,
+    .rightColumn {
+        gap: 12px;
+    }
+
+    .leftColumn > *,
+    .rightColumn > * {
+        height: auto;
+        min-height: 250px;
+        max-height: 350px;
+    }
+
+    .zeroWastePromo {
+        min-height: 250px !important;
+        max-height: 350px !important;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+    .mypageContainer {
+        padding: 12px;
+        padding-bottom: 30px;
+        min-height: calc(100vh - 120px);
+    }
+
+    .leftColumn > *,
+    .rightColumn > * {
+        min-height: 220px;
+        max-height: 300px;
+    }
+
+    .zeroWastePromo {
+        min-height: 220px !important;
+        max-height: 300px !important;
+    }
+}
