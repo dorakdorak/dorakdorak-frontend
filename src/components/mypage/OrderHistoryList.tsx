@@ -9,6 +9,7 @@ interface OrderHistoryListProps {
     showMoreButton?: boolean;                   // 더보기 활성화 여부
     onMoreClick?: () => void;                   // 더보기 클릭시 실행할 함수
     hideOrderHeader?: boolean;                  // 주문별 헤더 (주문번호, 취소버튼) 활성화 여부
+    hideStatusBadge?: boolean;                  // 주문별 상태 (결제대기, 결제완료) 활성화 여부
     limitItems?: number;                        // 주문 1건당 최대 몇개까지 보여줄지 제한
 }
 
@@ -119,11 +120,13 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
                                                     {(item.price * item.amount).toLocaleString()} 원
                                                 </div>
                                             </div>
-                                            <div className={styles.orderStatus}>
-                                                <span className={`${styles.statusBadge} ${styles[`status${(item.orderStatus || '').replace(/\s/g, '')}`]}`}>
-                                                    {ORDER_STATUS_KR[item.orderStatus] ?? item.orderStatus}
-                                                </span>
-                                            </div>
+                                            {!props.hideStatusBadge && (
+                                                <div className={styles.orderStatus}>
+                                                    <span className={`${styles.statusBadge} ${styles[`status${(item.orderStatus || '').replace(/\s/g, '')}`]}`}>
+                                                        {ORDER_STATUS_KR[item.orderStatus] ?? item.orderStatus}
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>

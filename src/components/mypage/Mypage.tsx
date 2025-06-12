@@ -167,6 +167,7 @@ function Mypage() {
                         showMoreButton={true}
                         onMoreClick={handleNormalOrderMore}
                         hideOrderHeader={true}
+                        hideStatusBadge={true}
                         limitItems={3}
                     />
                     <ZeroWastePromo onClick={handleZeroWasteClick} />
@@ -180,6 +181,7 @@ function Mypage() {
                         showMoreButton={true}
                         onMoreClick={handleGroupOrderMore}
                         hideOrderHeader={true}
+                        hideStatusBadge={true}
                         limitItems={3}
                     />
                     <CustomDosirakList
