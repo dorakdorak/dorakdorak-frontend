@@ -9,6 +9,7 @@ import {
   FOOD_STYLE_OPTIONS,
   FOOD_PREFERENCE_OPTIONS,
 } from "@/constants/foodOptions";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   liked: string;
@@ -62,6 +63,19 @@ export default function QuestionGrid({
     },
   ];
 
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    navigate("/custom-detail", {
+      state: {
+        likedIngredient: liked,
+        dislikedIngredient: disliked,
+        preferredStyle: style,
+        desiredFeeling: preference,
+      },
+    });
+  };
+
   return (
     <div>
       <motion.div
@@ -100,7 +114,7 @@ export default function QuestionGrid({
         transition={{ duration: 0.8, delay: 0.4 }}
         viewport={{ once: true, amount: 0.4 }}
       >
-        <Button variant="secondary" size="lg">
+        <Button variant="secondary" size="lg" onClick={handleSubmit}>
           생성하기
         </Button>
       </motion.div>

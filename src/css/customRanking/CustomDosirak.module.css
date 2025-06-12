@@ -8,6 +8,7 @@
   /* max-width: 240px; */
   box-sizing: border-box;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .imageWrapper {

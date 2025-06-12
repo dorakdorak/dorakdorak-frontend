@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuestionGrid from "@/components/common/select/QuestionGrid";
 import IntroSection from "@/components/common/IntroSection";
 import aiImage from "@/assets/images/intro/custom-register.png";
@@ -9,15 +9,20 @@ export default function CustomDosirak() {
   const [style, setStyle] = useState("");
   const [preference, setPreference] = useState("");
 
+  useEffect(() => {
+    document.body.classList.add("bg-custom");
+    return () => {
+      document.body.classList.remove("bg-custom");
+    };
+  }, []);
+
   return (
     <div
       style={{
-        width: "100vw",
-        marginLeft: "-10vw",
-        marginRight: "-10vw",
-        backgroundColor: "#F5FAF1",
-        padding: "130px 10vw",
-        boxSizing: "border-box",
+        backgroundColor: "#f5faf1",
+        padding: "130px 0",
+        maxWidth: "1200px",
+        margin: "0 auto",
       }}
     >
       <IntroSection

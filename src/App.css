@@ -20,6 +20,10 @@ body,
   box-sizing: border-box;
 }
 
+body.bg-custom {
+  background-color: #f5faf1;
+}
+
 @media (max-width: 768px) {
   .main-content {
     padding: 0 20px;
