@@ -32,13 +32,18 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
     const calculateTotalAmount = (items: MyOrderItem[]) =>
         items.reduce((sum, item) => sum + item.price * item.amount, 0);
 
+    // 최신순 정렬
+    const sortedOrderGroups = [...props.orderGroups].sort((a, b) =>
+        new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime()
+    );
+
     // 보여줄 주문 그룹 제한 처리
     const displayOrderGroups = props.limitItems
-        ? props.orderGroups.map(order => ({
+        ? sortedOrderGroups.map(order => ({
             ...order,
             items: order.items.slice(0, props.limitItems)
         }))
-        : props.orderGroups;
+        : sortedOrderGroups;
 
     return (
         <div className={styles.orderHistoryList}>
@@ -64,8 +69,6 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
                         // 결제 대기, 결제 완료, 공구 모집인 경우에만 주문 취소 활성화
                         const cancelStatus = ['PAYMENT_PENDING', 'PAYMENT_COMPLETED', 'GONGGU_OPEN'];
                         const canCancel = order.items.every(item => cancelStatus.includes(item.orderStatus));
-                        console.log(order.items.map(i => `[${i.name}] = ${i.orderStatus}`));
-
 
                         return (
                             <div key={order.orderId} className={styles.orderGroup}>

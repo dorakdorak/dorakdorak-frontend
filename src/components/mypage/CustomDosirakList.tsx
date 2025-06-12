@@ -16,16 +16,21 @@ interface CustomDosirakListProps {
 }
 
 const CustomDosirakList = (props: CustomDosirakListProps) => {
-    
+
     const handleMoreClick = () => {
         if (props.onMoreClick) {
             props.onMoreClick();
         }
     };
 
+    // 최신순 정렬
+    const sortedDosirakList = [...props.dosirakList].sort((a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
     const displayDosirakList = props.limitItems 
-        ? props.dosirakList.slice(0, props.limitItems)
-        : props.dosirakList;
+        ? sortedDosirakList.slice(0, props.limitItems)
+        : sortedDosirakList;
 
     return (
         <div className={styles.customDosirakList}>
