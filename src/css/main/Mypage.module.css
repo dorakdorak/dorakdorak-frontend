@@ -90,54 +90,10 @@
     min-height: 280px;
 }
 
-/* 태블릿 반응형 */
-@media (max-width: 768px) {
-    .mypageContainer {
-        padding: 16px;
-        padding-bottom: 40px;
-        min-height: calc(100vh - 150px);
-    }
-
-    .contentLayout {
-        flex-direction: column;
-        gap: 16px;
-        align-items: stretch;
-    }
-
-    .leftColumn,
-    .rightColumn {
-        gap: 12px;
-    }
-
-    .leftColumn > *,
-    .rightColumn > * {
-        height: auto;
-        min-height: 250px;
-        max-height: 350px;
-    }
-
-    .zeroWastePromo {
-        min-height: 250px !important;
-        max-height: 350px !important;
-    }
-}
-
-/* 모바일 반응형 */
-@media (max-width: 480px) {
-    .mypageContainer {
-        padding: 12px;
-        padding-bottom: 30px;
-        min-height: calc(100vh - 120px);
-    }
-
-    .leftColumn > *,
-    .rightColumn > * {
-        min-height: 220px;
-        max-height: 300px;
-    }
-
-    .zeroWastePromo {
-        min-height: 220px !important;
-        max-height: 300px !important;
-    }
+/* 로딩 스피너 */
+.spinnerFullPageWrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

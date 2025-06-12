@@ -7,7 +7,7 @@ import styles from '@/css/main/MyCustomDosiraks.module.css';
 
 import CustomDosirakList from '@/components/mypage/CustomDosirakList';
 import OrderSummaryStatus from '@/components/mypage/OrderSummaryStatus';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Spinner from '@/components/common/Spinner';
 
 function MyCustomDosiraks() {
     const navigate = useNavigate();
@@ -40,7 +40,13 @@ function MyCustomDosiraks() {
     };
 
     // 페이지 로딩시 스피너 리턴
-    if (!userSummary) { return <LoadingSpinner />;}
+    if (!userSummary) {
+        return (
+            <div className={styles.spinnerFullPageWrapper}>
+                <Spinner />
+            </div>
+        );
+    }
 
     return (
         <div className={styles.customDosirakPage}>

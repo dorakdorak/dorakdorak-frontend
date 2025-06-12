@@ -7,7 +7,7 @@ import OrderSummaryStatus from '@/components/mypage/OrderSummaryStatus';
 import OrderHistoryList from '@/components/mypage/OrderHistoryList';
 import CustomDosirakList from '@/components/mypage/CustomDosirakList';
 import ZeroWastePromo from '@/components/mypage/ZeroWastePromo';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Spinner from '@/components/common/Spinner';
 
 import {
     fetchMyNormalOrdersPreview,
@@ -139,7 +139,11 @@ function Mypage() {
 
     // 페이지 로딩시 스피너 리턴
     if (!userSummary) {
-        return <LoadingSpinner />;
+        return (
+            <div className={styles.spinnerFullPageWrapper}>
+                <Spinner />
+            </div>
+        );
     }
 
     return (

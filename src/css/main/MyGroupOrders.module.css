@@ -12,3 +12,11 @@
     margin-bottom: 24px;
 }
 
+/* 로딩 스피너 */
+.spinnerFullPageWrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

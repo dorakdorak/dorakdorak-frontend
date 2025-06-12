@@ -15,6 +15,9 @@ import Mypage from '@/pages/Mypage';
 import Detail from '@/pages/Detail';
 import CustomDetail from '@/pages/CustomDetail';
 import useAuthStore from '@/store/authStore';
+import MyNormalOrders from './pages/MyNormalOrders';
+import MyGroupOrders from './pages/MyGroupOrders';
+import MyCustomDosiraks from './pages/MyCustomDosiraks';
 
 const App: React.FC = () => {
   // Zustand persist가 자동으로 상태 복원
@@ -35,10 +38,13 @@ const App: React.FC = () => {
             <Route path="/zero-waste" element={<ZeroWasteRanking />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/mypage" element={<Mypage />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/custom-detail" element={<CustomDetail />} />
             <Route path="/custom-detail/:id" element={<CustomDetail />} />
+            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/mypage/normal-orders" element={<MyNormalOrders />} />
+            <Route path="/mypage/group-orders" element={<MyGroupOrders />} />
+            <Route path="/mypage/custom-dosirak" element={<MyCustomDosiraks />} />
           </Routes>
         </main>
 

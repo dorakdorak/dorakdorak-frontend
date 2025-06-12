@@ -3,7 +3,7 @@ import { MyOrderResponse, MyCustomDosirakResponse,  MyOrderPreviewResponse, MyPa
 
 export const fetchMyNormalOrders = async (): Promise<MyOrderResponse> => {
     try {
-        const response = await axiosInstance.get('/members/orders/normal');
+        const response = await axiosInstance.get('/api/members/orders/normal');
         console.log(response.data)
         return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ export const fetchMyNormalOrders = async (): Promise<MyOrderResponse> => {
 
 export const fetchMyGroupOrders = async (): Promise<MyOrderResponse> => {
     try {
-        const response = await axiosInstance.get('/members/orders/group');
+        const response = await axiosInstance.get('/api/members/orders/group');
         console.log(response.data)
         return response.data;
     } catch (error) {
@@ -27,7 +27,7 @@ export const fetchMyGroupOrders = async (): Promise<MyOrderResponse> => {
 
 export const fetchMyCustomDosiraks = async (): Promise<MyCustomDosirakResponse> => {
     try {
-        const response = await axiosInstance.get('/members/custom-dosirak');
+        const response = await axiosInstance.get('/api/members/custom-dosirak');
         console.log(response.data)
         return response.data;
     } catch (error) {
@@ -39,7 +39,7 @@ export const fetchMyCustomDosiraks = async (): Promise<MyCustomDosirakResponse> 
 
 export const fetchMyNormalOrdersPreview = async (): Promise<MyOrderPreviewResponse> => {
     try {
-        const response = await axiosInstance.get('/members/orders/normal/preview');
+        const response = await axiosInstance.get('/api/members/orders/normal/preview');
         console.log(response.data)
         return response.data;
     } catch (error) {
@@ -51,7 +51,7 @@ export const fetchMyNormalOrdersPreview = async (): Promise<MyOrderPreviewRespon
 
 export const fetchMyGroupOrdersPreview = async (): Promise<MyOrderPreviewResponse> => {
     try {
-        const response = await axiosInstance.get('/members/orders/group/preview');
+        const response = await axiosInstance.get('/api/members/orders/group/preview');
         console.log(response.data)
         return response.data;
     } catch (error) {
@@ -62,7 +62,7 @@ export const fetchMyGroupOrdersPreview = async (): Promise<MyOrderPreviewRespons
 
 export const fetchMyCustomDosiraksPreview = async (): Promise<MyCustomDosirakResponse> => {
     try {
-        const response = await axiosInstance.get('/members/custom-dosirak/preview');
+        const response = await axiosInstance.get('/api/members/custom-dosirak/preview');
         console.log(response.data)
         return response.data;
     } catch (error) {
@@ -73,7 +73,7 @@ export const fetchMyCustomDosiraksPreview = async (): Promise<MyCustomDosirakRes
 
 export const fetchMyPageSummary = async (): Promise<MyPageSummary> => {
     try {
-        const response = await axiosInstance.get('/members/orders/summary');
+        const response = await axiosInstance.get('/api/members/orders/summary');
         console.log(response.data)
         return response.data;
     } catch (error) {

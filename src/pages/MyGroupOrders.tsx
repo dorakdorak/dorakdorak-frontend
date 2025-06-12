@@ -6,7 +6,7 @@ import styles from '@/css/main/MyGroupOrders.module.css';
 
 import OrderHistoryList from '@/components/mypage/OrderHistoryList';
 import OrderSummaryStatus from '@/components/mypage/OrderSummaryStatus';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Spinner from '@/components/common/Spinner';
 
 function MyGroupOrders () {
     const [userSummary, setUserSummary] = useState<MyPageSummary | null>(null); // 사용자 정보
@@ -50,7 +50,13 @@ function MyGroupOrders () {
     };
 
     // 페이지 로딩시 스피너 리턴
-    if (!userSummary) { return <LoadingSpinner />;}
+    if (!userSummary) {
+        return (
+            <div className={styles.spinnerFullPageWrapper}>
+                <Spinner />
+            </div>
+        );
+    }
 
     return (
         <div className={styles.groupOrdersPage}>
