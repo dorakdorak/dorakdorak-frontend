@@ -23,6 +23,13 @@ import {
     MyPageSummary
 } from '@/types/Mypage';
 
+import {
+    mockSummary,
+    mockNormalPreview,
+    mockGroupPreview,
+    mockCustomDosiraksPreview
+} from '@/mock/MypageMockData';
+
 function Mypage() {
     const navigate = useNavigate();
     const contentLayoutRef = useRef<HTMLDivElement>(null);
@@ -89,29 +96,36 @@ function Mypage() {
 
     // 데이터 로딩
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const [normalPreview, groupPreview, customPreview, summary] = await Promise.all([
-                    fetchMyNormalOrdersPreview(),
-                    fetchMyGroupOrdersPreview(),
-                    fetchMyCustomDosiraksPreview(),
-                    fetchMyPageSummary()
-                ]);
+        const mockNormalOrders = mapPreviewsToSingleOrder(mockNormalPreview);
+        const mockGroupOrders = mapPreviewsToSingleOrder(mockGroupPreview);
+        setNormalOrder(mockNormalOrders);
+        setGroupOrder(mockGroupOrders);
+        setCustomDosirakList(mockCustomDosiraksPreview);
+        setUserSummary(mockSummary);
+        // API 연결시 아래 주석 해제
+        // const fetchData = async () => {
+        //     try {
+        //         const [normalPreview, groupPreview, customPreview, summary] = await Promise.all([
+        //             fetchMyNormalOrdersPreview(),
+        //             fetchMyGroupOrdersPreview(),
+        //             fetchMyCustomDosiraksPreview(),
+        //             fetchMyPageSummary()
+        //         ]);
 
-                // 각 프리뷰 데이터를 하나의 주문으로 묶음
-                const normalOrders: MyOrder[] = mapPreviewsToSingleOrder(normalPreview.orders);
-                const groupOrders: MyOrder[] = mapPreviewsToSingleOrder(groupPreview.orders);
+        //         // 각 프리뷰 데이터를 하나의 주문으로 묶음
+        //         const normalOrders: MyOrder[] = mapPreviewsToSingleOrder(normalPreview.orders);
+        //         const groupOrders: MyOrder[] = mapPreviewsToSingleOrder(groupPreview.orders);
 
-                setNormalOrder(normalOrders);
-                setGroupOrder(groupOrders);
-                setCustomDosirakList(customPreview.customDosiraks);
-                setUserSummary(summary);
-            } catch (error) {
-                console.error('데이터 불러오기 실패:', error);
-            }
-        };
+        //         setNormalOrder(normalOrders);
+        //         setGroupOrder(groupOrders);
+        //         setCustomDosirakList(customPreview.customDosiraks);
+        //         setUserSummary(summary);
+        //     } catch (error) {
+        //         console.error('데이터 불러오기 실패:', error);
+        //     }
+        // };
 
-        fetchData();
+        // fetchData();
     }, []);
 
     // 내용 높이 정렬 - 데이터 변경될 때

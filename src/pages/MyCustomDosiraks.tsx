@@ -9,6 +9,8 @@ import CustomDosirakList from '@/components/mypage/CustomDosirakList';
 import OrderSummaryStatus from '@/components/mypage/OrderSummaryStatus';
 import Spinner from '@/components/common/Spinner';
 
+import { mockSummary, mockCustomDosiraks } from '@/mock/MypageMockData';
+
 function MyCustomDosiraks() {
     const navigate = useNavigate();
 
@@ -16,22 +18,27 @@ function MyCustomDosiraks() {
     const [customDosirakList, setCustomDosirakList] = useState<MyCustomDosirak[]>([]);    // 커스텀 도시락 배열
 
     useEffect(() => {
-        const loadData = async () => {
-            try {
-                const [summaryData, dosirakData] = await Promise.all([
-                    fetchMyPageSummary(),
-                    fetchMyCustomDosiraks()
-                ]);
+        setUserSummary(mockSummary);
+        setCustomDosirakList(mockCustomDosiraks);
 
-                setUserSummary(summaryData);
-                setCustomDosirakList(dosirakData.customDosiraks);
+        // API 연결시 아래 주석 해제
+        // const loadData = async () => {
+        //     try {
+        //         const [summaryData, dosirakData] = await Promise.all([
+        //             // fetchMyPageSummary(),
+        //             // fetchMyCustomDosiraks()
+                    
+        //         ]);
 
-            } catch (error) {
-                console.error('나의 커스텀 도시락 목록 불러오기 실패:', error);
-            }
-        };
+        //         setUserSummary(summaryData);
+        //         setCustomDosirakList(dosirakData.customDosiraks);
 
-        loadData();
+        //     } catch (error) {
+        //         console.error('나의 커스텀 도시락 목록 불러오기 실패:', error);
+        //     }
+        // };
+
+        // loadData();
     }, []);
 
     // 도시락 생성하기 버튼 클릭시 실행

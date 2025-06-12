@@ -8,26 +8,31 @@ import OrderHistoryList from '@/components/mypage/OrderHistoryList';
 import OrderSummaryStatus from '@/components/mypage/OrderSummaryStatus';
 import Spinner from '@/components/common/Spinner';
 
+import { mockSummary, mockOrders } from '@/mock/MypageMockData';
+
 function MyGroupOrders () {
     const [userSummary, setUserSummary] = useState<MyPageSummary | null>(null); // 사용자 정보
     const [groupOrder, setGroupOrder] = useState([]);   // 공동 주문 내역
 
     useEffect(() => {
-        const loadData = async () => {
-            try {
-                const [summaryData, orderData] = await Promise.all([
-                    fetchMyPageSummary(),
-                    fetchMyGroupOrders()
-                ]);
+        setUserSummary(mockSummary);
+        setGroupOrder(mockOrders);
+        // API 연결시 아래 주석 해제
+        // const loadData = async () => {
+        //     try {
+        //         const [summaryData, orderData] = await Promise.all([
+        //             fetchMyPageSummary(),
+        //             fetchMyGroupOrders()
+        //         ]);
 
-                setGroupOrder(orderData.orders);
-                setUserSummary(summaryData);
-            } catch (error) {
-                console.error("공동 주문 데이터 불러오기 실패:", error);
-            }
-        };
+        //         setGroupOrder(orderData.orders);
+        //         setUserSummary(summaryData);
+        //     } catch (error) {
+        //         console.error("공동 주문 데이터 불러오기 실패:", error);
+        //     }
+        // };
 
-        loadData();
+        // loadData();
     }, []);
 
     // 주문 취소 버튼 클릭시 실행
