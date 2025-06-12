@@ -1,0 +1,68 @@
+/* 주문 요약 상태 컴포넌트 스타일 */
+.orderSummaryStatus {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+    padding: 24px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 사용자 정보 영역 */
+.userInfo {
+    flex: 1;
+}
+
+/* 사용자 이름 */
+.userInfo h2 {
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+/* 사용자 이메일 */
+.userEmail {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* 상태 카드들 컨테이너 */
+.statusCards {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+/* 개별 상태 카드 */
+.statusCard {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+/* 상태 카드 호버 효과 */
+.statusCard:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 상태 라벨 */
+.statusLabel {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+/* 상태 값 (숫자) */
+.statusValue {
+    color: #4CAF50;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+}
