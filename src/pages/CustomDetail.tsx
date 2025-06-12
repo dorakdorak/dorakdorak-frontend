@@ -7,13 +7,14 @@ import NutritionTable from "@/components/detail/NutritionInfo";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
 import warningIcon from "@/assets/images/icon/caution.png";
+import createCustomDosirak from "@/api/CustomDosirakGenerate"; // 이미 있는 API 호출 함수
+import Spinner from "@/components/common/Spinner";
 
 function CustomDetail() {
   const { id } = useParams();
   const location = useLocation();
-  const [data, setData] = useState<CreateCustomDosirakResponse | null>(
-    location.state ?? (id ? null : mockCustomDosirakDetail)
-  );
+  const [data, setData] = useState<CreateCustomDosirakResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -23,45 +24,95 @@ function CustomDetail() {
   }, []);
 
   useEffect(() => {
-    if (id && !data) {
-      fetch(`http://localhost:8080/dosiraks/custom-dosirak/${id}`)
-        .then((res) => res.json())
-        .then((resData) => setData(resData))
-        .catch(() => {
-          alert("도시락 정보를 불러오지 못해 임시 데이터를 사용합니다");
-          setData(mockCustomDosirakDetail);
-        });
-    }
-  }, [id, data]);
+    const fetchData = async () => {
+      try {
+        if (!isLoading) return; // 이미 로딩 끝났으면 중단
 
-  if (!data) return <p>로딩 중입니다...</p>;
+        if (id) {
+          const res = await fetch(
+            `http://localhost:8080/dosiraks/custom-dosirak/${id}`
+          );
+          const resData = await res.json();
+          setData(resData);
+        } else if (location.state) {
+          const response = await createCustomDosirak({
+            likedIngredient: location.state.likedIngredient,
+            dislikedIngredient: location.state.dislikedIngredient,
+            preferredStyle: location.state.preferredStyle,
+            desiredFeeling: location.state.desiredFeeling,
+          });
+          setData(response);
+        } else {
+          setData(mockCustomDosirakDetail); // fallback
+        }
+      } catch (error) {
+        console.error("도시락 정보 로딩 실패:", error);
+        //alert("도시락 정보를 불러오지 못해 임시 데이터를 사용합니다");
+        setData(mockCustomDosirakDetail);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id, location.state]);
+
+  if (isLoading) {
+    const spinnerText = id ? "로딩 중" : "생성 중";
+
+    return (
+      <div className={styles.wrapper}>
+        <SectionHeader title="커스텀 도시락 생성 결과" />
+        <div className={styles.contentContainer}>
+          <div className={styles.imageBox}>
+            <Spinner text={spinnerText} />
+          </div>
+          <div className={styles.nutritionBox}>
+            <Spinner text={spinnerText} />
+          </div>
+        </div>
+        {!id && (
+          <div className={styles.infoNotice}>
+            AI가 선택한 정보로 도시락을 생성중입니다.
+          </div>
+        )}
+      </div>
+    );
+  }
 
   const { name, imageUrl, nutrition } = data;
+  console.log(nutrition);
 
   return (
     <div className={styles.wrapper}>
-      <SectionHeader title="커스텀 도시락 생성 결과" />
+      <SectionHeader title="커스텀 도시락" />
 
       <div className={styles.contentContainer}>
         <div className={styles.imageBox}>
-          <img src={imageUrl} alt={name} />
+          <img src={imageUrl} alt={data.name} />
           <h3>{name}</h3>
         </div>
 
         <div className={styles.nutritionBox}>
-          <NutritionTable nutrition={nutrition} />
+          <NutritionTable nutrition={data.nutrition} />
         </div>
       </div>
 
       <div className={styles.infoNotice}>
-        <img src={warningIcon} alt="경고 아이콘" className={styles.noticeIcon} />
+        <img
+          src={warningIcon}
+          alt="경고 아이콘"
+          className={styles.noticeIcon}
+        />
         이 영양 정보는 AI가 추천한 구성에 따라 자동으로 계산된 예상치예요!
         <br />
         실제 식단과는 조금 다를 수 있으니 참고용으로 봐주세요.
       </div>
       {!id && (
         <>
-          <div className={styles.infoNotice}>AI가 추천한 도시락 구성, 마음에 드시나요?</div>
+          <div className={styles.infoNotice}>
+            AI가 추천한 도시락 구성, 마음에 드시나요?
+          </div>
 
           <div className={styles.buttonWrapper}>
             <Button variant="gray" size="lg">

@@ -3,8 +3,6 @@ import SelectBox from "@/components/common/select/SelectBox";
 import styles from "@/css/common/SelectableItem.module.css";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
-import createCustomDosirak from "@/api/CustomDosirakGenerate";
-import { mockCustomDosirakDetail } from "@/mock/CustomDosirakDetailMockData";
 import {
   LIKED_INGREDIENT_OPTIONS,
   DISLIKED_INGREDIENT_OPTIONS,
@@ -68,21 +66,14 @@ export default function QuestionGrid({
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    try {
-      const response = await createCustomDosirak({
+    navigate("/custom-detail", {
+      state: {
         likedIngredient: liked,
         dislikedIngredient: disliked,
         preferredStyle: style,
         desiredFeeling: preference,
-      });
-
-      navigate("/dosiraks/result", { state: response });
-    } catch (error) {
-      alert("도시락 생성에 실패했습니다.");
-      console.log(error);
-      alert("도시락 생성에 실패하여 임시 데이터를 사용합니다.");
-      navigate("/custom-detail", { state: mockCustomDosirakDetail });
-    }
+      },
+    });
   };
 
   return (
