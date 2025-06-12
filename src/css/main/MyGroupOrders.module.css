@@ -1,0 +1,14 @@
+/* 공동주문 페이지 컨테이너 */
+.groupOrdersPage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 공동주문 페이지 제목 */
+.groupOrdersPage h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+
