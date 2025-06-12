@@ -11,15 +11,18 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.80.6",
+    "@types/jwt-decode": "^2.2.1",
     "axios": "^1.9.0",
     "classnames": "^2.5.1",
     "framer-motion": "^12.16.0",
+    "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-daum-postcode": "^3.2.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2",
-    "swiper": "^11.2.8"
+    "swiper": "^11.2.8",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
