@@ -6,16 +6,13 @@ interface CalendarComponentProps {
   onDateChange: (selectedDate: string) => void;
 }
 
-export default function CalendarComponent({
-  onDateChange,
-}: CalendarComponentProps) {
+export default function CalendarComponent({ onDateChange }: CalendarComponentProps) {
   const [date, setDate] = React.useState<Date | null>(null);
 
   const formatDateToString = (date: Date) => {
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(date.getDate()).padStart(2, "0")}`;
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(
+      date.getDate()
+    ).padStart(2, "0")}`;
   };
 
   React.useEffect(() => {
@@ -28,7 +25,8 @@ export default function CalendarComponent({
 
   return (
     <div className={styles.container}>
-      <div className={styles.calendarWrapper}>
+      {/* <h3 className={styles.title}>날짜선택</h3> */}
+      <div className={styles.container}>
         <Calendar
           calendarType="gregory"
           onChange={(value) => {
@@ -39,6 +37,7 @@ export default function CalendarComponent({
           }}
           value={date}
           locale="ko-KR"
+          minDate={new Date()}
           navigationLabel={({ date }) => (
             <div className={styles.navigationLabel}>
               <span className={styles.navigationLabelText}>
@@ -52,9 +51,7 @@ export default function CalendarComponent({
           prevLabel={<span>&lt;</span>}
           nextLabel={<span>&gt;</span>}
           formatDay={(locale, date) => date.getDate().toString()}
-          formatShortWeekday={(locale, date) =>
-            date.toLocaleDateString("ko", { weekday: "short" })
-          }
+          formatShortWeekday={(locale, date) => date.toLocaleDateString("ko", { weekday: "short" })}
           showNeighboringMonth={false}
         />
       </div>
