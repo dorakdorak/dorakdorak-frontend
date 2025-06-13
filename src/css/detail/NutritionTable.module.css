@@ -1,0 +1,48 @@
+.nutritionBox {
+  margin: 0 auto;
+  /* margin-top: 2rem; */
+  max-width: 500px;
+  min-width: 300px;
+  border: 1px solid #ccc;
+  font-family: "Pretendard", sans-serif;
+  /* margin-bottom: 200px; */
+}
+
+.nutritionTitle {
+  background-color: #f5f5f5;
+  padding: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  font-size: 20px;
+  margin: 0;
+}
+
+.nutritionTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nutritionTable th,
+.nutritionTable td {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.nutritionTable th {
+  font-weight: 500;
+  width: 50%;
+  background-color: #fafafa;
+  color: #333;
+}
+
+.nutritionTable td {
+  color: #222;
+}
+
+@media (max-width: 768px) {
+  .nutritionBox {
+    min-width: 200px;
+  }
+}

@@ -1,0 +1,45 @@
+.sortOptions {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: #666666;
+  font-family: "Pretendard", sans-serif;
+  margin: 20px 16px;
+}
+
+.sortOptionWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.sortOption {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-weight: 400;
+  padding: 0;
+  margin-right: 7px;
+}
+
+.active {
+  color: #000;
+  font-weight: 500;
+}
+
+.sortDivider {
+  margin: 0 10px;
+  color: #ccc;
+}
+
+@media (max-width: 1024px) {
+  .sortOptions {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sortOptions {
+    padding: 0 8px;
+  }
+}

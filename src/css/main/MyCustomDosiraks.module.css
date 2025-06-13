@@ -1,0 +1,47 @@
+/* 커스텀 도시락 페이지 컨테이너 */
+.customDosirakPage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 페이지 헤더 영역 */
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+/* 커스텀 도시락 페이지 제목 */
+.pageHeader h1 {
+    color: #333;
+    font-size: 24px;
+    margin: 0;
+}
+
+/* 나만의 도시락 생성 버튼 */
+.addDosirakBtn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* 나만의 도시락 생성 버튼 호버 효과 */
+.addDosirakBtn:hover {
+    background: #45a049;
+}
+
+/* 로딩 스피너 */
+.spinnerFullPageWrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

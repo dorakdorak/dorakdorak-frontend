@@ -1,0 +1,43 @@
+.quantitySelector {
+  font-family: "Pretendard", sans-serif;
+  display: flex;
+  width: 90px;
+  height: 24px;
+  border: 1px solid #000;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.quantityButton,
+.quantityValue {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+  box-sizing: border-box;
+}
+
+.quantityButton:last-child {
+  border-right: none;
+}
+
+.quantityButton {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+
+.quantityButton:hover {
+  background-color: #f5f5f5;
+}
+
+.quantityValue {
+  user-select: none;
+  font-weight: 500;
+  border-left: 1px solid #000;
+}

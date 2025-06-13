@@ -1,0 +1,87 @@
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding: 24px 0;
+  margin-bottom: 200px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 100px;
+  gap: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.rankIcon {
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Paperlogy", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.rankIcon img {
+  width: 48px;
+  height: 48px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+}
+
+.name {
+  font-family: "Paperlogy", sans-serif;
+  flex: 1;
+  font-weight: 600;
+  font-size: 24px;
+  color: #111;
+}
+
+.count {
+  font-family: "Paperlogy", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #111;
+}
+
+.titleBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto 80px;
+  padding: 10px 30px;
+  font-family: "Paperlogy", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #aacd81;
+  border-radius: 30px;
+  position: relative;
+}
+
+.titleBox::before,
+.titleBox::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 400px;
+  background-color: #ccc;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.titleBox::before {
+  left: -410px; /* 선과 박스 사이 간격 조절 */
+}
+
+.titleBox::after {
+  right: -410px;
+}

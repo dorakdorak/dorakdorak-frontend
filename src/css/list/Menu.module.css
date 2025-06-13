@@ -1,0 +1,11 @@
+.menuContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.menuSortWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}

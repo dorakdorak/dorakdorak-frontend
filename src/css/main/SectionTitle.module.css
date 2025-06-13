@@ -1,0 +1,35 @@
+.sectionTitle {
+  font-family: "Pretendard", sans-serif;
+  text-align: center;
+  margin: 2rem 0;
+  margin-top: 12rem;
+}
+
+.sectionTitleRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sectionTitleRow h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sectionArrowIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sectionTitle p {
+  font-family: "Pretendard", sans-serif;
+  font-size: 1.1rem;
+  color: #787b81;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}

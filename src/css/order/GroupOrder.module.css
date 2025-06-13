@@ -1,0 +1,128 @@
+.box {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+.wrapper {
+  font-family: "Pretendard", sans-serif;
+  background-color: #f5faf1;
+  padding: 50px 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fff;
+  padding: 30px 50px;
+  border-radius: 12px;
+  margin-top: 60px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 50px 2fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 20px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.headerRow {
+  background-color: #3a5d1d;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.title {
+  margin-bottom: 14px;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 600;
+}
+
+.totalAmountBox {
+  font-family: "Pretendard", sans-serif;
+  text-align: right;
+  margin-top: 20px;
+  margin-right: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.totalAmount {
+  margin-left: 8px;
+  color: #3a5d1d;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 100px;
+  margin-top: 50px;
+}
+
+.noticeList li {
+  margin-bottom: 6px;
+}
+
+.checkboxAgreement {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.noticeWrapper {
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  margin-top: 60px;
+  background-color: #fff;
+  padding: 30px 50px;
+}
+
+.agreementWrapper {
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  margin-top: 60px;
+  background-color: #fff;
+  padding: 30px 50px;
+}
+
+.checkboxAgreement {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.checkboxImage {
+  width: 22px;
+  height: 22px;
+}
+
+.checkboxText {
+  font-size: 16px;
+  line-height: 1.5;
+}
