@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
 
     if ((statusCode === 419 || statusCode === 401) && !isLoginRequest) {
       try {
-        const startUrl = 'http://localhost:8080';
+        const startUrl = 'https://dorakdorak.store/';
         const refreshResponse = await axios.post(
           startUrl + '/api/auth/reissue',
           {},
