@@ -30,11 +30,11 @@ function AdminHeader(): React.ReactElement {
           </Link>
         </div>
         <nav className={styles.headerNavMenu}>
-          <Link to="/menu">주문관리</Link>
-          <Link to="/group-order">제품관리</Link>
-          <Link to="/custom-dosirak">판매량통계</Link>
-          <Link to="/custom-ranking">인기도통계</Link>
-          <Link to="/zero-waste">주문통계</Link>
+          <Link to="/order-management">주문관리</Link>
+          <Link to="/dosirak-management">제품관리</Link>
+          <Link to="/sales-statistics">판매량통계</Link>
+          <Link to="/popular-statistics">인기도통계</Link>
+          <Link to="/order-statistics">주문통계</Link>
         </nav>
         <div className={styles.headerUserMenu}>
           <a
