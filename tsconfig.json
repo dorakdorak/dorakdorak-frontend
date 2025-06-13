@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "target": "ES2020",                        // JSX private 필드 오류 방지
+    "module": "ESNext",                        // Vite 환경에 적합
+    "moduleResolution": "bundler",             // 또는 "node16", Vite와 호환
+    "lib": ["DOM", "ESNext"],                  // JSX, fetch 등 DOM API 인식
+
+    "jsx": "react-jsx",                        // React 17+ JSX 변환
+    "types": ["react", "react-dom", "node"],   // JSX namespace 오류 방지
+
+    "baseUrl": "src",                          // 절대경로 import 설정
     "paths": {
       "@/*": ["*"]
     },
-    "types": ["node"],
-    "jsx": "react-jsx",
+
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,                      // 외부 라이브러리 타입 오류 무시
+    "forceConsistentCasingInFileNames": true   // 대소문자 일관성 검사
   },
   "include": ["src"]
-  //"files": [],
-  //"references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }
