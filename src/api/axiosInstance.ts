@@ -1,7 +1,7 @@
 import axios from 'axios';
 import useAuthStore from '@/store/authStore';
 const axiosInstance = axios.create({
-  baseURL: 'https://dorakdorak.store', // 공통 베이스 URL https://api.example.com
+  baseURL: 'https://dorakdorak.store/', // 공통 베이스 URL https://api.example.com
   timeout: 5000,
   withCredentials: true,
   headers: {
@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
 
     if ((statusCode === 419 || statusCode === 401) && !isLoginRequest) {
       try {
-        const startUrl = 'http://localhost:8080';
+        const startUrl = 'https://dorakdorak.store/';
         const refreshResponse = await axios.post(
           startUrl + '/api/auth/reissue',
           {},
