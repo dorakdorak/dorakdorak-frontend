@@ -1,7 +1,7 @@
 import axios from 'axios';
 import useAuthStore from '@/store/authStore';
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // 공통 베이스 URL https://api.example.com
+  baseURL: 'https://dorakdorak.store/', // 공통 베이스 URL https://api.example.com
   timeout: 5000,
   withCredentials: true,
   headers: {
