@@ -2,7 +2,7 @@
   width: 100%;
   background-color: #ffffff;
   border-bottom: 1px solid #ddd;
-  padding: 14px 0;
+  padding: 20px 0;
   font-family: "Pretendard", sans-serif;
   font-weight: 500;
 }
@@ -13,7 +13,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1550px;
   padding: 0 40px;
   margin: 0 auto;
 }
@@ -31,9 +31,9 @@
 .headerNavMenu,
 .headerUserMenu {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .headerNavMenu span,

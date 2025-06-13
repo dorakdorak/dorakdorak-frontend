@@ -1,7 +1,6 @@
 import SelectableItem from "@/components/common/select/SelectableItem";
 import styles from "@/css/common/SelectableItem.module.css";
 
-
 type Option = {
   label: string;
   value: string;
@@ -16,8 +15,8 @@ type Props = {
 
 export default function SelectBox({ title, options, selectedValue, onChange }: Props) {
   return (
-      <div className={styles.container}>
-      <h3>{title}</h3>
+    <div className={styles.container}>
+      <h3 className={styles.title}>{title}</h3>
       {options.map((option) => (
         <SelectableItem
           key={option.value}

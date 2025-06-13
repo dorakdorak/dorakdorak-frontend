@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useLoginForm } from '@/hooks/useLoginForm'; // 📌 훅 import
-import styles from '@/css/common/Header.module.css';
+import { Link } from "react-router-dom";
+import { useLoginForm } from "@/hooks/useLoginForm"; // 📌 훅 import
+import styles from "@/css/common/Header.module.css";
 
 type HeaderProps = {
   isLoggedIn: boolean;
@@ -22,7 +22,7 @@ function Header({ isLoggedIn }: HeaderProps): React.ReactElement {
         <div className={styles.headerLogo}>
           <Link
             to="/"
-            style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+            style={{ display: "flex", alignItems: "center", gap: "4px" }}
           >
             <img
               src="/images/logo2.png"
@@ -34,11 +34,11 @@ function Header({ isLoggedIn }: HeaderProps): React.ReactElement {
           </Link>
         </div>
         <nav className={styles.headerNavMenu}>
-          <Link to="/menu">도시락 조회</Link>
-          <Link to="/group-order">공구 주문</Link>
-          <Link to="/custom-dosirak">나만의 도시락 만들기</Link>
-          <Link to="/custom-ranking">커스텀 랭킹</Link>
-          <Link to="/zero-waste">제로 웨이스트 랭킹</Link>
+          <Link to="/menu">도락전체</Link>
+          <Link to="/group-order">도락공구</Link>
+          <Link to="/custom-dosirak">도락제작소</Link>
+          <Link to="/custom-ranking">제작소랭킹</Link>
+          <Link to="/zero-waste">도락챌린지</Link>
         </nav>
         <div className={styles.headerUserMenu}>
           {isLoggedIn ? (
@@ -49,13 +49,13 @@ function Header({ isLoggedIn }: HeaderProps): React.ReactElement {
                 href="#"
                 onClick={handleLogoutClick}
                 style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  cursor: isLogoutLoading ? 'not-allowed' : 'pointer', //  로딩 중 커서 변경
+                  textDecoration: "none",
+                  color: "inherit",
+                  cursor: isLogoutLoading ? "not-allowed" : "pointer", //  로딩 중 커서 변경
                   opacity: isLogoutLoading ? 0.6 : 1, // 로딩 중 투명도 변경
                 }}
               >
-                {isLogoutLoading ? '로그아웃 중...' : '로그아웃'}{' '}
+                {isLogoutLoading ? "로그아웃 중..." : "로그아웃"}{" "}
                 {/* 로딩 상태 표시 */}
               </a>
             </>
