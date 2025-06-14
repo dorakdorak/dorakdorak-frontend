@@ -1,0 +1,35 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Pretendard", sans-serif;
+}
+
+.headerRow {
+  background-color: #ecf5ec;
+  text-align: left;
+  text-align: center;
+}
+
+.cell {
+  padding: 12px;
+  text-align: center; 
+}
+
+.row {
+  border-top: 1px solid #eee;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
