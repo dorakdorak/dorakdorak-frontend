@@ -1,0 +1,57 @@
+.container {
+  width: 300px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #3a5d1d;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.option {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #3a5d1d;
+  background-color: #3a5d1d;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+}
