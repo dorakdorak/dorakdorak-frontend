@@ -5,7 +5,7 @@ import { SortType } from "@/constants/sortOptions";
 import { CustomDosirakItem } from "@/types/DosirakList";
 import { mockCustomDosiraks } from "@/mock/CustomDosirakRankingMockData";
 import styles from "@/css/list/Menu.module.css";
-import VoteModal from "@/components/customRanking/VoteModal";
+import ConfirmModal from "@/components/customRanking/ConfirmModal";
 import SectionHeader from "@/components/common/SectionHeader";
 
 function CustomRanking() {
@@ -58,8 +58,14 @@ function CustomRanking() {
         <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
       </div>
       <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />
-      {modalOpen && selectedItem && (
-        <VoteModal name={selectedItem.name} onConfirm={handleVoteConfirm} onCancel={closeModal} />
+      {selectedItem && (
+        <ConfirmModal
+          name={selectedItem.name}
+          mode="vote"
+          show={modalOpen}
+          onConfirm={handleVoteConfirm}
+          onCancel={closeModal}
+        />
       )}
     </div>
   );
