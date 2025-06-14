@@ -8,3 +8,10 @@ export interface AdminOrderResponse {
   arrivedAt: string;
   orderStatus: OrderStatusCode;
 }
+
+export interface AdminCustomsDosiraksResponse {
+  customdosirakId: number;
+  name: string;
+  imageUrl: string;
+  voteCount: number;
+}
