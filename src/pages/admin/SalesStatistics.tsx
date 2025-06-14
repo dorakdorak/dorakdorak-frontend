@@ -40,7 +40,7 @@ function SalesStatistics() {
   }, [selectedId]);
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div style={{ padding: "50px 200px", marginBottom: "50px" }}>
       <SectionHeader title="판매량 통계" />
 
       <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
