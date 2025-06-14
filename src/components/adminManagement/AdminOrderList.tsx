@@ -14,7 +14,7 @@ export default function AdminOrderList({ orders, onStatusChange }: Props) {
       <SectionHeader title="주문 관리"></SectionHeader>
 
       <div className={`${styles.table}`}>
-        <div className={`${styles.row} ${styles.headerRow}`}>
+        <div className={`${styles.row} ${styles.row5} ${styles.headerRow}`}>
           <div>주문코드</div>
           <div>유형</div>
           <div>가격</div>
@@ -23,7 +23,7 @@ export default function AdminOrderList({ orders, onStatusChange }: Props) {
         </div>
 
         {orders.map((order) => (
-          <div className={styles.row} key={order.orderId}>
+          <div className={`${styles.row} ${styles.row5}`} key={order.orderId}>
             <div>{order.orderCode}</div>
             <div>{order.type === "SINGLE" ? "일반" : "공구"}</div>
             <div>{order.price.toLocaleString()}원</div>

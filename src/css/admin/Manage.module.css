@@ -31,12 +31,19 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   justify-items: center;
   gap: 8px;
   padding: 20px 10px;
   border-bottom: 1px solid #ddd;
+}
+
+.row5 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.row4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .headerRow {
