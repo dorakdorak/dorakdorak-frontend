@@ -15,3 +15,11 @@ export interface AdminCustomsDosiraksResponse {
   imageUrl: string;
   voteCount: number;
 }
+
+export interface AdminPopularDosirakResponse {
+  rank: number;
+  dosirakId: number;
+  name: string;
+  imageUrl: string;
+  count: number;
+}
