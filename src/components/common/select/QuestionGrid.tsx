@@ -13,25 +13,25 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 
 type Props = {
-  liked: string;
-  disliked: string;
-  style: string;
-  preference: string;
-  setLiked: (v: string) => void;
-  setDisliked: (v: string) => void;
-  setStyle: (v: string) => void;
-  setPreference: (v: string) => void;
+  mainPreference: string;
+  importantSense: string;
+  mealAmount: string;
+  cravingFlavor: string;
+  setMainPreference: (v: string) => void;
+  setImportantSense: (v: string) => void;
+  setMealAmount: (v: string) => void;
+  setCravingFlavor: (v: string) => void;
 };
 
 export default function QuestionGrid({
-  liked,
-  disliked,
-  style,
-  preference,
-  setLiked,
-  setDisliked,
-  setStyle,
-  setPreference,
+  mainPreference,
+  importantSense,
+  mealAmount,
+  cravingFlavor,
+  setMainPreference,
+  setImportantSense,
+  setMealAmount,
+  setCravingFlavor,
 }: Props) {
   const boxes = [
     {
@@ -40,8 +40,8 @@ export default function QuestionGrid({
         label: item,
         value: item,
       })),
-      selectedValue: liked,
-      onChange: setLiked,
+      selectedValue: mainPreference,
+      onChange: setMainPreference,
       delay: 0,
     },
     {
@@ -50,39 +50,40 @@ export default function QuestionGrid({
         label: item,
         value: item,
       })),
-      selectedValue: disliked,
-      onChange: setDisliked,
+      selectedValue: importantSense,
+      onChange: setImportantSense,
       delay: 0.2,
     },
     {
       title: "한 끼에 얼마나 든든하게 드실래요?",
       options: MEAL_PURPOSES.map((item) => ({ label: item, value: item })),
-      selectedValue: style,
-      onChange: setStyle,
+      selectedValue: mealAmount,
+      onChange: setMealAmount,
       delay: 0.4,
     },
     {
       title: "요즘 끌리는 맛은?",
       options: FLAVOR_PREFERENCES.map((item) => ({ label: item, value: item })),
-      selectedValue: preference,
-      onChange: setPreference,
+      selectedValue: cravingFlavor,
+      onChange: setCravingFlavor,
       delay: 0.6,
     },
   ];
 
   const navigate = useNavigate();
-
   const { isLoggedIn } = useAuthStore();
-  const isFormComplete = liked && disliked && style && preference;
+
+  const isFormComplete =
+    mainPreference && importantSense && mealAmount && cravingFlavor;
   const canSubmit = isLoggedIn && isFormComplete;
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     navigate("/custom-detail", {
       state: {
-        likedIngredient: liked,
-        dislikedIngredient: disliked,
-        preferredStyle: style,
-        desiredFeeling: preference,
+        mainPreference,
+        importantSense,
+        mealAmount,
+        cravingFlavor,
       },
     });
   };

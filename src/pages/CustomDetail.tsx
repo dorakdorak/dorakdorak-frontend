@@ -2,7 +2,6 @@ import styles from "@/css/customGenerate/CustomDetail.module.css";
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CreateCustomDosirakResponse } from "@/types/CustomDosirakGenerate";
-import { mockCustomDosirakDetail } from "@/mock/CustomDosirakDetailMockData";
 import NutritionTable from "@/components/detail/NutritionInfo";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
@@ -36,19 +35,15 @@ function CustomDetail() {
           setData(resData);
         } else if (location.state) {
           const response = await createCustomDosirak({
-            likedIngredient: location.state.likedIngredient,
-            dislikedIngredient: location.state.dislikedIngredient,
-            preferredStyle: location.state.preferredStyle,
-            desiredFeeling: location.state.desiredFeeling,
+            mainPreference: location.state.mainPreference,
+            importantSense: location.state.importantSense,
+            mealAmount: location.state.mealAmount,
+            cravingFlavor: location.state.cravingFlavor,
           });
           setData(response);
-        } else {
-          setData(mockCustomDosirakDetail); // fallback
         }
       } catch (error) {
         console.error("도시락 정보 로딩 실패:", error);
-        //alert("도시락 정보를 불러오지 못해 임시 데이터를 사용합니다");
-        setData(mockCustomDosirakDetail);
       } finally {
         setIsLoading(false);
       }
@@ -80,17 +75,14 @@ function CustomDetail() {
     );
   }
 
-  const { name, imageUrl, nutrition } = data;
-  console.log(nutrition);
-
   return (
     <div className={styles.wrapper}>
       <SectionHeader title="커스텀 도시락" />
 
       <div className={styles.contentContainer}>
         <div className={styles.imageBox}>
-          <img src={imageUrl} alt={data.name} />
-          <h3>{name}</h3>
+          <img src={data.imageUrl} alt={data.name} />
+          <h3>{data.name}</h3>
         </div>
 
         <div className={styles.nutritionBox}>

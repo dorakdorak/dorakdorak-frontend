@@ -3,7 +3,7 @@ export const MAIN_INGREDIENT_PREFERENCES = [
   "고기 위주가 좋아요",
   "채소 위주로 가볍게 먹고 싶어요",
   "생선이나 해산물도 좋아요",
-  "고기+채소+해산물, 밸런스 있게 다 담아줘요",
+  "밸런스 있게 다 담아줘요",
 ] as const;
 export type MainIngredientPreference = typeof MAIN_INGREDIENT_PREFERENCES[number];
 
