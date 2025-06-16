@@ -22,7 +22,7 @@ function Detail() {
 
   return (
     <div className="dosirak-detail">
-      <DosirakInfo dosirak={data} />
+      <DosirakInfo dosirakId={Number(id)} dosirak={data} />
 
       <TabNavigation />
 

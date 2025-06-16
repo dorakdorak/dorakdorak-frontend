@@ -7,6 +7,7 @@ import styles from "@/css/order/GroupOrder.module.css";
 import DosirakOrderSection from "@/components/order/DosirakOrderSection";
 import { fetchGroupOrders } from "@/api/GroupOrder";
 import GroupOrderItem from "@/types/GroupOrder";
+import { useSearchParams } from "react-router-dom";
 
 function GroupOrder() {
   const getToday = () => new Date().toISOString().split("T")[0];
@@ -14,6 +15,10 @@ function GroupOrder() {
   const [selectedDate, setSelectedDate] = useState<string>(getToday());
   const [selectedTime, setSelectedTime] = useState<string>("9");
   const [orderList, setOrderList] = useState<GroupOrderItem[]>([]);
+
+  const [searchParams] = useSearchParams();
+  const dosirakIdParam = searchParams.get("dosirakId");
+  const dosirakId = dosirakIdParam ? parseInt(dosirakIdParam) : undefined;
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -27,6 +32,7 @@ function GroupOrder() {
       const request = {
         arriveAt: selectedDate,
         arriveTime: selectedTime,
+        ...(dosirakId ? { dosirakId } : {}),
       };
 
       fetchGroupOrders(request)
