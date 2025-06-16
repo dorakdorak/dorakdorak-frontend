@@ -39,7 +39,15 @@ export default function DosirakOrderSection({ orderList }: Props) {
 
   const changeCount = (id: number, count: number) => {
     setOrders((prev) =>
-      prev.map((o) => (o.dosirakId === id ? { ...o, orderCount: count } : o))
+      prev.map((o) =>
+        o.dosirakId === id
+          ? {
+              ...o,
+              orderCount: count,
+              selected: count > 0, // 0이면 false, 1 이상이면 true
+            }
+          : o
+      )
     );
   };
 
