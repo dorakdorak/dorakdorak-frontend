@@ -5,7 +5,7 @@ export interface MyOrderItem {
     imageUrl: string;
     price: number;
     amount: number;
-    orderStatus: string;
+    itemStatus: string;
 }
 
 export interface MyOrder {
@@ -25,7 +25,7 @@ export interface MyOrderPreview{
     price: number;
     amount: number;
     orderDate: string;
-    orderStatus: string;
+    itemStatus: string;
 }
 
 export interface MyOrderPreviewResponse{

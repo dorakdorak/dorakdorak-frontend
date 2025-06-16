@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchMyGroupOrders, fetchMyPageSummary } from '@/api/Mypage';
+import { fetchMyGroupOrders, fetchMyPageSummary, cancelOrder } from '@/api/Mypage';
 import { MyPageSummary } from '@/types/Mypage';
 
 import styles from '@/css/main/MyGroupOrders.module.css';
@@ -8,50 +8,40 @@ import OrderHistoryList from '@/components/mypage/OrderHistoryList';
 import OrderSummaryStatus from '@/components/mypage/OrderSummaryStatus';
 import Spinner from '@/components/common/Spinner';
 
-import { mockSummary, mockOrders } from '@/mock/MypageMockData';
-
 function MyGroupOrders () {
     const [userSummary, setUserSummary] = useState<MyPageSummary | null>(null); // 사용자 정보
     const [groupOrder, setGroupOrder] = useState([]);   // 공동 주문 내역
 
     useEffect(() => {
-        setUserSummary(mockSummary);
-        setGroupOrder(mockOrders);
-        // API 연결시 아래 주석 해제
-        // const loadData = async () => {
-        //     try {
-        //         const [summaryData, orderData] = await Promise.all([
-        //             fetchMyPageSummary(),
-        //             fetchMyGroupOrders()
-        //         ]);
+        const loadData = async () => {
+            try {
+                const [summaryData, orderData] = await Promise.all([
+                    fetchMyPageSummary(),
+                    fetchMyGroupOrders()
+                ]);
 
-        //         setGroupOrder(orderData.orders);
-        //         setUserSummary(summaryData);
-        //     } catch (error) {
-        //         console.error("공동 주문 데이터 불러오기 실패:", error);
-        //     }
-        // };
+                setGroupOrder(orderData.orders);
+                setUserSummary(summaryData);
+            } catch (error) {
+                console.error("공동 주문 데이터를 불러오는 데 문제가 발생했습니다.");
+            }
+        };
 
-        // loadData();
+        loadData();
     }, []);
 
     // 주문 취소 버튼 클릭시 실행
-    const handleOrderCancel = (orderId: number) => {
-        // TODO: 여기서 주문 취소로 이어져야합니다.
-        setGroupOrder(prev =>
-            prev.map(group =>
-                group.orderId === orderId
-                    ? {
-                        ...group,
-                        canCancel: false,
-                        items: group.items.map(item => ({
-                            ...item,
-                            orderStatus: '주문 취소'
-                        }))
-                    }
-                    : group
-            )
-        );
+    const handleOrderCancel = async (orderId: number) => {
+        const isConfirmed = window.confirm("정말 이 주문을 취소하시겠습니까?");
+        if (!isConfirmed) return;
+
+        try {
+            await cancelOrder(orderId);
+            alert('주문이 취소되었습니다.');
+            window.location.reload();
+        } catch (error) {
+            alert('주문 취소에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        }
     };
 
     // 페이지 로딩시 스피너 리턴

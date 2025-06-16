@@ -69,7 +69,7 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
                         const totalAmount = calculateTotalAmount(order.items);
                         // 결제 대기, 결제 완료, 공구 모집인 경우에만 주문 취소 활성화
                         const cancelStatus = ['PAYMENT_PENDING', 'PAYMENT_COMPLETED', 'GONGGU_OPEN'];
-                        const canCancel = order.items.every(item => cancelStatus.includes(item.orderStatus));
+                        const canCancel = order.items.every(item => cancelStatus.includes(item.itemStatus));
 
                         return (
                             <div key={order.orderId} className={styles.orderGroup}>
@@ -121,9 +121,9 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
                                                 </div>
                                             </div>
                                             {!props.hideStatusBadge && (
-                                                <div className={styles.orderStatus}>
-                                                    <span className={`${styles.statusBadge} ${styles[`status${(item.orderStatus || '').replace(/\s/g, '')}`]}`}>
-                                                        {ORDER_STATUS_KR[item.orderStatus] ?? item.orderStatus}
+                                                <div className={styles.itemStatus}>
+                                                    <span className={`${styles.statusBadge} ${styles[`status${(item.itemStatus || '').replace(/\s/g, '')}`]}`}>
+                                                        {ORDER_STATUS_KR[item.itemStatus] ?? item.itemStatus}
                                                     </span>
                                                 </div>
                                             )}

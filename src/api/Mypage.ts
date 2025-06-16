@@ -7,7 +7,7 @@ export const fetchMyNormalOrders = async (): Promise<MyOrderResponse> => {
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('일반 주문 데이터 조회 실패:', error);
+        console.error('일반 주문 데이터 조회 실패');
         throw error;
     }
 };
@@ -19,7 +19,7 @@ export const fetchMyGroupOrders = async (): Promise<MyOrderResponse> => {
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('공동 주문 데이터 조회 실패:', error);
+        console.error('공동 주문 데이터 조회 실패');
         throw error;
     }
 };
@@ -31,7 +31,7 @@ export const fetchMyCustomDosiraks = async (): Promise<MyCustomDosirakResponse> 
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('나의 커스텀 도시락 데이터 조회 실패:', error);
+        console.error('나의 커스텀 도시락 데이터 조회 실패');
         throw error;
     }
 };
@@ -43,7 +43,7 @@ export const fetchMyNormalOrdersPreview = async (): Promise<MyOrderPreviewRespon
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('일반 주문 프리뷰 데이터 조회 실패:', error);
+        console.error('일반 주문 프리뷰 데이터 조회 실패');
         throw error;
     }
 };
@@ -55,7 +55,7 @@ export const fetchMyGroupOrdersPreview = async (): Promise<MyOrderPreviewRespons
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('공동 주문 프리뷰 데이터 조회 실패:', error);
+        console.error('공동 주문 프리뷰 데이터 조회 실패');
         throw error;
     }
 };
@@ -66,7 +66,7 @@ export const fetchMyCustomDosiraksPreview = async (): Promise<MyCustomDosirakRes
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('나의 커스텀 도시락 프리뷰 데이터 조회 실패:', error);
+        console.error('나의 커스텀 도시락 프리뷰 데이터 조회 실패');
         throw error;
     }
 };
@@ -77,7 +77,17 @@ export const fetchMyPageSummary = async (): Promise<MyPageSummary> => {
         console.log(response.data)
         return response.data;
     } catch (error) {
-        console.error('마이페이지 요약 데이터 조회 실패:', error);
+        console.error('마이페이지 요약 데이터 조회 실패');
+        throw error;
+    }
+};
+
+export const cancelOrder = async (orderId: number): Promise<void> => {
+    try {
+        await axiosInstance.delete(`/api/members/orders/${orderId}`);
+        console.log('주문 취소 완료');
+    } catch (error) {
+        console.error('주문 취소 실패');
         throw error;
     }
 };
