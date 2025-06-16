@@ -1,19 +1,24 @@
 import styles from "@/css/customGenerate/CustomDetail.module.css";
 import { useParams, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CreateCustomDosirakResponse } from "@/types/CustomDosirakGenerate";
 import NutritionTable from "@/components/detail/NutritionInfo";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
 import warningIcon from "@/assets/images/icon/caution.png";
-import createCustomDosirak from "@/api/CustomDosirakGenerate"; // 이미 있는 API 호출 함수
+import {
+  createCustomDosirak,
+  registerCustomDosirak,
+} from "@/api/CustomDosirakGenerate";
 import Spinner from "@/components/common/Spinner";
+import { useNavigate } from "react-router-dom";
 
 function CustomDetail() {
   const { id } = useParams();
   const location = useLocation();
   const [data, setData] = useState<CreateCustomDosirakResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -22,10 +27,15 @@ function CustomDetail() {
     };
   }, []);
 
+  const hasFetched = useRef(false);
+
   useEffect(() => {
     const fetchData = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
       try {
-        if (!isLoading) return; // 이미 로딩 끝났으면 중단
+        if (!isLoading) return;
 
         if (id) {
           const res = await fetch(
@@ -107,10 +117,36 @@ function CustomDetail() {
           </div>
 
           <div className={styles.buttonWrapper}>
-            <Button variant="gray" size="lg">
+            <Button
+              variant="gray"
+              size="lg"
+              onClick={() => navigate("/custom-dosirak")}
+            >
               다시하기
             </Button>
-            <Button variant="secondary" size="lg">
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={async () => {
+                if (!data) return;
+
+                try {
+                  await registerCustomDosirak({
+                    name: data.name,
+                    imageUrl: data.imageUrl,
+                    price: data.price,
+                    weight: data.weight,
+                    storageType: data.storageType,
+                    categories: data.categories,
+                    nutrition: data.nutrition,
+                  });
+                  navigate("/custom-ranking");
+                } catch (error) {
+                  console.error("도시락 등록 실패", error);
+                  alert("도시락 등록에 실패했습니다.");
+                }
+              }}
+            >
               등록하기
             </Button>
           </div>

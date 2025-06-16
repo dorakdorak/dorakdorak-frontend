@@ -17,3 +17,18 @@ export type CreateCustomDosirakResponse = {
   nutrition: Nutrition;
   message: string;
 };
+
+export type CustomDosirakRegisterRequest = {
+  name: string;
+  imageUrl: string;
+  price: number;
+  weight: number;
+  storageType: StorageType;
+  categories: string[];
+  nutrition: Nutrition;
+}
+
+export type CustomDosirakRegisterResponse = {
+  status: string;
+  message: string;
+};
