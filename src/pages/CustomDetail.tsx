@@ -19,6 +19,7 @@ function CustomDetail() {
   const [data, setData] = useState<CreateCustomDosirakResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -127,10 +128,12 @@ function CustomDetail() {
             <Button
               variant="secondary"
               size="lg"
+              disabled={isSubmitting} // 중복 클릭 방지
               onClick={async () => {
                 if (!data) return;
 
                 try {
+                  setIsSubmitting(true); // 등록 시작
                   await registerCustomDosirak({
                     name: data.name,
                     imageUrl: data.imageUrl,
@@ -144,10 +147,12 @@ function CustomDetail() {
                 } catch (error) {
                   console.error("도시락 등록 실패", error);
                   alert("도시락 등록에 실패했습니다.");
+                } finally {
+                  setIsSubmitting(false); // 등록 끝
                 }
               }}
             >
-              등록하기
+              {isSubmitting ? "등록 중..." : "등록하기"}
             </Button>
           </div>
         </>
