@@ -9,7 +9,7 @@ export default async function createCustomDosirak(
 ): Promise<CreateCustomDosirakResponse> {
   try {
     const response = await axiosInstance.post<CreateCustomDosirakResponse>(
-      "/dosiraks/custom-dosirak",
+      "/api/custom-dosiraks/preview",
       request
     );
     return response.data;

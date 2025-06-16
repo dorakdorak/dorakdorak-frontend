@@ -1,16 +1,19 @@
-import { Nutrition } from "@/types/DosirakDetail";
+import { Nutrition, StorageType } from "@/types/DosirakDetail";
 
 export type CreateCustomDosirakRequest = {
-  likedIngredient: string;
-  dislikedIngredient: string;
-  preferredStyle: string;
-  desiredFeeling: string;
+  mainPreference: string;
+  importantSense: string;
+  mealAmount: string;
+  cravingFlavor: string;
 };
 
 export type CreateCustomDosirakResponse = {
-  customDosirakId: number;
   name: string;
   imageUrl: string;
+  price: number;
+  weight: number;
+  storageType: StorageType;
+  categories: string[];
   nutrition: Nutrition;
   message: string;
 };
