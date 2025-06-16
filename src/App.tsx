@@ -13,6 +13,7 @@ import OrderSuccessPage from "@/pages/OrderSuccessPage";
 import CustomDosirak from "@/pages/CustomDosirak";
 import CustomRanking from "@/pages/CustomRanking";
 import ZeroWasteRanking from "@/pages/ZeroWasteRanking";
+import ZeroWasteCert from "@/pages/ZeroWasteCert";
 import Login from "@/pages/Login";
 import SignUp from "@/pages/SignUp";
 import Mypage from "@/pages/Mypage";
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/custom-dosirak" element={<CustomDosirak />} />
               <Route path="/custom-ranking" element={<CustomRanking />} />
               <Route path="/zero-waste" element={<ZeroWasteRanking />} />
+              <Route path="/zero-waste/cert/:qrcode" element={<ZeroWasteCert />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/detail/:id" element={<Detail />} />
