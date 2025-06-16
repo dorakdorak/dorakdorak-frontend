@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { fetchMyNormalOrders, fetchMyPageSummary, cancelOrder } from '@/api/Mypage';
-import { MyPageSummary } from '@/types/Mypage';
+import { MyOrder, MyPageSummary } from '@/types/Mypage';
 
 import styles from '@/css/main/MyNormalOrders.module.css';
 
@@ -10,18 +10,43 @@ import Spinner from '@/components/common/Spinner';
 
 function MyNormalOrders() {
     const [userSummary, setUserSummary] = useState<MyPageSummary | null>(null); // 사용자 정보
-    const [normalOrder, setNormalOrder] = useState([]); // 공동 주문 내역
+    const [normalOrder, setNormalOrder] = useState<MyOrder[]>([]); // 공동 주문 내역
+    const [lastOrderId, setLastOrderId] = useState<number | undefined>(undefined); // 마지막 주문 ID
+    const [hasMore, setHasMore] = useState(true); // 더 불러올 주문이 있는지 여부
+    const [isLoading, setIsLoading] = useState(false); // API 로딩 상태
+
+    const observer = useRef<IntersectionObserver | null>(null);
+    const lastOrderRef = useRef<HTMLDivElement | null>(null);
+
+    // 주문 불러오기 함수
+    const loadOrders = useCallback(async () => {
+        if (isLoading || !hasMore) return;
+        setIsLoading(true);
+
+        try {
+            const res = await fetchMyNormalOrders(lastOrderId, 6);
+            const newOrders = res.orders;
+
+            setNormalOrder((prev) => [...prev, ...newOrders]);
+
+            if (newOrders.length < 6) {
+                setHasMore(false);
+            } else {
+                setLastOrderId(newOrders[newOrders.length - 1].orderId);
+            }
+        } catch (error) {
+            console.error("일반 주문 데이터를 불러오는 데 문제가 발생했습니다.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, [lastOrderId, hasMore, isLoading]);
 
     useEffect(() => {
         const loadData = async () => {
             try {
-                const [summaryData, orderData] = await Promise.all([
-                    fetchMyPageSummary(),
-                    fetchMyNormalOrders()
-                ]);
-
-                setNormalOrder(orderData.orders);
+                const summaryData = await fetchMyPageSummary();
                 setUserSummary(summaryData);
+                await loadOrders();
             } catch (error) {
                 console.error("일반 주문 데이터를 불러오는 데 문제가 발생했습니다.");
             }
@@ -29,6 +54,25 @@ function MyNormalOrders() {
 
         loadData();
     }, []);
+
+    // IntersectionObserver로 마지막 주문 감지
+    useEffect(() => {
+        if (!hasMore || isLoading) return;
+
+        if (observer.current) observer.current.disconnect();
+
+        observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadOrders();
+            }
+        });
+
+        if (lastOrderRef.current) {
+            observer.current.observe(lastOrderRef.current);
+        }
+
+        return () => observer.current?.disconnect();
+    }, [normalOrder, hasMore, isLoading, loadOrders]);
 
     // 주문 취소 버튼 클릭시 실행
     const handleOrderCancel = async (orderId: number) => {
@@ -74,7 +118,15 @@ function MyNormalOrders() {
                 showMoreButton={false}
                 hideOrderHeader={false}
                 hideStatusBadge={false}
+                lastElementRef={lastOrderRef}
             />
+
+            {/* 로딩 중일 때 하단 스피너 */}
+            {isLoading && (
+                <div className={styles.spinnerBottomWrapper}>
+                    <Spinner />
+                </div>
+            )}
         </div>
     );
 };

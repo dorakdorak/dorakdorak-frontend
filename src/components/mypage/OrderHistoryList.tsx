@@ -11,6 +11,7 @@ interface OrderHistoryListProps {
     hideOrderHeader?: boolean;                  // 주문별 헤더 (주문번호, 취소버튼) 활성화 여부
     hideStatusBadge?: boolean;                  // 주문별 상태 (결제대기, 결제완료) 활성화 여부
     limitItems?: number;                        // 주문 1건당 최대 몇개까지 보여줄지 제한
+    lastElementRef?: React.Ref<HTMLDivElement>; // 마지막 주문 DOM 참조 (무한스크롤용)
 }
 
 const OrderHistoryList = (props: OrderHistoryListProps) => {
@@ -65,14 +66,18 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
                         <p>주문 내역이 없습니다.</p>
                     </div>
                 ) : (
-                    displayOrderGroups.map((order) => {
+                    displayOrderGroups.map((order, index) => {
                         const totalAmount = calculateTotalAmount(order.items);
                         // 결제 대기, 결제 완료, 공구 모집인 경우에만 주문 취소 활성화
                         const cancelStatus = ['PAYMENT_PENDING', 'PAYMENT_COMPLETED', 'GONGGU_OPEN'];
                         const canCancel = order.items.every(item => cancelStatus.includes(item.itemStatus));
 
                         return (
-                            <div key={order.orderId} className={styles.orderGroup}>
+                            <div
+                                key={order.orderId}
+                                className={styles.orderGroup}
+                                ref={index === displayOrderGroups.length - 1 ? props.lastElementRef : null} // 마지막 요소에 ref 연결
+                            >
                                 {!props.hideOrderHeader && (
                                     <div className={styles.orderInfoHeader}>
                                         <div className={styles.orderHeaderLeft}>
