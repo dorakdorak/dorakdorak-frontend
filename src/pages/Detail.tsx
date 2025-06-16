@@ -1,44 +1,45 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DosirakDetail } from "@/types/DosirakDetail";
-// import { fetchDosirakDetail } from "@/api/dosirak"; // 추후 사용
-import mockDosirak from "@/mock/DosirakDetailMockData"; // 임시 목업
+import { fetchDosirakDetail } from "@/api/DosirakDetail";
 import DosirakInfo from "@/components/detail/DosirakInfo";
 import NutritionTable from "@/components/detail/NutritionInfo";
 import TabNavigation from "@/components/detail/TabNavigation";
 import SectionHeader from "@/components/common/SectionHeader";
+import Spinner from "@/components/common/Spinner";
 
 function Detail() {
-  const { dosirakId } = useParams<{ dosirakId: string }>();
+  const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<DosirakDetail | null>(null);
 
   useEffect(() => {
-    // 실제 API 연동 시 사용
-    // if (dosirakId) {
-    //   fetchDosirakDetail(Number(dosirakId)).then(setData);
-    // }
+    if (id) {
+      fetchDosirakDetail(Number(id)).then(setData);
+    }
+  }, [id]);
 
-    // 목업 데이터 사용
-    setData(mockDosirak);
-  }, [dosirakId]);
-
-  if (!data) return <p>로딩 중...</p>;
+  if (!data) return <Spinner />;
 
   return (
     <div className="dosirak-detail">
-      <DosirakInfo dosirak={mockDosirak} />
+      <DosirakInfo dosirak={data} />
 
       <TabNavigation />
 
       <section id="info">
         <SectionHeader title="상세 정보" />
         <div className="detail-images" style={{ marginBottom: "100px" }}>
-          {mockDosirak.baseInfo.detailImages.map((img) => (
+          {data.baseInfo.detailImages.map((img) => (
             <img
               key={img.sortOrder}
               src={img.imageUrl}
               alt={`상세 이미지 ${img.sortOrder}`}
-              style={{ width: "100%", maxWidth: "500px", display: "block", margin: "0 auto 20px" }}
+              style={{
+                width: "100%",
+                maxWidth: "500px",
+                display: "block",
+                margin: "0 auto 20px",
+              }}
             />
           ))}
         </div>
@@ -46,7 +47,7 @@ function Detail() {
 
       <section id="nutrition" style={{ marginBottom: "200px" }}>
         <SectionHeader title="영양 정보" />
-        <NutritionTable nutrition={mockDosirak.nutrition} />
+        <NutritionTable nutrition={data.nutrition} />
       </section>
     </div>
   );
