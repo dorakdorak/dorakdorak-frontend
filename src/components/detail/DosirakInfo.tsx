@@ -4,14 +4,18 @@ import QuantitySelector from "@/components/common/QuantitySelector";
 import Button from "@/components/common/Button";
 import { useState } from "react";
 import styles from "@/css/detail/DosirakInfo.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
+  dosirakId: number;
   dosirak: DosirakDetail;
 }
 
-const DosirakInfo = ({ dosirak }: Props) => {
+const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
   const [quantity, setQuantity] = useState(1);
-  const finalPrice = dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
+  const finalPrice =
+    dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
+  const navigate = useNavigate();
 
   return (
     <div className={styles.dosirakDetailContainer}>
@@ -64,7 +68,10 @@ const DosirakInfo = ({ dosirak }: Props) => {
               <tr>
                 <td>수량</td>
                 <td>
-                  <QuantitySelector initialQuantity={quantity} onChange={setQuantity} />
+                  <QuantitySelector
+                    initialQuantity={quantity}
+                    onChange={setQuantity}
+                  />
                 </td>
               </tr>
             </tbody>
@@ -72,8 +79,16 @@ const DosirakInfo = ({ dosirak }: Props) => {
         </div>
 
         <div className={styles.dosirakDetailButtons}>
-          <Button variant="primary" size="md">일반 주문</Button>
-          <Button variant="secondary" size="md">공동 주문</Button>
+          <Button variant="primary" size="md">
+            일반 주문
+          </Button>
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={() => navigate(`/group-order?dosirakId=${dosirakId}`)}
+          >
+            공동 주문
+          </Button>
         </div>
       </div>
     </div>

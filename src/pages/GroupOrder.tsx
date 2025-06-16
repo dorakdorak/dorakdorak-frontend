@@ -5,17 +5,45 @@ import SelectBox from "@/components/common/select/SelectBox";
 import { TIME_OPTIONS } from "@/constants/times";
 import styles from "@/css/order/GroupOrder.module.css";
 import DosirakOrderSection from "@/components/order/DosirakOrderSection";
+import { fetchGroupOrders } from "@/api/GroupOrder";
+import GroupOrderItem from "@/types/GroupOrder";
+import { useSearchParams } from "react-router-dom";
 
 function GroupOrder() {
-  const [selectedDate, setSelectedDate] = useState<string>("");
-  const [selectedTime, setSelectedTime] = useState<string>("");
-  console.log(selectedDate);
+  const getToday = () => new Date().toISOString().split("T")[0];
+
+  const [selectedDate, setSelectedDate] = useState<string>(getToday());
+  const [selectedTime, setSelectedTime] = useState<string>("9");
+  const [orderList, setOrderList] = useState<GroupOrderItem[]>([]);
+
+  const [searchParams] = useSearchParams();
+  const dosirakIdParam = searchParams.get("dosirakId");
+  const dosirakId = dosirakIdParam ? parseInt(dosirakIdParam) : undefined;
+
   useEffect(() => {
     document.body.classList.add("bg-custom");
     return () => {
       document.body.classList.remove("bg-custom");
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedDate && selectedTime) {
+      const request = {
+        arriveAt: selectedDate,
+        arriveTime: selectedTime,
+        ...(dosirakId ? { dosirakId } : {}),
+      };
+
+      fetchGroupOrders(request)
+        .then(setOrderList)
+        .catch((err) => {
+          console.error("공동 주문 목록 불러오기 실패", err);
+          setOrderList([]);
+        });
+    }
+  }, [selectedDate, selectedTime]);
+
   return (
     <div className={styles.wrapper}>
       <SectionHeader title="공동 주문" />
@@ -33,7 +61,7 @@ function GroupOrder() {
         </div>
       </div>
       <div className={styles.orderSection}>
-        <DosirakOrderSection />
+        <DosirakOrderSection orderList={orderList} />
       </div>
     </div>
   );

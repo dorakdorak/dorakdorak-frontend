@@ -1,20 +1,25 @@
 import styles from "@/css/customGenerate/CustomDetail.module.css";
 import { useParams, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CreateCustomDosirakResponse } from "@/types/CustomDosirakGenerate";
-import { mockCustomDosirakDetail } from "@/mock/CustomDosirakDetailMockData";
 import NutritionTable from "@/components/detail/NutritionInfo";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
 import warningIcon from "@/assets/images/icon/caution.png";
-import createCustomDosirak from "@/api/CustomDosirakGenerate"; // 이미 있는 API 호출 함수
+import {
+  createCustomDosirak,
+  registerCustomDosirak,
+} from "@/api/CustomDosirakGenerate";
 import Spinner from "@/components/common/Spinner";
+import { useNavigate } from "react-router-dom";
 
 function CustomDetail() {
   const { id } = useParams();
   const location = useLocation();
   const [data, setData] = useState<CreateCustomDosirakResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -23,10 +28,15 @@ function CustomDetail() {
     };
   }, []);
 
+  const hasFetched = useRef(false);
+
   useEffect(() => {
     const fetchData = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
       try {
-        if (!isLoading) return; // 이미 로딩 끝났으면 중단
+        if (!isLoading) return;
 
         if (id) {
           const res = await fetch(
@@ -36,19 +46,15 @@ function CustomDetail() {
           setData(resData);
         } else if (location.state) {
           const response = await createCustomDosirak({
-            likedIngredient: location.state.likedIngredient,
-            dislikedIngredient: location.state.dislikedIngredient,
-            preferredStyle: location.state.preferredStyle,
-            desiredFeeling: location.state.desiredFeeling,
+            mainPreference: location.state.mainPreference,
+            importantSense: location.state.importantSense,
+            mealAmount: location.state.mealAmount,
+            cravingFlavor: location.state.cravingFlavor,
           });
           setData(response);
-        } else {
-          setData(mockCustomDosirakDetail); // fallback
         }
       } catch (error) {
         console.error("도시락 정보 로딩 실패:", error);
-        //alert("도시락 정보를 불러오지 못해 임시 데이터를 사용합니다");
-        setData(mockCustomDosirakDetail);
       } finally {
         setIsLoading(false);
       }
@@ -80,17 +86,14 @@ function CustomDetail() {
     );
   }
 
-  const { name, imageUrl, nutrition } = data;
-  console.log(nutrition);
-
   return (
     <div className={styles.wrapper}>
       <SectionHeader title="커스텀 도시락" />
 
       <div className={styles.contentContainer}>
         <div className={styles.imageBox}>
-          <img src={imageUrl} alt={data.name} />
-          <h3>{name}</h3>
+          <img src={data.imageUrl} alt={data.name} />
+          <h3>{data.name}</h3>
         </div>
 
         <div className={styles.nutritionBox}>
@@ -115,11 +118,41 @@ function CustomDetail() {
           </div>
 
           <div className={styles.buttonWrapper}>
-            <Button variant="gray" size="lg">
+            <Button
+              variant="gray"
+              size="lg"
+              onClick={() => navigate("/custom-dosirak")}
+            >
               다시하기
             </Button>
-            <Button variant="secondary" size="lg">
-              등록하기
+            <Button
+              variant="secondary"
+              size="lg"
+              disabled={isSubmitting} // 중복 클릭 방지
+              onClick={async () => {
+                if (!data) return;
+
+                try {
+                  setIsSubmitting(true); // 등록 시작
+                  await registerCustomDosirak({
+                    name: data.name,
+                    imageUrl: data.imageUrl,
+                    price: data.price,
+                    weight: data.weight,
+                    storageType: data.storageType,
+                    categories: data.categories,
+                    nutrition: data.nutrition,
+                  });
+                  navigate("/custom-ranking");
+                } catch (error) {
+                  console.error("도시락 등록 실패", error);
+                  alert("도시락 등록에 실패했습니다.");
+                } finally {
+                  setIsSubmitting(false); // 등록 끝
+                }
+              }}
+            >
+              {isSubmitting ? "등록 중..." : "등록하기"}
             </Button>
           </div>
         </>

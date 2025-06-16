@@ -4,10 +4,10 @@ import IntroSection from "@/components/common/IntroSection";
 import aiImage from "@/assets/images/intro/custom-register.png";
 
 export default function CustomDosirak() {
-  const [liked, setLiked] = useState("");
-  const [disliked, setDisliked] = useState("");
-  const [style, setStyle] = useState("");
-  const [preference, setPreference] = useState("");
+  const [mainPreference, setMainPreference] = useState("");
+  const [importantSense, setImportantSense] = useState("");
+  const [mealAmount, setMealAmount] = useState("");
+  const [cravingFlavor, setCravingFlavor] = useState("");
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -35,14 +35,14 @@ export default function CustomDosirak() {
         imageUrl={aiImage}
       />
       <QuestionGrid
-        liked={liked}
-        disliked={disliked}
-        style={style}
-        preference={preference}
-        setLiked={setLiked}
-        setDisliked={setDisliked}
-        setStyle={setStyle}
-        setPreference={setPreference}
+        mainPreference={mainPreference}
+        importantSense={importantSense}
+        mealAmount={mealAmount}
+        cravingFlavor={cravingFlavor}
+        setMainPreference={setMainPreference}
+        setImportantSense={setImportantSense}
+        setMealAmount={setMealAmount}
+        setCravingFlavor={setCravingFlavor}
       />
     </div>
   );

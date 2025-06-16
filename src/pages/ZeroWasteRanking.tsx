@@ -5,25 +5,28 @@ import IntroSection from "@/components/common/IntroSection";
 import UniversityRanking from "@/components/zeroWaste/UniversityRanking";
 import zeroWaste from "@/assets/images/intro/zero-waste.png";
 import { motion } from "framer-motion";
-import { mockUniversityRanking } from "@/mock/UniversityRankingMockData";
 
 function ZeroWasteRanking() {
   const [universities, setUniversities] = useState<University[] | null>(null);
 
   useEffect(() => {
     const loadRanking = async () => {
-      const useMock = true;
-      if (useMock) {
-        setUniversities(mockUniversityRanking);
+      try {
+        const data = await fetchUniversityRanking();
+        if (data) setUniversities(data);
+      } catch (error) {
+        console.log("랭킹 정보를 불러오는 데 실패했습니다.", error);
       }
-      const data = await fetchUniversityRanking();
-      if (data) setUniversities(data);
     };
     loadRanking();
   }, []);
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <IntroSection
         title={["제로 웨이스트,", "이제 누구나 참여할 수 있습니다."]}
         description={[

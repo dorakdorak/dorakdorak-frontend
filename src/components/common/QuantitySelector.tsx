@@ -6,7 +6,10 @@ interface QuantitySelectorProps {
   onChange?: (quantity: number) => void;
 }
 
-export default function QuantitySelector({ initialQuantity = 1, onChange }: QuantitySelectorProps) {
+export default function QuantitySelector({
+  initialQuantity = 1,
+  onChange,
+}: QuantitySelectorProps) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
   const handleIncrease = () => {
@@ -16,7 +19,7 @@ export default function QuantitySelector({ initialQuantity = 1, onChange }: Quan
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) {
+    if (quantity > 0) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
       onChange?.(newQuantity);

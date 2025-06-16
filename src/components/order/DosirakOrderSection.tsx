@@ -4,64 +4,57 @@ import QuantitySelector from "../common/QuantitySelector";
 import checkGreenFull from "@/assets/images/icon/check-green-full.png";
 import checkGray from "@/assets/images/icon/check-gray.png";
 import { getDiscountedPrice } from "@/utils/price";
-import Button from "../common/Button";
+import Button from "@/components/common/Button";
+import GroupOrderItem from "@/types/GroupOrder";
 
-type Dosirak = {
-  dosirakId: number;
-  name: string;
-  categories: string;
-  price: number;
-  count: number;
+interface Dosirak extends GroupOrderItem {
   selected: boolean;
-};
+  orderCount: number;
+}
 
-export default function DosirakOrderSection() {
+interface Props {
+  orderList: GroupOrderItem[];
+}
+
+export default function DosirakOrderSection({ orderList }: Props) {
   const [orders, setOrders] = useState<Dosirak[]>([]);
   const [agreed, setAgreed] = useState(false);
 
   useEffect(() => {
-    // 예시 응답
-    const response = {
-      orders: [
-        {
-          dosirakId: 1,
-          name: "닭가슴살 도시락",
-          categories: "단백질 식단",
-          price: 5000,
-          count: 3,
-        },
-        {
-          dosirakId: 2,
-          name: "병아리콩카레 도시락",
-          categories: "저당 식단",
-          price: 5000,
-          count: 1,
-        },
-      ],
-    };
-
-    const initialized = response.orders.map((o) => ({
+    const initialized = orderList.map((o) => ({
       ...o,
       selected: false,
+      orderCount: 0,
     }));
-
     setOrders(initialized);
-  }, []);
+  }, [orderList]);
 
   const toggleSelect = (id: number) => {
     setOrders((prev) =>
-      prev.map((o) => (o.dosirakId === id ? { ...o, selected: !o.selected } : o))
+      prev.map((o) =>
+        o.dosirakId === id ? { ...o, selected: !o.selected } : o
+      )
     );
   };
 
   const changeCount = (id: number, count: number) => {
-    setOrders((prev) => prev.map((o) => (o.dosirakId === id ? { ...o, count: count } : o)));
+    setOrders((prev) =>
+      prev.map((o) =>
+        o.dosirakId === id
+          ? {
+              ...o,
+              orderCount: count,
+              selected: count > 0, // 0이면 false, 1 이상이면 true
+            }
+          : o
+      )
+    );
   };
 
-  const selectedOrders = orders.filter((o) => o.selected && o.count > 0);
+  const selectedOrders = orders.filter((o) => o.selected && o.orderCount > 0);
 
   const totalAmount = selectedOrders.reduce(
-    (sum, o) => sum + getDiscountedPrice(o.price, 15) * o.count,
+    (sum, o) => sum + getDiscountedPrice(o.price, 15) * o.orderCount,
     0
   );
 
@@ -87,14 +80,14 @@ export default function DosirakOrderSection() {
               onClick={() => toggleSelect(o.dosirakId)}
             />
             <span>{o.name}</span>
-            <span>{o.categories}</span>
+            <span>{o.category}</span>
             <span>{o.price.toLocaleString()}</span>
             <span>{o.count}/20</span>
             <span>
               <QuantitySelector
-                initialQuantity={o.count}
+                initialQuantity={o.orderCount}
                 onChange={(newQty) => changeCount(o.dosirakId, newQty)}
-              ></QuantitySelector>
+              />
             </span>
           </div>
         ))}
@@ -119,47 +112,62 @@ export default function DosirakOrderSection() {
               onClick={() => toggleSelect(o.dosirakId)}
             />
             <span>{o.name}</span>
-            <span>{o.categories}</span>
+            <span>{o.category}</span>
             <span>{getDiscountedPrice(o.price, 15).toLocaleString()}</span>
-            <span>{o.count}</span>
-            <span>{(o.count * getDiscountedPrice(o.price, 15)).toLocaleString()}</span>
+            <span>{o.orderCount}</span>
+            <span>
+              {(o.count * getDiscountedPrice(o.price, 15)).toLocaleString()}
+            </span>
           </div>
         ))}
         <div className={styles.totalAmountBox}>
-          총 주문 금액: <span className={styles.totalAmount}>{totalAmount.toLocaleString()}원</span>
+          총 주문 금액:{" "}
+          <span className={styles.totalAmount}>
+            {totalAmount.toLocaleString()}원
+          </span>
         </div>
       </div>
 
       <div className={styles.noticeWrapper}>
         <ul className={styles.noticeList}>
           <li>
-            해당 도시락은 <strong>공동 주문 상품</strong>으로, 일정 수량 이상 모일 경우에만 배송이
-            진행됩니다.
+            해당 도시락은 <strong>공동 주문 상품</strong>으로, 일정 수량 이상
+            모일 경우에만 배송이 진행됩니다.
           </li>
           <li>
-            <strong>최소 주문 수량을 초과하면</strong>, 선택한 시간에 맞춰 배송이 보장됩니다.
+            <strong>최소 주문 수량을 초과하면</strong>, 선택한 시간에 맞춰
+            배송이 보장됩니다.
           </li>
           <li>
-            주문 수량이 충족되면, <strong>등록된 이메일로 알림이 발송</strong>됩니다.
+            주문 수량이 충족되면, <strong>등록된 이메일로 알림이 발송</strong>
+            됩니다.
           </li>
         </ul>
       </div>
 
       <div className={styles.agreementWrapper}>
-        <div className={styles.checkboxAgreement} onClick={() => setAgreed(!agreed)}>
+        <div
+          className={styles.checkboxAgreement}
+          onClick={() => setAgreed(!agreed)}
+        >
           <img
             src={agreed ? checkGreenFull : checkGray}
             alt="동의 여부"
             className={styles.checkboxImage}
           />
           <span className={styles.checkboxText}>
-            공동 주문 정책 및 최소 주문 수량 도달 시 배송이 확정됨을 확인하였으며, 이에 동의합니다.
+            공동 주문 정책 및 최소 주문 수량 도달 시 배송이 확정됨을
+            확인하였으며, 이에 동의합니다.
           </span>
         </div>
       </div>
 
       <div className={styles.buttonWrapper}>
-        <Button size="lg" variant="secondary" disabled={totalAmount === 0 || !agreed}>
+        <Button
+          size="lg"
+          variant="secondary"
+          disabled={totalAmount === 0 || !agreed}
+        >
           주문하기
         </Button>
       </div>

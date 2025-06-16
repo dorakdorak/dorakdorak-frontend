@@ -1,30 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SortOptions from "@/components/common/SortOptions";
 import CustomDosirakList from "@/components/customRanking/CustomDosirakList";
 import { SortType } from "@/constants/sortOptions";
-import { CustomDosirakItem } from "@/types/DosirakList";
-import { mockCustomDosiraks } from "@/mock/CustomDosirakRankingMockData";
+import { DosirakItem, DosirakRequest } from "@/types/DosirakList";
 import styles from "@/css/list/Menu.module.css";
 import ConfirmModal from "@/components/customRanking/ConfirmModal";
 import SectionHeader from "@/components/common/SectionHeader";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/store/authStore";
+import fetchDosiraks from "@/api/DosirakList";
+import Spinner from "@/components/common/Spinner";
 
 function CustomRanking() {
   const [selectedSort, setSelectedSort] = useState<SortType>("LATEST");
-  const [dosiraks, setDosiraks] = useState<CustomDosirakItem[]>(mockCustomDosiraks);
+  const [dosiraks, setDosiraks] = useState<DosirakItem[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<CustomDosirakItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<DosirakItem | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const sorted = [...dosiraks];
-  //   if (selectedSort === "LATEST") {
-  //     sorted.sort((a, b) => b.dosirakId - a.dosirakId);
-  //   } else if (selectedSort === "VOTE") {
-  //     sorted.sort((a, b) => b.vote - a.vote);
-  //   }
-  //   setDosiraks(sorted);
-  // }, [selectedSort]);
+  const navigate = useNavigate();
+  const { isLoggedIn } = useAuthStore();
 
-  const openModal = (item: CustomDosirakItem) => {
+  // 로그인 확인
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login", {
+        replace: true,
+        state: { message: "로그인 후 이용 가능한 서비스입니다." },
+      });
+    }
+  }, [isLoggedIn, navigate]);
+
+  // 도시락 목록 요청
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const request: DosirakRequest = {
+        sortType: selectedSort,
+        dosirakType: "CUSTOM",
+      };
+      try {
+        const { dosiraks } = await fetchDosiraks(request);
+        setDosiraks(dosiraks);
+      } catch (error) {
+        console.error("도시락 데이터를 불러오는 데 실패했습니다.", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [selectedSort, isLoggedIn]);
+
+  const openModal = (item: DosirakItem) => {
     setSelectedItem(item);
     setModalOpen(true);
   };
@@ -44,7 +74,11 @@ function CustomRanking() {
     setDosiraks((prev) =>
       prev.map((item) =>
         item.dosirakId === selectedItem.dosirakId
-          ? { ...item, isVoted: true, vote: item.vote + 1 }
+          ? {
+              ...item,
+              vote: (item.vote ?? 0) + 1,
+              isVoted: true,
+            }
           : item
       )
     );
@@ -53,11 +87,18 @@ function CustomRanking() {
 
   return (
     <div className={styles.menuContainer}>
-      <SectionHeader title="커스텀 도시락 랭킹"></SectionHeader>
+      <SectionHeader title="커스텀 도시락 랭킹" />
       <div className={styles.menuSortWrapper}>
-        <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
+        <SortOptions
+          selectedSort={selectedSort}
+          onSelectSort={setSelectedSort}
+        />
       </div>
-      <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />
+      )}
       {selectedItem && (
         <ConfirmModal
           name={selectedItem.name}
