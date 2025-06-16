@@ -6,7 +6,9 @@ export interface DosirakRequest {
   dosirakId?: number;
   filterType: FilterType;
   sortType: SortType;
+  dosirakType: "NORMAL" | "CUSTOM";
 }
+
 
 export interface DosirakItem {
   dosirakId: number;
@@ -15,6 +17,8 @@ export interface DosirakItem {
   salesPercentage: number;
   storageType: StorageType;
   imageUrl: string;
+  createdAt: string;
+  vote: boolean | null;
 }
 
 export interface CustomDosirakItem {
