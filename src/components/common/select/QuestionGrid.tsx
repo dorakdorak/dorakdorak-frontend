@@ -4,12 +4,13 @@ import styles from "@/css/common/SelectableItem.module.css";
 import SectionHeader from "@/components/common/SectionHeader";
 import Button from "@/components/common/Button";
 import {
-  LIKED_INGREDIENT_OPTIONS,
-  DISLIKED_INGREDIENT_OPTIONS,
-  FOOD_STYLE_OPTIONS,
-  FOOD_PREFERENCE_OPTIONS,
+  MAIN_INGREDIENT_PREFERENCES,
+  SENSORY_PREFERENCES,
+  MEAL_PURPOSES,
+  FLAVOR_PREFERENCES,
 } from "@/constants/foodOptions";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/store/authStore";
 
 type Props = {
   liked: string;
@@ -34,29 +35,35 @@ export default function QuestionGrid({
 }: Props) {
   const boxes = [
     {
-      title: "좋아하는 재료가 있나요?",
-      options: LIKED_INGREDIENT_OPTIONS,
+      title: "고기 or 채소, 뭐가 더 끌리세요?",
+      options: MAIN_INGREDIENT_PREFERENCES.map((item) => ({
+        label: item,
+        value: item,
+      })),
       selectedValue: liked,
       onChange: setLiked,
       delay: 0,
     },
     {
-      title: "싫어하는 재료가 있나요?",
-      options: DISLIKED_INGREDIENT_OPTIONS,
+      title: "먹을 때 가장 중요한 감각은?",
+      options: SENSORY_PREFERENCES.map((item) => ({
+        label: item,
+        value: item,
+      })),
       selectedValue: disliked,
       onChange: setDisliked,
       delay: 0.2,
     },
     {
-      title: "어떤 스타일을 선호하시나요?",
-      options: FOOD_STYLE_OPTIONS,
+      title: "한 끼에 얼마나 든든하게 드실래요?",
+      options: MEAL_PURPOSES.map((item) => ({ label: item, value: item })),
       selectedValue: style,
       onChange: setStyle,
       delay: 0.4,
     },
     {
-      title: "원하는 느낌이 있다면 알려주세요",
-      options: FOOD_PREFERENCE_OPTIONS,
+      title: "요즘 끌리는 맛은?",
+      options: FLAVOR_PREFERENCES.map((item) => ({ label: item, value: item })),
       selectedValue: preference,
       onChange: setPreference,
       delay: 0.6,
@@ -64,6 +71,10 @@ export default function QuestionGrid({
   ];
 
   const navigate = useNavigate();
+
+  const { isLoggedIn } = useAuthStore();
+  const isFormComplete = liked && disliked && style && preference;
+  const canSubmit = isLoggedIn && isFormComplete;
 
   const handleSubmit = async () => {
     navigate("/custom-detail", {
@@ -114,7 +125,19 @@ export default function QuestionGrid({
         transition={{ duration: 0.8, delay: 0.4 }}
         viewport={{ once: true, amount: 0.4 }}
       >
-        <Button variant="secondary" size="lg" onClick={handleSubmit}>
+        {!isLoggedIn && (
+          <div
+            style={{ marginBottom: "12px", textAlign: "center", color: "#888" }}
+          >
+            커스텀 도시락을 만드시려면 로그인이 필요합니다.
+          </div>
+        )}
+        <Button
+          variant="secondary"
+          size="lg"
+          onClick={handleSubmit}
+          disabled={!canSubmit}
+        >
           생성하기
         </Button>
       </motion.div>
