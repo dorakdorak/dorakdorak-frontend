@@ -1,11 +1,11 @@
 import styles from "@/css/customRanking/CustomDosirak.module.css";
 import checkGreen from "@/assets/images/icon/check-green.png";
 import checkWhite from "@/assets/images/icon/check-white.png";
-import { CustomDosirakItem } from "@/types/DosirakList";
+import { DosirakItem } from "@/types/DosirakList";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  item: CustomDosirakItem;
+  item: DosirakItem;
   onVoteClick: (id: number) => void;
 }
 
@@ -32,12 +32,8 @@ const CustomDosirakCard = ({ item, onVoteClick }: Props) => {
         }}
         disabled={item.isVoted}
       >
-        <img
-          src={item.isVoted ? checkWhite : checkGreen}
-          alt="투표"
-          className={styles.icon}
-        />
-        {item.isVoted ? "투표완료" : "투표하기"}
+        <img src={item.isVoted ? checkWhite : checkGreen} alt="투표" className={styles.icon} />
+        {item.vote ? "투표완료" : "투표하기"}
       </button>
     </div>
   );

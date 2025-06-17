@@ -139,6 +139,7 @@
     padding: 16px;
     background: #fff;
     border-top: 1px solid #eee;
+    gap: 24px;
 }
 
 /* 첫 번째 주문 아이템 */
@@ -230,8 +231,8 @@
 
 /* 결제 실패 */
 .statusPAYMENT_FAILED {
-    background: #f8d7da;
-    color: #721c24;
+    background: #f3e5e5;
+    color: #5a2e2e; 
 }
 
 /* 결제 취소 */
@@ -241,21 +242,21 @@
 }
 
 /* 공구 모집 */
-.statusGONGGU_OPEN {
-    background: #d1ecf1;
-    color: #0c5460;
+.statusGONGGOO_OPEN {
+    background: #d0ebff;
+    color: #0b5394;
 }
 
-/* 공구 모집 취소 */
-.statusGONGGU_CANCELLED {
-    background: #f5c6cb;
-    color: #721c24;
+/* 공구 모집 마감 */
+.statusGONGGOO_CONFIRMED {
+    background: #d4edda;
+    color: #155724;
 }
 
 /* 배송 진행 중 */
 .statusDELIVERY_IN_PROGRESS {
-    background: #cce5ff;
-    color: #004085;
+    background: #d0ebff;
+    color: #0b5394;
 }
 
 /* 배송 완료 */

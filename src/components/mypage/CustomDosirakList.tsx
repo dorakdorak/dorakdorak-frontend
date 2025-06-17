@@ -1,4 +1,5 @@
 import styles from '@/css/mypage/CustomDosirakList.module.css';
+import { RefObject } from 'react';
 
 interface CustomDosirakItem {
     name: string;       // 도시락 이름
@@ -13,6 +14,7 @@ interface CustomDosirakListProps {
     onMoreClick?: () => void;           // 더보기 클릭시 실행할 함수
     hideHeader?: boolean;               // 헤더 숨김 여부
     limitItems?: number;                // 최대 몇개까지 도시락 보여줄지 제한
+    lastElementRef?: RefObject<HTMLDivElement>; // 마지막 요소 감지를 위한 ref
 }
 
 const CustomDosirakList = (props: CustomDosirakListProps) => {
@@ -60,10 +62,15 @@ const CustomDosirakList = (props: CustomDosirakListProps) => {
                         <p>등록된 커스텀 도시락이 없습니다.</p>
                     </div>
                 ) : (
-                    displayDosirakList.map((dosirak) => (
+                    displayDosirakList.map((dosirak, index) => (
                         <div 
                             key={dosirak.name + dosirak.createdAt}
                             className={styles.dosirakItem}
+                            ref={
+                                index === displayDosirakList.length - 1
+                                    ? props.lastElementRef
+                                    : undefined
+                            }
                         >
                             <div className={styles.dosirakImage}>
                                 <img src={dosirak.imageUrl} alt={dosirak.name} />

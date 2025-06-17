@@ -9,7 +9,8 @@ import AdminHeader from "@/components/common/AdminHeader";
 import Main from "@/pages/Main";
 import Menu from "@/pages/Menu";
 import GroupOrder from "@/pages/GroupOrder";
-import OrderSuccessPage from "@/pages/OrderSuccessPage";
+import OrderSuccess from "@/pages/OrderSuccess";
+import OrderFail from "@/pages/OrderFail";
 import CustomDosirak from "@/pages/CustomDosirak";
 import CustomRanking from "@/pages/CustomRanking";
 import ZeroWasteRanking from "@/pages/ZeroWasteRanking";
@@ -31,28 +32,31 @@ import OrderStatistics from "@/pages/admin/OrderStatistics";
 import useAuthStore from "@/store/authStore";
 
 const LayoutWrapper = () => {
+  // Production 확인용. 향후 삭제 예정
+  console.log("현재 VITE MODE:", import.meta.env.MODE);
+
   // Zustand persist가 자동으로 상태 복원
   const { isLoggedIn, user } = useAuthStore();
   const location = useLocation();
-  
+
   const hideLayout = location.pathname.startsWith("/zero-waste/cert");
 
   return (
     <div className="app-wrapper">
-      {!hideLayout && (
-        user?.role === "ADMIN" ? (
+      {!hideLayout &&
+        (user?.role === "ADMIN" ? (
           <AdminHeader />
         ) : (
           <Header isLoggedIn={isLoggedIn} />
-        )
-      )}
+        ))}
 
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/group-order" element={<GroupOrder />} />
-          <Route path="/order-success" element={<OrderSuccessPage />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/order-fail" element={<OrderFail />} />
           <Route path="/custom-dosirak" element={<CustomDosirak />} />
           <Route path="/custom-ranking" element={<CustomRanking />} />
           <Route path="/zero-waste" element={<ZeroWasteRanking />} />
