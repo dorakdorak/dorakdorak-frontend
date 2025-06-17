@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 import fetchDosiraks from "@/api/DosirakList";
 import Spinner from "@/components/common/Spinner";
+import { voteCustomDosirak } from "@/api/VoteCustomDosirak";
 
 function CustomRanking() {
   const [selectedSort, setSelectedSort] = useState<SortType>("LATEST");
@@ -69,36 +70,38 @@ function CustomRanking() {
     if (found) openModal(found);
   };
 
-  const handleVoteConfirm = () => {
+  const handleVoteConfirm = async () => {
     if (!selectedItem) return;
-    setDosiraks((prev) =>
-      prev.map((item) =>
-        item.dosirakId === selectedItem.dosirakId
-          ? {
-              ...item,
-              vote: (item.vote ?? 0) + 1,
-              isVoted: true,
-            }
-          : item
-      )
-    );
-    closeModal();
+
+    try {
+      await voteCustomDosirak(selectedItem.dosirakId);
+
+      setDosiraks((prev) =>
+        prev.map((item) =>
+          item.dosirakId === selectedItem.dosirakId
+            ? {
+                ...item,
+                vote: (item.vote ?? 0) + 1,
+                isVoted: true,
+              }
+            : item
+        )
+      );
+
+      closeModal();
+    } catch (error) {
+      console.error("투표 실패", error);
+      alert("투표에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
     <div className={styles.menuContainer}>
       <SectionHeader title="커스텀 도시락 랭킹" />
       <div className={styles.menuSortWrapper}>
-        <SortOptions
-          selectedSort={selectedSort}
-          onSelectSort={setSelectedSort}
-        />
+        <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
       </div>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />
-      )}
+      {loading ? <Spinner /> : <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />}
       {selectedItem && (
         <ConfirmModal
           name={selectedItem.name}

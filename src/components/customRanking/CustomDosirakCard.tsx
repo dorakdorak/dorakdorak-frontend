@@ -25,20 +25,14 @@ const CustomDosirakCard = ({ item, onVoteClick }: Props) => {
       <div className={styles.voteCount}>{item.price.toLocaleString()}원</div>
       <div className={styles.voteCount}>{item.vote.toLocaleString()}표</div>
       <button
-        className={`${styles.voteButton} ${
-          item.vote === 1 ? styles.voted : ""
-        }`}
+        className={`${styles.voteButton} ${item.isVoted ? styles.voted : ""}`}
         onClick={(e) => {
           e.stopPropagation();
           onVoteClick(item.dosirakId);
         }}
-        disabled={item.vote === 1}
+        disabled={item.isVoted}
       >
-        <img
-          src={item.vote === 1 ? checkWhite : checkGreen}
-          alt="투표"
-          className={styles.icon}
-        />
+        <img src={item.isVoted ? checkWhite : checkGreen} alt="투표" className={styles.icon} />
         {item.vote ? "투표완료" : "투표하기"}
       </button>
     </div>

@@ -61,7 +61,11 @@ function GroupOrder() {
         </div>
       </div>
       <div className={styles.orderSection}>
-        <DosirakOrderSection orderList={orderList} />
+        <DosirakOrderSection 
+          orderList={orderList} 
+          arriveAt={selectedDate}
+          arriveTime={parseInt(selectedTime)}
+        />
       </div>
     </div>
   );
