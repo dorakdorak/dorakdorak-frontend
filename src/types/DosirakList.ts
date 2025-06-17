@@ -9,7 +9,6 @@ export interface DosirakRequest {
   dosirakType: "NORMAL" | "CUSTOM";
 }
 
-
 export interface DosirakItem {
   dosirakId: number;
   name: string;
@@ -19,4 +18,5 @@ export interface DosirakItem {
   imageUrl: string;
   createdAt: string;
   vote: number | null;
+  isVoted: boolean | null;
 }
