@@ -5,7 +5,7 @@ export interface MyOrderItem {
     imageUrl: string;
     price: number;
     amount: number;
-    orderStatus: string;
+    itemStatus: string;
 }
 
 export interface MyOrder {
@@ -25,7 +25,7 @@ export interface MyOrderPreview{
     price: number;
     amount: number;
     orderDate: string;
-    orderStatus: string;
+    itemStatus: string;
 }
 
 export interface MyOrderPreviewResponse{
@@ -34,6 +34,7 @@ export interface MyOrderPreviewResponse{
 
 // 나의 커스텀 도시락 내역 관련
 export interface MyCustomDosirak {
+    dosirakId: number,
     name: string;
     imageUrl: string;
     createdAt: string;

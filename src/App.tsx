@@ -30,6 +30,9 @@ import OrderStatistics from "@/pages/admin/OrderStatistics";
 import useAuthStore from "@/store/authStore";
 
 const App = () => {
+  //Production 확인용. 향후 삭제해야됨
+  console.log("현재 VITE MODE:", import.meta.env.MODE); 
+
   // Zustand persist가 자동으로 상태 복원
   const { isLoggedIn, user } = useAuthStore();
 
