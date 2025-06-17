@@ -69,7 +69,7 @@ const OrderHistoryList = (props: OrderHistoryListProps) => {
                     displayOrderGroups.map((order, index) => {
                         const totalAmount = calculateTotalAmount(order.items);
                         // 결제 대기, 결제 완료, 공구 모집인 경우에만 주문 취소 활성화
-                        const cancelStatus = ['PAYMENT_PENDING', 'PAYMENT_COMPLETED', 'GONGGU_OPEN'];
+                        const cancelStatus = ['PAYMENT_PENDING', 'PAYMENT_COMPLETED', 'GONGGOO_OPEN'];
                         const canCancel = order.items.every(item => cancelStatus.includes(item.itemStatus));
 
                         return (
