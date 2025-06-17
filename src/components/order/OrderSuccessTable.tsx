@@ -29,9 +29,7 @@ const OrderSuccessTable = ({ orders }: Props) => {
             </td>
             <td className={styles.cell}>{item.price.toLocaleString()} 원</td>
             <td className={styles.cell}>{item.amount} 개</td>
-            <td className={styles.cell}>
-              {item.orderStatus === "PAYMENT_COMPLETED" ? "결제 완료" : item.orderStatus}
-            </td>
+            <td className={styles.cell}>결제 완료</td>
           </tr>
         ))}
       </tbody>
