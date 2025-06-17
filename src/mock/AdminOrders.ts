@@ -15,7 +15,7 @@ export const mockOrders: AdminOrderResponse[] = [
     type: "GROUP",
     price: 10000,
     arrivedAt: "2025년 6월 15일 13시",
-    orderStatus: "GONGGU_CONFIRMED",
+    orderStatus: "GONGGOO_CONFIRMED",
   },
   {
     orderId: 3,
