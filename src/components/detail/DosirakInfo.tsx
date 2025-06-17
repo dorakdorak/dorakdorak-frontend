@@ -2,9 +2,13 @@ import { DosirakDetail } from "@/types/DosirakDetail";
 import { getStorageTypeLabel } from "@/utils/storageType";
 import QuantitySelector from "@/components/common/QuantitySelector";
 import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
 import { useState } from "react";
 import styles from "@/css/detail/DosirakInfo.module.css";
 import { useNavigate } from "react-router-dom";
+import { loadTossPayments } from "@tosspayments/payment-sdk";
+import { SinglePaymentPrepareRequest } from "@/types/Payment";
+import { requestSinglePayment } from "@/api/Payment";
 
 interface Props {
   dosirakId: number;
@@ -13,9 +17,40 @@ interface Props {
 
 const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
   const finalPrice =
     dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
   const navigate = useNavigate();
+
+  const handleSingleOrder = async () => {
+    setLoading(true);
+    try {
+      // Step 1. 주문 준비 요청
+      const prepareRequest: SinglePaymentPrepareRequest = {
+        orderItems: [{ dosirakId, count: quantity }],
+      };
+      const res = await requestSinglePayment(prepareRequest);
+
+      // Step 2. 토스페이먼츠 결제창 호출
+      const tossPayments = await loadTossPayments("test_ck_AQ92ymxN34dmjmq9pxDg3ajRKXvd"); // 테스트 키
+      await tossPayments.requestPayment("카드", {
+        amount: res.amount,
+        orderId: res.orderId,
+        orderName: res.orderName,
+        customerName: res.customerName,
+        customerEmail: res.customerEmail,
+        successUrl: `${window.location.origin}/order-success?toss=true`,
+        failUrl: `${window.location.origin}/order/fail`,
+      });
+    } catch (err) {
+      console.error("결제 요청 중 오류:", err);
+      alert("결제 요청에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <Spinner text="결제 요청 중입니다..." />;
 
   return (
     <div className={styles.dosirakDetailContainer}>
@@ -79,7 +114,7 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
         </div>
 
         <div className={styles.dosirakDetailButtons}>
-          <Button variant="primary" size="md">
+          <Button variant="primary" size="md" onClick={handleSingleOrder}>
             일반 주문
           </Button>
           <Button
