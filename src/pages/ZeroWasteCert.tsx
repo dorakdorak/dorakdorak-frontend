@@ -24,6 +24,9 @@ const ZeroWasteCertPage = () => {
     fetchZeroWasteInfo(qrcode)
       .then((res) => setInfo(res.data))
       .catch(() => alert("도시락 정보를 불러오지 못했습니다."));
+      setTimeout(() => {
+        window.location.href = "https://dorakdorak.store";
+      }, 3000);
   }, [qrcode]);
 
   const analyzeImage = async (file: File) => {
@@ -63,7 +66,7 @@ const ZeroWasteCertPage = () => {
         ※ 위에서 촬영한 사진을 첨부해주세요!
         <br />도시락 잔량은 10% 이하여야 합니다.
       </p> 
-      {loading && <Spinner text="이미지 분석 중" />}
+      {loading && <div className={styles.pageWrapper}><Spinner text="이미지 분석 중" /></div>}
       {previewUrl && <PreviewImage url={previewUrl} />}
       {result && (
         <>
