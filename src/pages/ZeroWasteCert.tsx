@@ -23,10 +23,14 @@ const ZeroWasteCertPage = () => {
     if (!qrcode) return;
     fetchZeroWasteInfo(qrcode)
       .then((res) => setInfo(res.data))
-      .catch(() => alert("도시락 정보를 불러오지 못했습니다."));
-      setTimeout(() => {
-        window.location.href = "https://dorakdorak.store";
-      }, 3000);
+      .catch(() => {
+        alert("도시락 정보를 불러오지 못했습니다.");
+        setTimeout(() => {
+          window.location.href = "https://dorakdorak.store";
+        }, 3000);
+      }
+      );
+      
   }, [qrcode]);
 
   const analyzeImage = async (file: File) => {
