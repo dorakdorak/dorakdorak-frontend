@@ -38,7 +38,7 @@ function MyCustomDosiraks() {
                 setLastDosirakId(newList[newList.length - 1].dosirakId);
             }
         } catch (error) {
-            console.error('커스텀 도시락 정보를 불러오는데 문제가 발생했습니다.');
+            console.error('커스텀 도시락 정보를 불러오는데 문제가 발생했습니다.', error);
         } finally {
             setIsLoading(false);
         }
@@ -54,7 +54,7 @@ function MyCustomDosiraks() {
                 setUserSummary(summaryData);
                 await loadDosiraks();
             } catch (error) {
-                console.error('커스텀 도시락 정보를 불러오는데 문제가 발생했습니다.');
+                console.error('커스텀 도시락 정보를 불러오는데 문제가 발생했습니다.', error);
             }
         };
 
@@ -82,7 +82,7 @@ function MyCustomDosiraks() {
 
     // 도시락 생성하기 버튼 클릭시 실행
     const handleAddDosirak = () => {
-        navigate('/mypage/custom-dosirak/create');
+        navigate('/custom-dosirak');
     };
 
     // 페이지 로딩시 스피너 리턴
