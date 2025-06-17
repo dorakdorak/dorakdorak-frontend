@@ -29,17 +29,6 @@ const ZeroWastePromo = ({ onClick }: ZeroWastePromoProps) => {
                     <p>AI가 잔반 여부를 분석해 인증 수가 가장 많은 대학에는</p>
                     <p>스페셜 이벤트가 기다리고 있어요! 🌱</p>
                 </div>
-                
-                {/* 하단 배지 및 화살표 */}
-                <div className={styles.promoFooter}>
-                    {/* ZERO WASTE 배지 */}
-                    <div className={styles.promoBadge}>
-                        <span className={styles.zeroText}>ZERO</span>
-                        <span className={styles.wasteText}>WASTE</span>
-                    </div>
-                    {/* 화살표 */}
-                    <div className={styles.actionArrow}>→</div>
-                </div>
             </div>
         </div>
     );
