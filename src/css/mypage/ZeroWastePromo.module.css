@@ -1,5 +1,7 @@
 /* 제로웨이스트 홍보 박스 컴포넌트 스타일 */
 .zeroWastePromo {
+    font-family: "Paperlogy", sans-serif;
+    font-weight: 400;
     background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -78,6 +80,7 @@
 
 /* 홍보 제목 텍스트 */
 .promoTitle h3 {
+    font-family: "Paperlogy", sans-serif;
     color: #333;
     font-size: 20px;
     font-weight: 600;
@@ -103,57 +106,8 @@
     line-height: 1.5;
 }
 
-/* 홍보 푸터 영역 */
-.promoFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-}
-
-/* ZERO WASTE 배지 */
-.promoBadge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 12px 20px;
-    border-radius: 25px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* 배지 텍스트 */
-.zeroText,
-.wasteText {
-    font-size: 12px;
-    font-weight: 700;
-    color: #4CAF50;
-    letter-spacing: 1.5px;
-    line-height: 1;
-}
-
-.zeroText {
-    margin-bottom: 2px;
-}
-
-/* 액션 화살표 */
-.actionArrow {
-    font-size: 24px;
-    color: #4CAF50;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.8);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-/* 화살표 호버 효과 */
-.zeroWastePromo:hover .actionArrow {
+/* 호버 효과 */
+.zeroWastePromo:hover {
     transform: translateX(4px);
 }
 
