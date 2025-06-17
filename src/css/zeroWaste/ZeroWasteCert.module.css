@@ -1,0 +1,184 @@
+.pageWrapper {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  font-family: "Paperlogy", sans-serif;
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.highlight {
+  color: #77b255;
+}
+
+.dosirakInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: left;
+  margin-bottom: 24px;
+}
+
+.image {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.text {
+  text-align: left;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.date {
+  font-size: 13px;
+  color: #555;
+}
+
+.uploadBox {
+  display: block;
+  background-color: #e5f3dc;
+  color: #444;
+  border-radius: 16px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+}
+
+.plus {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.notice {
+  font-size: 12px;
+  color: #333;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.previewImage {
+  width: 100%;
+  max-width: 320px;
+  margin: 24px auto 12px;
+  border-radius: 10px;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.success {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.fail {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.resultText {
+  font-size: 14px;
+  color: #444;
+}
+
+.retryButton {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.retryButton:hover {
+  background-color: #d32f2f;
+}
+
+.previewWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.gaugeWrapper {
+  margin-top: 16px;
+}
+
+.gaugeBar {
+  height: 10px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.gaugeFill {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.gaugeText {
+  font-size: 13px;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* content */
+.contentWrapper {
+  text-align: left;
+  padding: 0 12px;
+}
+
+/* CetTitle */
+.titleWrapper {
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.certHighlight {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #34661f;
+  margin: 0;
+}
+
+.certSub {
+  font-size: 16px;
+  font-weight: 500;
+  color: #888;
+  margin: 4px 0 0 0;
+}
+
+.spinner-wrapper {
+  margin-top: 30px;
+}
