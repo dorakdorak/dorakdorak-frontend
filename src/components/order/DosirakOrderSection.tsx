@@ -6,6 +6,8 @@ import checkGray from "@/assets/images/icon/check-gray.png";
 import { getDiscountedPrice } from "@/utils/price";
 import Button from "@/components/common/Button";
 import GroupOrderItem from "@/types/GroupOrder";
+import { requestGroupPayment} from "@/api/Payment";
+import { loadTossPayments } from "@tosspayments/payment-sdk";
 
 interface Dosirak extends GroupOrderItem {
   selected: boolean;
@@ -14,9 +16,15 @@ interface Dosirak extends GroupOrderItem {
 
 interface Props {
   orderList: GroupOrderItem[];
+  arriveAt: string;
+  arriveTime: number;
 }
 
-export default function DosirakOrderSection({ orderList }: Props) {
+export default function DosirakOrderSection({
+  orderList,
+  arriveAt,
+  arriveTime,
+}: Props) {
   const [orders, setOrders] = useState<Dosirak[]>([]);
   const [agreed, setAgreed] = useState(false);
 
@@ -57,6 +65,35 @@ export default function DosirakOrderSection({ orderList }: Props) {
     (sum, o) => sum + getDiscountedPrice(o.price, 15) * o.orderCount,
     0
   );
+
+  const handleOrder = async () => {
+    try {
+      const orderItems = selectedOrders.map((o) => ({
+        dosirakId: o.dosirakId,
+        count: o.orderCount,
+      }));
+
+      const response = await requestGroupPayment({
+        orderItems,
+        arriveAt,
+        arriveTime,
+      });
+
+      const tossPayments = await loadTossPayments("test_ck_AQ92ymxN34dmjmq9pxDg3ajRKXvd");
+
+      await tossPayments.requestPayment("카드", {
+        amount: response.amount,
+        orderId: response.orderId,
+        orderName: response.orderName,
+        customerName: response.customerName,
+        customerEmail: response.customerEmail,
+        successUrl: `${window.location.origin}/order-success?toss=true`,
+        failUrl: `${window.location.origin}/order-fail`,
+      });
+    } catch (error) {
+        console.error("공동 주문 결제 실패:", error);
+    } 
+  };
 
   return (
     <div>
@@ -167,6 +204,7 @@ export default function DosirakOrderSection({ orderList }: Props) {
           size="lg"
           variant="secondary"
           disabled={totalAmount === 0 || !agreed}
+          onClick={handleOrder}
         >
           주문하기
         </Button>

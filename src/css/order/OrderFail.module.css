@@ -1,0 +1,13 @@
+.wrapper {
+  text-align: center;
+  padding: 80px 20px;
+}
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.text {
+  margin-top: 16px;
+  font-size: 16px;
+  color: #666;
+}
