@@ -4,9 +4,11 @@ import { StorageType } from "@/types/DosirakDetail";
 
 export interface DosirakRequest {
   dosirakId?: number;
-  filterType: FilterType;
+  filterType?: FilterType;
   sortType: SortType;
+  dosirakType: "NORMAL" | "CUSTOM";
 }
+
 
 export interface DosirakItem {
   dosirakId: number;
@@ -15,13 +17,6 @@ export interface DosirakItem {
   salesPercentage: number;
   storageType: StorageType;
   imageUrl: string;
-}
-
-export interface CustomDosirakItem {
-  dosirakId: number;
-  name: string;
-  price: number;
-  vote: number;
-  imageUrl: string;
-  isVoted: boolean;
+  createdAt: string;
+  vote: number | null;
 }
