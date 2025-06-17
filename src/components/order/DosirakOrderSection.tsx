@@ -6,7 +6,7 @@ import checkGray from "@/assets/images/icon/check-gray.png";
 import { getDiscountedPrice } from "@/utils/price";
 import Button from "@/components/common/Button";
 import GroupOrderItem from "@/types/GroupOrder";
-import { requestGroupPayment} from "@/api/Payment";
+import { requestGroupPayment } from "@/api/Payment";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 
 interface Dosirak extends GroupOrderItem {
@@ -20,11 +20,7 @@ interface Props {
   arriveTime: number;
 }
 
-export default function DosirakOrderSection({
-  orderList,
-  arriveAt,
-  arriveTime,
-}: Props) {
+export default function DosirakOrderSection({ orderList, arriveAt, arriveTime }: Props) {
   const [orders, setOrders] = useState<Dosirak[]>([]);
   const [agreed, setAgreed] = useState(false);
 
@@ -39,9 +35,7 @@ export default function DosirakOrderSection({
 
   const toggleSelect = (id: number) => {
     setOrders((prev) =>
-      prev.map((o) =>
-        o.dosirakId === id ? { ...o, selected: !o.selected } : o
-      )
+      prev.map((o) => (o.dosirakId === id ? { ...o, selected: !o.selected } : o))
     );
   };
 
@@ -91,8 +85,8 @@ export default function DosirakOrderSection({
         failUrl: `${window.location.origin}/order-fail`,
       });
     } catch (error) {
-        console.error("공동 주문 결제 실패:", error);
-    } 
+      console.error("공동 주문 결제 실패:", error);
+    }
   };
 
   return (
@@ -152,28 +146,22 @@ export default function DosirakOrderSection({
             <span>{o.category}</span>
             <span>{getDiscountedPrice(o.price, 15).toLocaleString()}</span>
             <span>{o.orderCount}</span>
-            <span>
-              {(o.count * getDiscountedPrice(o.price, 15)).toLocaleString()}
-            </span>
+            <span>{(o.orderCount * getDiscountedPrice(o.price, 15)).toLocaleString()}</span>
           </div>
         ))}
         <div className={styles.totalAmountBox}>
-          총 주문 금액:{" "}
-          <span className={styles.totalAmount}>
-            {totalAmount.toLocaleString()}원
-          </span>
+          총 주문 금액: <span className={styles.totalAmount}>{totalAmount.toLocaleString()}원</span>
         </div>
       </div>
 
       <div className={styles.noticeWrapper}>
         <ul className={styles.noticeList}>
           <li>
-            해당 도시락은 <strong>공동 주문 상품</strong>으로, 일정 수량 이상
-            모일 경우에만 배송이 진행됩니다.
+            해당 도시락은 <strong>공동 주문 상품</strong>으로, 일정 수량 이상 모일 경우에만 배송이
+            진행됩니다.
           </li>
           <li>
-            <strong>최소 주문 수량을 초과하면</strong>, 선택한 시간에 맞춰
-            배송이 보장됩니다.
+            <strong>최소 주문 수량을 초과하면</strong>, 선택한 시간에 맞춰 배송이 보장됩니다.
           </li>
           <li>
             주문 수량이 충족되면, <strong>등록된 이메일로 알림이 발송</strong>
@@ -183,18 +171,14 @@ export default function DosirakOrderSection({
       </div>
 
       <div className={styles.agreementWrapper}>
-        <div
-          className={styles.checkboxAgreement}
-          onClick={() => setAgreed(!agreed)}
-        >
+        <div className={styles.checkboxAgreement} onClick={() => setAgreed(!agreed)}>
           <img
             src={agreed ? checkGreenFull : checkGray}
             alt="동의 여부"
             className={styles.checkboxImage}
           />
           <span className={styles.checkboxText}>
-            공동 주문 정책 및 최소 주문 수량 도달 시 배송이 확정됨을
-            확인하였으며, 이에 동의합니다.
+            공동 주문 정책 및 최소 주문 수량 도달 시 배송이 확정됨을 확인하였으며, 이에 동의합니다.
           </span>
         </div>
       </div>

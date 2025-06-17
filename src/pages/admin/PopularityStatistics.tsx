@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { AdminPopularDosirakResponse } from "@/types/AdminManagement"; // 위에 정의한 타입
-import { mockPopularDosirak } from "@/mock/AdminPopularDosiraks";
 import SectionHeader from "@/components/common/SectionHeader";
+import { PopularResponse } from "@/types/AdminStatistics";
+import { fetchPopularDosiraks } from "@/api/AdminApi";
 
 const ageGroups = [0, 10, 20, 30, 40, 50];
 
 export default function PopularityStatistics() {
   const [selectedAge, setSelectedAge] = useState<number>(0);
-  const [popularList, setPopularList] = useState<AdminPopularDosirakResponse[]>([]);
+  const [popularList, setPopularList] = useState<PopularResponse[]>([]);
 
   const fetchPopular = async (age: number) => {
     try {
-      const query = age !== 0 ? `?age=${age}` : "";
-      const res = await fetch(`/admin/statistics/popular${query}`);
-      const json = await res.json();
-      setPopularList(json.items);
+      const data = await fetchPopularDosiraks(age !== 0 ? age : undefined);
+      setPopularList(data);
     } catch (e) {
-      console.error("인기 도시락 불러오기 실패", e);
-      setPopularList(mockPopularDosirak);
+      console.error("인기 도시락 불러오기 실패:", e);
+      setPopularList([]); // 빈 배열로 대체
     }
   };
 

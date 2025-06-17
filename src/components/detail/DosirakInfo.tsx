@@ -16,8 +16,7 @@ interface Props {
 
 const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
   const [quantity, setQuantity] = useState(1);
-  const finalPrice =
-    dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
+  const finalPrice = dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
   const navigate = useNavigate();
 
   const handleSingleOrder = async () => {
@@ -40,9 +39,9 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
         failUrl: `${window.location.origin}/order-fail`,
       });
     } catch (err) {
-        console.error("결제 요청 중 오류:", err);
-        alert("결제 요청에 실패했습니다.");
-    } 
+      console.error("결제 요청 중 오류:", err);
+      alert("결제 요청에 실패했습니다.");
+    }
   };
 
   return (
@@ -59,15 +58,17 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
         <h2 className={styles.dosirakDetailTitle}>{dosirak.baseInfo.name}</h2>
 
         <div className={styles.dosirakDetailPriceBox}>
-          <span className={styles.dosirakDetailSale}>
-            {`${dosirak.baseInfo.salePercentage * 100}%`}
-          </span>
-          <span className={styles.dosirakDetailPrice}>
-            {finalPrice.toLocaleString()}원
-          </span>
-          <span className={styles.dosirakDetailOriginalPrice}>
-            {dosirak.baseInfo.price.toLocaleString()}원
-          </span>
+          {dosirak.baseInfo.salePercentage > 0 && (
+            <span className={styles.dosirakDetailSale}>
+              {`${dosirak.baseInfo.salePercentage * 100}%`}
+            </span>
+          )}
+          <span className={styles.dosirakDetailPrice}>{finalPrice.toLocaleString()}원</span>
+          {dosirak.baseInfo.salePercentage > 0 && (
+            <span className={styles.dosirakDetailOriginalPrice}>
+              {dosirak.baseInfo.price.toLocaleString()}원
+            </span>
+          )}
         </div>
 
         <div className={styles.dosirakDetailDetail}>
@@ -96,10 +97,7 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
               <tr>
                 <td>수량</td>
                 <td>
-                  <QuantitySelector
-                    initialQuantity={quantity}
-                    onChange={setQuantity}
-                  />
+                  <QuantitySelector initialQuantity={quantity} onChange={setQuantity} />
                 </td>
               </tr>
             </tbody>

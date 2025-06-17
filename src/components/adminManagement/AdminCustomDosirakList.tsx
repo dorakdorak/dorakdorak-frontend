@@ -1,9 +1,9 @@
 import styles from "@/css/admin/Manage.module.css";
-import { AdminCustomsDosiraksResponse } from "@/types/AdminManagement";
-import SectionHeader from "../common/SectionHeader";
+import { DosirakItem } from "@/types/DosirakList";
+import SectionHeader from "@/components/common/SectionHeader";
 
 interface Props {
-  dosiraks: AdminCustomsDosiraksResponse[];
+  dosiraks: DosirakItem[];
   onRegisterClick: (id: number, name: string) => void;
 }
 
@@ -21,7 +21,7 @@ export default function AdminCustomDosirakList({ dosiraks, onRegisterClick }: Pr
         </div>
 
         {dosiraks.map((item) => (
-          <div className={`${styles.row} ${styles.row4}`} key={item.customdosirakId}>
+          <div className={`${styles.row} ${styles.row4}`} key={item.name}>
             <div>
               <img
                 src={item.imageUrl}
@@ -30,10 +30,10 @@ export default function AdminCustomDosirakList({ dosiraks, onRegisterClick }: Pr
               />
             </div>
             <div>{item.name}</div>
-            <div>{item.voteCount.toLocaleString()}표</div>
+            <div>{item.vote.toLocaleString()}표</div>
             <div>
               <button
-                onClick={() => onRegisterClick(item.customdosirakId, item.name)}
+                onClick={() => onRegisterClick(item.dosirakId, item.name)}
                 style={{
                   padding: "6px 12px",
                   borderRadius: "6px",
