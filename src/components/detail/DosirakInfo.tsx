@@ -2,7 +2,6 @@ import { DosirakDetail } from "@/types/DosirakDetail";
 import { getStorageTypeLabel } from "@/utils/storageType";
 import QuantitySelector from "@/components/common/QuantitySelector";
 import Button from "@/components/common/Button";
-import Spinner from "@/components/common/Spinner";
 import { useState } from "react";
 import styles from "@/css/detail/DosirakInfo.module.css";
 import { useNavigate } from "react-router-dom";
@@ -17,13 +16,11 @@ interface Props {
 
 const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
   const [quantity, setQuantity] = useState(1);
-  const [loading, setLoading] = useState(false);
   const finalPrice =
     dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
   const navigate = useNavigate();
 
   const handleSingleOrder = async () => {
-    setLoading(true);
     try {
       // Step 1. 주문 준비 요청
       const prepareRequest: SinglePaymentPrepareRequest = {
@@ -40,17 +37,13 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
         customerName: res.customerName,
         customerEmail: res.customerEmail,
         successUrl: `${window.location.origin}/order-success?toss=true`,
-        failUrl: `${window.location.origin}/order/fail`,
+        failUrl: `${window.location.origin}/order-fail`,
       });
     } catch (err) {
-      console.error("결제 요청 중 오류:", err);
-      alert("결제 요청에 실패했습니다.");
-    } finally {
-      setLoading(false);
-    }
+        console.error("결제 요청 중 오류:", err);
+        alert("결제 요청에 실패했습니다.");
+    } 
   };
-
-  if (loading) return <Spinner text="결제 요청 중입니다..." />;
 
   return (
     <div className={styles.dosirakDetailContainer}>
