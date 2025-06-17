@@ -30,3 +30,15 @@ export async function updateAdminOrderStatus(
     throw error;
   }
 }
+
+/* 커스텀 도시락 정식 등록 요청 */
+export async function registerCustomDosirak(customDosirakId: number): Promise<void> {
+  try {
+    await axiosInstance.post("/api/admin/custom-dosiraks", {
+      customDosirakId,
+    });
+  } catch (error) {
+    console.error(`커스텀 도시락 등록 실패 (ID: ${customDosirakId})`, error);
+    throw error;
+  }
+}
