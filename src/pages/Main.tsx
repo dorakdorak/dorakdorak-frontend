@@ -1,21 +1,49 @@
 import CategoryList from "@/components/common/category/CategoryList";
 import Carousel from "@/components/main/Carousel";
 import DosirakSection from "@/components/main/DosirakSection";
-import meal2 from "@/assets/images/mock/meal2.jpg";
+import custom1 from "@/assets/images/mock/custom1.png";
+import custom2 from "@/assets/images/mock/custom2.png";
+import custom3 from "@/assets/images/mock/custom3.png";
 import { motion } from "framer-motion";
 import SectionTitle from "@/components/main/SectionTitle";
 import RankingList from "@/components/main/RankingList";
-import { useState } from "react";
 import { FilterType } from "@/constants/categories";
+import { useEffect, useState } from "react";
+import fetchDosiraks from "@/api/DosirakList";
+import { DosirakItem } from "@/types/DosirakList";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
+  const [popularDosiraks, setPopularDosiraks] = useState<DosirakItem[]>([]);
+
+  const handleCategoryClick = (filter: FilterType) => {
+    navigate("/menu", { state: { filter } });
+    setSelectedFilter(filter);
+  };
+
+  useEffect(() => {
+    const fetchPopularDosiraks = async () => {
+      try {
+        const response = await fetchDosiraks({
+          sortType: "POPULAR",
+          dosirakType: "NORMAL",
+        });
+        setPopularDosiraks(response.dosiraks.slice(0, 3));
+      } catch (error) {
+        console.error("인기 도시락 조회 실패:", error);
+      }
+    };
+
+    fetchPopularDosiraks();
+  }, []);
 
   return (
     <section style={{ marginBottom: "200px" }}>
       <CategoryList
         selectedFilter={selectedFilter}
-        onSelectFilter={setSelectedFilter}
+        onSelectFilter={handleCategoryClick}
       />
       <Carousel />
       <motion.div
@@ -30,11 +58,11 @@ function Main() {
           description="지난주 가장 인기 있었던 도시락 TOP3"
           to="/menu"
           cardTo="detail"
-          boxes={[
-            { image: meal2, tag: "고혈압 식단" },
-            { image: meal2, tag: "스페셜 식단" },
-            { image: meal2, tag: "당뇨 식단" },
-          ]}
+          boxes={popularDosiraks.map((item) => ({
+            id: item.dosirakId,
+            image: item.imageUrl,
+            tag: String(item.name),
+          }))}
         />
       </motion.div>
 
@@ -57,9 +85,9 @@ function Main() {
           to="/custom-dosirak"
           cardTo="custom-detail"
           boxes={[
-            { image: meal2, tag: "고단백" },
-            { image: meal2, tag: "식단조절" },
-            { image: meal2, tag: "저당" },
+            { id: 117, image: custom1, tag: "비비드 베지 클래식" },
+            { id: 127, image: custom2, tag: "대박 해산물 한판!" },
+            { id: 130, image: custom3, tag: "고기 러버즈 피스트" },
           ]}
         />
       </motion.div>
