@@ -8,88 +8,83 @@
     padding-bottom: 60px;
 }
 
-/* 2열 레이아웃 컨테이너 */
+/* 2열 레이아웃 */
 .contentLayout {
     display: flex;
     gap: 32px;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
-/* 왼쪽 컬럼 */
-.leftColumn {
+/* 컬럼 구조 */
+.leftColumn,
+.rightColumn {
     flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 40px;
-}
-
-/* 오른쪽 컬럼 */
-.rightColumn {
-    flex: 1;
     min-width: 0;
-    display: flex;
-    flex-direction: column;
 }
 
-/* 컬럼 내 박스들 높이 설정 */
+/* 컬럼 내 박스들 - 절대 고정 높이 없음 */
 .leftColumn > *,
 .rightColumn > * {
+    flex: none;
     height: auto;
     min-height: 280px;
-    max-height: 400px;
-    flex-shrink: 0;
+    box-sizing: border-box;
+    overflow: visible;
 }
 
-/* 공통 박스 스타일 */
+/* 공통 박스 */
 .orderHistoryList,
 .customDosirakList,
 .zeroWastePromo {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #eee;
     border-radius: 8px;
     padding: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 0;
     box-sizing: border-box;
+    flex: none;
+    height: auto;
+    min-height: 280px;
+    overflow: visible;
 }
 
-/* 제로웨이스트 프로모 박스 */
+/* 제로웨이스트도 별도 제약 없음 */
 .zeroWastePromo {
-    height: auto !important;
-    min-height: 280px !important;
-    max-height: 400px !important;
-    margin-bottom: 0;
+    overflow: visible;
 }
 
-/* 마이페이지 내 박스들 높이 설정 */
+/* 마이페이지 내 박스 중복 정의 제거됨 */
 .mypageContainer .orderHistoryList,
 .mypageContainer .customDosirakList {
     height: auto;
     min-height: 280px;
-    max-height: 400px;
+    overflow: visible;
 }
 
-/* 박스 높이 동일화를 위한 레이아웃 */
-.contentLayout {
-    align-items: stretch;
+/* 1열 전환 대비 */
+@media screen and (max-width: 1023px) {
+    .contentLayout {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .leftColumn,
+    .rightColumn {
+        width: 100%;
+    }
+
+    .leftColumn > *,
+    .rightColumn > * {
+        width: 100%;
+    }
 }
 
-.leftColumn,
-.rightColumn {
-    display: flex;
-    flex-direction: column;
-}
-
-.leftColumn > *,
-.rightColumn > * {
-    flex: 1;
-    height: auto;
-    min-height: 280px;
-}
-
-/* 로딩 스피너 */
+/* 스피너 */
 .spinnerFullPageWrapper {
     height: 100vh;
     display: flex;
