@@ -100,7 +100,7 @@ export const fetchMyPageSummary = async (): Promise<MyPageSummary> => {
 
 export const cancelOrder = async (orderId: number): Promise<void> => {
     try {
-        await axiosInstance.delete(`/api/members/orders/${orderId}`);
+        await axiosInstance.delete(`/api/orders/${orderId}`);
         console.log("주문 취소 완료");
     } catch (error) {
         console.error("주문 취소 실패");
