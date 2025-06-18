@@ -13,7 +13,10 @@ function Main() {
 
   return (
     <section style={{ marginBottom: "200px" }}>
-      <CategoryList selectedFilter={selectedFilter} onSelectFilter={setSelectedFilter} />
+      <CategoryList
+        selectedFilter={selectedFilter}
+        onSelectFilter={setSelectedFilter}
+      />
       <Carousel />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -51,7 +54,7 @@ function Main() {
               AI가 생성해주는 나만의 커스텀 도시락
             </>
           }
-          to="/menu"
+          to="/custom-dosirak"
           cardTo="custom-detail"
           boxes={[
             { image: meal2, tag: "고단백" },
@@ -80,7 +83,7 @@ function Main() {
               커스텀 도시락 할인 혜택을 드립니다.
             </>
           }
-          to="/certification"
+          to="/zero-waste"
         />
         <RankingList />
       </motion.div>
