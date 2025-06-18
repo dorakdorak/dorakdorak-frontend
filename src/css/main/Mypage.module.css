@@ -26,14 +26,13 @@
     min-width: 0;
 }
 
-/* 컬럼 내 박스들 - 절대 고정 높이 없음 */
+/* 컬럼 내 박스들 */
 .leftColumn > *,
 .rightColumn > * {
     flex: none;
     height: auto;
     min-height: 280px;
     box-sizing: border-box;
-    overflow: visible;
 }
 
 /* 공통 박스 */
@@ -50,20 +49,13 @@
     flex: none;
     height: auto;
     min-height: 280px;
-    overflow: visible;
 }
 
-/* 제로웨이스트도 별도 제약 없음 */
-.zeroWastePromo {
-    overflow: visible;
-}
-
-/* 마이페이지 내 박스 중복 정의 제거됨 */
+/* 마이페이지 내 박스 */
 .mypageContainer .orderHistoryList,
 .mypageContainer .customDosirakList {
     height: auto;
     min-height: 280px;
-    overflow: visible;
 }
 
 /* 1열 전환 대비 */
