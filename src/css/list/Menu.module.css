@@ -9,3 +9,7 @@
   justify-content: flex-end;
   margin-bottom: 16px;
 }
+
+.customRankingContainer {
+  padding: 80px 100px;
+}

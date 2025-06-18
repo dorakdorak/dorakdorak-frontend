@@ -17,7 +17,8 @@ function CustomRanking() {
   const [dosiraks, setDosiraks] = useState<DosirakItem[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<DosirakItem | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   const navigate = useNavigate();
   const { isLoggedIn } = useAuthStore();
@@ -32,28 +33,60 @@ function CustomRanking() {
     }
   }, [isLoggedIn, navigate]);
 
-  // 도시락 목록 요청
+  const getLastId = () =>
+    dosiraks.length > 0 ? dosiraks[dosiraks.length - 1].dosirakId : undefined;
+
+  const fetchMoreDosiraks = async (isInitial = false) => {
+    if (isFetching || (!hasMore && !isInitial)) return;
+
+    setIsFetching(true);
+    const request: DosirakRequest = {
+      sortType: selectedSort,
+      dosirakType: "CUSTOM",
+      dosirakId: isInitial ? undefined : getLastId(),
+    };
+
+    try {
+      const { dosiraks: newList } = await fetchDosiraks(request);
+      if (newList.length === 0) {
+        setHasMore(false);
+      } else {
+        setDosiraks((prev) => {
+          const existingIds = new Set(prev.map((d) => d.dosirakId));
+          const unique = newList.filter((d) => !existingIds.has(d.dosirakId));
+          return [...prev, ...unique];
+        });
+      }
+    } catch (error) {
+      console.error("도시락 데이터를 불러오는 데 실패했습니다.", error);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const request: DosirakRequest = {
-        sortType: selectedSort,
-        dosirakType: "CUSTOM",
-      };
-      try {
-        const { dosiraks } = await fetchDosiraks(request);
-        setDosiraks(dosiraks);
-      } catch (error) {
-        console.error("도시락 데이터를 불러오는 데 실패했습니다.", error);
-      } finally {
-        setLoading(false);
+    const resetAndFetch = async () => {
+      setDosiraks([]);
+      setHasMore(true);
+      await fetchMoreDosiraks(true);
+    };
+    if (isLoggedIn) resetAndFetch();
+  }, [selectedSort, isLoggedIn]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const innerHeight = window.innerHeight;
+      const scrollHeight = document.body.scrollHeight;
+
+      if (scrollY + innerHeight >= scrollHeight - 200) {
+        fetchMoreDosiraks();
       }
     };
 
-    if (isLoggedIn) {
-      fetchData();
-    }
-  }, [selectedSort, isLoggedIn]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [dosiraks, hasMore, isFetching]);
 
   const openModal = (item: DosirakItem) => {
     setSelectedItem(item);
@@ -75,7 +108,6 @@ function CustomRanking() {
 
     try {
       await voteCustomDosirak(selectedItem.dosirakId);
-
       setDosiraks((prev) =>
         prev.map((item) =>
           item.dosirakId === selectedItem.dosirakId
@@ -87,7 +119,6 @@ function CustomRanking() {
             : item
         )
       );
-
       closeModal();
     } catch (error) {
       console.error("투표 실패", error);
@@ -96,12 +127,21 @@ function CustomRanking() {
   };
 
   return (
-    <div className={styles.menuContainer}>
+    <div className={styles.customRankingContainer}>
       <SectionHeader title="커스텀 도시락 랭킹" />
       <div className={styles.menuSortWrapper}>
-        <SortOptions selectedSort={selectedSort} onSelectSort={setSelectedSort} />
+        <SortOptions
+          selectedSort={selectedSort}
+          onSelectSort={setSelectedSort}
+        />
       </div>
-      {loading ? <Spinner /> : <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />}
+      <CustomDosirakList items={dosiraks} onVoteClick={handleVoteClick} />
+      {isFetching && <Spinner />}
+      {/* {!hasMore && dosiraks.length > 0 && (
+        <div style={{ textAlign: "center", color: "#888", marginTop: "20px" }}>
+          더 이상 도시락이 없습니다.
+        </div>
+      )} */}
       {selectedItem && (
         <ConfirmModal
           name={selectedItem.name}
