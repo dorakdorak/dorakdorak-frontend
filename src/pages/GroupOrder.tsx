@@ -8,6 +8,8 @@ import DosirakOrderSection from "@/components/order/DosirakOrderSection";
 import { fetchGroupOrders } from "@/api/GroupOrder";
 import GroupOrderItem from "@/types/GroupOrder";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/store/authStore";
 
 function GroupOrder() {
   const getToday = () => new Date().toISOString().split("T")[0];
@@ -19,6 +21,19 @@ function GroupOrder() {
   const [searchParams] = useSearchParams();
   const dosirakIdParam = searchParams.get("dosirakId");
   const dosirakId = dosirakIdParam ? parseInt(dosirakIdParam) : undefined;
+
+  const navigate = useNavigate();
+  const { isLoggedIn } = useAuthStore();
+
+  // 로그인 확인
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login", {
+        replace: true,
+        state: { message: "로그인 후 이용 가능한 서비스입니다." },
+      });
+    }
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     document.body.classList.add("bg-custom");
@@ -61,8 +76,8 @@ function GroupOrder() {
         </div>
       </div>
       <div className={styles.orderSection}>
-        <DosirakOrderSection 
-          orderList={orderList} 
+        <DosirakOrderSection
+          orderList={orderList}
           arriveAt={selectedDate}
           arriveTime={parseInt(selectedTime)}
         />
