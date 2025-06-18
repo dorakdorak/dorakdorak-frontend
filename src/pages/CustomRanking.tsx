@@ -127,7 +127,7 @@ function CustomRanking() {
   };
 
   return (
-    <div className={styles.menuContainer}>
+    <div className={styles.customRankingContainer}>
       <SectionHeader title="커스텀 도시락 랭킹" />
       <div className={styles.menuSortWrapper}>
         <SortOptions

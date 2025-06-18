@@ -38,6 +38,7 @@
   margin-left: -10vw;
   margin-right: -10vw;
   width: calc(100% + 20vw);
+  margin-top: 50px;
 }
 
 .carouselSlide {
