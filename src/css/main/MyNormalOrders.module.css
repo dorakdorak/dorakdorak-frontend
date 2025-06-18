@@ -1,21 +1,22 @@
 /* 일반주문 페이지 컨테이너 */
 .normalOrdersPage {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  font-family: "Pretendard", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 /* 일반주문 페이지 제목 */
 .normalOrdersPage h1 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 24px;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 24px;
 }
 
 /* 로딩 스피너 */
 .spinnerFullPageWrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

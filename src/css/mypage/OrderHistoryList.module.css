@@ -1,274 +1,275 @@
 /* 주문 내역 리스트 컴포넌트 스타일 */
 .orderHistoryList {
-    min-height: 400px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
+  font-family: "Pretendard", sans-serif;
+  min-height: 400px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 섹션 헤더 영역 */
 .sectionHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #333;
-    flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #333;
+  flex-shrink: 0;
 }
 
 /* 섹션 제목 */
 .sectionHeader h3 {
-    color: #333;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
 }
 
 /* 더보기 버튼 */
 .moreButton {
-    background: none;
-    border: none;
-    color: #666;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 4px 8px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
 }
 
 /* 더보기 버튼 호버 효과 */
 .moreButton:hover {
-    color: #4CAF50;
+  color: #4caf50;
 }
 
 /* 주문 그룹들 컨테이너 */
 .orderGroups {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 /* 개별 주문 그룹 */
 .orderGroup {
-    border: 1px solid #eee;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 주문 정보 헤더 */
 .orderInfoHeader {
-    background: #f8f9fa;
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  background: #f8f9fa;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 /* 주문 헤더 왼쪽 영역 */
 .orderHeaderLeft {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
 }
 
 /* 주문 ID 및 총 금액 섹션 */
 .orderIdSection,
 .totalAmountSection {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* 라벨 텍스트 */
 .orderIdLabel,
 .totalAmountLabel {
-    font-size: 12px;
-    color: #666;
+  font-size: 12px;
+  color: #666;
 }
 
 /* 주문 ID 및 총 금액 값 */
 .orderId,
 .totalAmount {
-    font-size: 14px;
-    color: #333;
-    font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
 }
 
 /* 주문 취소 버튼 */
 .orderCancelButton {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 /* 주문 취소 버튼 호버 효과 */
 .orderCancelButton:hover:not(.disabled):not(:disabled) {
-    background: #45a049;
+  background: #45a049;
 }
 
 /* 비활성화된 주문 취소 버튼 */
 .orderCancelButton.disabled,
 .orderCancelButton:disabled {
-    background: #ccc;
-    color: #999;
-    cursor: not-allowed;
+  background: #ccc;
+  color: #999;
+  cursor: not-allowed;
 }
 
 .orderCancelButton.disabled:hover,
 .orderCancelButton:disabled:hover {
-    background: #ccc;
-    color: #999;
-    cursor: not-allowed;
+  background: #ccc;
+  color: #999;
+  cursor: not-allowed;
 }
 
 /* 주문 아이템 목록 */
 .orderList {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 개별 주문 아이템 */
 .orderItem {
-    display: flex;
-    align-items: center;
-    padding: 16px;
-    background: #fff;
-    border-top: 1px solid #eee;
-    gap: 24px;
+  display: flex;
+  align-items: center;
+  padding: 16px 40px;
+  background: #fff;
+  border-top: 1px solid #eee;
+  gap: 24px;
 }
 
 /* 첫 번째 주문 아이템 */
 .orderItem:first-child {
-    border-top: none;
+  border-top: none;
 }
 
 /* 주문 이미지 컨테이너 */
 .orderImage {
-    width: 80px;
-    height: 80px;
-    margin-right: 16px;
-    flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  margin-right: 16px;
+  flex-shrink: 0;
 }
 
 /* 주문 이미지 */
 .orderImage img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 /* 주문 상세 정보 */
 .orderDetails {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* 주문 정보 컨테이너 */
 .orderInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* 주문 상품명 */
 .orderName {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    line-height: 1.3;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.3;
 }
 
 /* 주문 가격 */
 .orderPrice {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
 }
 
 /* 주문 상태 컨테이너 */
 .orderStatus {
-    flex-shrink: 0;
-    margin-left: 16px;
+  flex-shrink: 0;
+  margin-left: 16px;
 }
 
 /* 주문 단가, 수량 */
 .orderMeta {
-    font-size: 13px;
-    color: #666;
-    display: flex;
-    gap: 12px;
-    margin-top: 4px;
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 /* 상태 배지 */
 .statusBadge {
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* 상태 배지 색상 */
 /* 결제 대기 */
 .statusPAYMENT_PENDING {
-    background: #fff3cd;
-    color: #856404;
+  background: #fff3cd;
+  color: #856404;
 }
 
 /* 결제 완료 */
 .statusPAYMENT_COMPLETED {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 /* 결제 실패 */
 .statusPAYMENT_FAILED {
-    background: #f3e5e5;
-    color: #5a2e2e; 
+  background: #f3e5e5;
+  color: #5a2e2e;
 }
 
 /* 결제 취소 */
 .statusPAYMENT_CANCELLED {
-    background: #e2e3e5;
-    color: #6c757d;
+  background: #e2e3e5;
+  color: #6c757d;
 }
 
 /* 공구 모집 */
 .statusGONGGOO_OPEN {
-    background: #d0ebff;
-    color: #0b5394;
+  background: #d0ebff;
+  color: #0b5394;
 }
 
 /* 공구 모집 마감 */
 .statusGONGGOO_CONFIRMED {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 /* 배송 진행 중 */
 .statusDELIVERY_IN_PROGRESS {
-    background: #d0ebff;
-    color: #0b5394;
+  background: #d0ebff;
+  color: #0b5394;
 }
 
 /* 배송 완료 */
 .statusDELIVERY_COMPLETED {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 /* 빈 상태 메시지 */
 .emptyState {
-    text-align: center;
-    padding: 40px 20px;
-    color: #666;
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
 }
