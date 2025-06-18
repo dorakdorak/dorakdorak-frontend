@@ -8,9 +8,14 @@ import SortOptions from "@/components/common/SortOptions";
 import DosirakList from "@/components/list/DosirakList";
 import styles from "@/css/list/Menu.module.css";
 import Spinner from "@/components/common/Spinner";
+import { useLocation } from "react-router-dom";
 
 function Menu() {
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
+  const location = useLocation();
+  const initialFilter = location.state?.filter as FilterType | undefined;
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>(
+    initialFilter ?? "ALL"
+  );
   const [selectedSort, setSelectedSort] = useState<SortType>("LATEST");
   const [dosiraks, setDosiraks] = useState<DosirakItem[]>([]);
   const [isFetching, setIsFetching] = useState(false);

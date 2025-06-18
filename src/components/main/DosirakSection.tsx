@@ -4,6 +4,7 @@ import SectionTitle from "@/components/main/SectionTitle";
 import DosirakCard from "@/components/main/DosirakCard";
 
 interface DosirakBox {
+  id: number;
   image: string;
   tag: string;
 }
@@ -16,12 +17,23 @@ interface DosirakSectionProps {
   cardTo: string;
 }
 
-const DosirakSection = ({ title, description, boxes, to, cardTo }: DosirakSectionProps) => (
+const DosirakSection = ({
+  title,
+  description,
+  boxes,
+  to,
+  cardTo,
+}: DosirakSectionProps) => (
   <section>
     <SectionTitle title={title} description={description} to={to} />
     <div className={styles.dosirakSection}>
-      {boxes.map((box, idx) => (
-        <DosirakCard key={idx} image={box.image} tag={box.tag} to={`/${cardTo}/${idx}`} />
+      {boxes.map((box, id) => (
+        <DosirakCard
+          key={id}
+          image={box.image}
+          tag={box.tag}
+          to={`/${cardTo}/${box.id}`}
+        />
       ))}
     </div>
   </section>
