@@ -1,85 +1,85 @@
 /* 마이페이지 메인 컨테이너 */
 .mypageContainer {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    min-height: calc(100vh - 200px);
-    padding-bottom: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  min-height: calc(100vh - 200px);
+  padding-bottom: 60px;
 }
 
 /* 2열 레이아웃 */
 .contentLayout {
-    display: flex;
-    gap: 32px;
-    align-items: flex-start;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 /* 컬럼 구조 */
 .leftColumn,
 .rightColumn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
 }
 
 /* 컬럼 내 박스들 */
 .leftColumn > *,
 .rightColumn > * {
-    flex: none;
-    height: auto;
-    min-height: 280px;
-    box-sizing: border-box;
+  flex: none;
+  height: auto;
+  min-height: 280px;
+  box-sizing: border-box;
 }
 
 /* 공통 박스 */
 .orderHistoryList,
 .customDosirakList,
 .zeroWastePromo {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 0;
-    box-sizing: border-box;
-    flex: none;
-    height: auto;
-    min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  flex: none;
+  height: auto;
+  min-height: 280px;
 }
 
 /* 마이페이지 내 박스 */
 .mypageContainer .orderHistoryList,
 .mypageContainer .customDosirakList {
-    height: auto;
-    min-height: 280px;
+  height: auto;
+  min-height: 280px;
 }
 
 /* 1열 전환 대비 */
 @media screen and (max-width: 1023px) {
-    .contentLayout {
-        flex-direction: column;
-        gap: 40px;
-    }
+  .contentLayout {
+    flex-direction: column;
+    gap: 40px;
+  }
 
-    .leftColumn,
-    .rightColumn {
-        width: 100%;
-    }
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+  }
 
-    .leftColumn > *,
-    .rightColumn > * {
-        width: 100%;
-    }
+  .leftColumn > *,
+  .rightColumn > * {
+    width: 100%;
+  }
 }
 
 /* 스피너 */
 .spinnerFullPageWrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
