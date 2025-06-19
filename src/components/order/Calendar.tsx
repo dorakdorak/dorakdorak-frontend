@@ -18,14 +18,14 @@ export default function CalendarComponent({
     )}-${String(date.getDate()).padStart(2, "0")}`;
   };
 
-  // ✅ 오늘 기준 3일 뒤 날짜 계산
+  // 오늘 기준 3일 뒤 날짜 계산
   const getThreeDaysLater = (): Date => {
     const date = new Date();
     date.setDate(date.getDate() + 4);
     return date;
   };
 
-  // ✅ 최초 마운트 시 3일 뒤 날짜 설정
+  // 최초 마운트 시 3일 뒤 날짜 설정
   React.useEffect(() => {
     const threeDaysLater = getThreeDaysLater();
     setDate(threeDaysLater);

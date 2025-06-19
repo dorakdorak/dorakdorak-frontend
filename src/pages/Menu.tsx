@@ -61,7 +61,7 @@ function Menu() {
     const resetAndFetch = async () => {
       setDosiraks([]);
       setHasMore(true);
-      await fetchMoreDosiraks(true); // ✅ 초기화 상태로 첫 요청
+      await fetchMoreDosiraks(true); // 초기화 상태로 첫 요청
     };
     resetAndFetch();
   }, [selectedFilter, selectedSort]);
