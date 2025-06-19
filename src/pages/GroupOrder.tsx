@@ -12,7 +12,11 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 
 function GroupOrder() {
-  const getToday = () => new Date().toISOString().split("T")[0];
+  const getToday = () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 4); // 오늘에서 3일 더하기
+    return date.toISOString().split("T")[0];
+  };
 
   const [selectedDate, setSelectedDate] = useState<string>(getToday());
   const [selectedTime, setSelectedTime] = useState<string>("9");
