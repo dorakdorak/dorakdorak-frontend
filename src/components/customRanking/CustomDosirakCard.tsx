@@ -32,8 +32,12 @@ const CustomDosirakCard = ({ item, onVoteClick }: Props) => {
         }}
         disabled={item.isVoted}
       >
-        <img src={item.isVoted ? checkWhite : checkGreen} alt="투표" className={styles.icon} />
-        {item.vote ? "투표완료" : "투표하기"}
+        <img
+          src={item.isVoted ? checkWhite : checkGreen}
+          alt="투표"
+          className={styles.icon}
+        />
+        {item.isVoted ? "투표완료" : "투표하기"}
       </button>
     </div>
   );
