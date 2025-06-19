@@ -43,14 +43,21 @@ const OrderSuccessPage = () => {
   if (loading || !result) {
     return (
       <div>
-        <br/><br/>
+        <br />
+        <br />
         <Spinner text="결제 확인 중입니다..." />
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: "840px", margin: "60px auto 0", padding: "24px 12px" }}>
+    <div
+      style={{
+        maxWidth: "840px",
+        margin: "120px auto 0",
+        padding: "24px 12px",
+      }}
+    >
       <OrderSuccessHeader orderCode={result.orderCode} />
       <OrderSuccessTable orders={result.orders} />
     </div>
