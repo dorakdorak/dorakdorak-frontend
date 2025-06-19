@@ -2,17 +2,19 @@ import { DosirakItem } from "@/types/DosirakList";
 import styles from "@/css/list/DosirakCard.module.css";
 import { getStorageTypeLabel } from "@/utils/storageType";
 import { Link } from "react-router-dom";
+import { getDiscountedPrice } from "@/utils/price";
 
 interface Props {
   item: DosirakItem;
 }
 
 function DosirakCard({ item }: Props) {
-  const { dosirakId, name, price, salesPercentage, imageUrl, storageType } = item;
+  const { dosirakId, name, price, salesPercentage, imageUrl, storageType } =
+    item;
 
   const hasDiscount = salesPercentage > 0;
   const discountRate = Math.round(salesPercentage * 100);
-  const discountedPrice = Math.floor(price * (1 - salesPercentage));
+  const discountedPrice = getDiscountedPrice(price, discountRate);
 
   return (
     <Link
@@ -26,7 +28,9 @@ function DosirakCard({ item }: Props) {
 
       <div className={styles.dosirakCardName}>
         <span
-          className={`${styles.dosirakCardStorageLabel} ${storageType.toLowerCase()}`}
+          className={`${
+            styles.dosirakCardStorageLabel
+          } ${storageType.toLowerCase()}`}
         >
           {getStorageTypeLabel(storageType)}
         </span>
@@ -39,7 +43,9 @@ function DosirakCard({ item }: Props) {
             <div className={styles.dosirakCardOriginalPrice}>
               {price.toLocaleString()}원
             </div>
-            <div className={styles.dosirakCardDiscountRate}>{discountRate}%</div>
+            <div className={styles.dosirakCardDiscountRate}>
+              {discountRate}%
+            </div>
             <div className={styles.dosirakCardDiscountedPrice}>
               {discountedPrice.toLocaleString()}원
             </div>

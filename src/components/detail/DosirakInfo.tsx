@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { loadTossPayments } from "@tosspayments/payment-sdk";
 import { SinglePaymentPrepareRequest } from "@/types/Payment";
 import { requestSinglePayment } from "@/api/Payment";
+import { getDiscountedPrice } from "@/utils/price";
 
 interface Props {
   dosirakId: number;
@@ -16,7 +17,10 @@ interface Props {
 
 const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
   const [quantity, setQuantity] = useState(1);
-  const finalPrice = dosirak.baseInfo.price * (1 - dosirak.baseInfo.salePercentage);
+  const finalPrice = getDiscountedPrice(
+    dosirak.baseInfo.price,
+    Math.round(dosirak.baseInfo.salePercentage * 100)
+  );
   const navigate = useNavigate();
 
   const handleSingleOrder = async () => {
@@ -28,7 +32,9 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
       const res = await requestSinglePayment(prepareRequest);
 
       // Step 2. 토스페이먼츠 결제창 호출
-      const tossPayments = await loadTossPayments("test_ck_AQ92ymxN34dmjmq9pxDg3ajRKXvd"); // 테스트 키
+      const tossPayments = await loadTossPayments(
+        "test_ck_AQ92ymxN34dmjmq9pxDg3ajRKXvd"
+      ); // 테스트 키
       await tossPayments.requestPayment("카드", {
         amount: res.amount,
         orderId: res.orderId,
@@ -63,7 +69,9 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
               {`${dosirak.baseInfo.salePercentage * 100}%`}
             </span>
           )}
-          <span className={styles.dosirakDetailPrice}>{finalPrice.toLocaleString()}원</span>
+          <span className={styles.dosirakDetailPrice}>
+            {finalPrice.toLocaleString()}원
+          </span>
           {dosirak.baseInfo.salePercentage > 0 && (
             <span className={styles.dosirakDetailOriginalPrice}>
               {dosirak.baseInfo.price.toLocaleString()}원
@@ -97,7 +105,10 @@ const DosirakInfo = ({ dosirakId, dosirak }: Props) => {
               <tr>
                 <td>수량</td>
                 <td>
-                  <QuantitySelector initialQuantity={quantity} onChange={setQuantity} />
+                  <QuantitySelector
+                    initialQuantity={quantity}
+                    onChange={setQuantity}
+                  />
                 </td>
               </tr>
             </tbody>
